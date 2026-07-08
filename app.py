@@ -4,10 +4,21 @@ import matplotlib.pyplot as plt
 import numpy as np
 from datetime import datetime, timedelta
 import os
-import json
 import cv2
 from PIL import Image
-import mediapipe as mp
+from posture_detection import PostureDetector
+
+try:
+    import openai
+    OPENAI_MODULE_AVAILABLE = True
+except ImportError:
+    openai = None
+    OPENAI_MODULE_AVAILABLE = False
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
+OPENAI_AVAILABLE = OPENAI_MODULE_AVAILABLE and bool(OPENAI_API_KEY)
+if OPENAI_AVAILABLE:
+    openai.api_key = OPENAI_API_KEY
 
 # ---------------------------------------------------------
 # PAGE CONFIG
@@ -84,99 +95,10 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# POSTURE DETECTION CLASS
+# POSTURE DETECTION
 # ---------------------------------------------------------
-class PostureDetector:
-    def __init__(self):
-        self.mp_pose = mp.solutions.pose
-        self.pose = self.mp_pose.Pose(
-            static_image_mode=True,
-            model_complexity=1,
-            smooth_landmarks=True,
-            min_detection_confidence=0.5,
-            min_tracking_confidence=0.5
-        )
-        self.mp_drawing = mp.solutions.drawing_utils
-    
-    def calculate_angle(self, a, b, c):
-        """Calculate angle between three points"""
-        a = np.array(a)
-        b = np.array(b)
-        c = np.array(c)
-        
-        ba = a - b
-        bc = c - b
-        
-        cosine_angle = np.dot(ba, bc) / (np.linalg.norm(ba) * np.linalg.norm(bc))
-        angle = np.arccos(np.clip(cosine_angle, -1.0, 1.0))
-        return np.degrees(angle)
-    
-    def detect_posture(self, image):
-        """Detect posture from image and return score"""
-        image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        results = self.pose.process(image_rgb)
-        
-        posture_score = 0
-        feedback = []
-        
-        if results.pose_landmarks:
-            landmarks = results.pose_landmarks.landmark
-            
-            # Get key points
-            left_shoulder = [landmarks[11].x, landmarks[11].y]
-            right_shoulder = [landmarks[12].x, landmarks[12].y]
-            left_hip = [landmarks[23].x, landmarks[23].y]
-            right_hip = [landmarks[24].x, landmarks[24].y]
-            head = [landmarks[0].x, landmarks[0].y]
-            
-            # Check spine alignment (neck to hip)
-            left_spine_angle = self.calculate_angle(left_shoulder, left_hip, head)
-            right_spine_angle = self.calculate_angle(right_shoulder, right_hip, head)
-            
-            # Check shoulder level
-            shoulder_diff = abs(left_shoulder[1] - right_shoulder[1])
-            
-            # Check hip level
-            hip_diff = abs(left_hip[1] - right_hip[1])
-            
-            # Calculate posture score (0-100)
-            spine_score = 100 - abs(175 - (left_spine_angle + right_spine_angle) / 2) / 1.75
-            spine_score = max(0, min(100, spine_score))
-            
-            alignment_score = 100 - (shoulder_diff + hip_diff) * 500
-            alignment_score = max(0, min(100, alignment_score))
-            
-            posture_score = int((spine_score + alignment_score) / 2)
-            
-            # Generate feedback
-            if spine_score < 70:
-                feedback.append("📌 Keep your spine straighter!")
-            else:
-                feedback.append("✅ Great spine alignment!")
-            
-            if shoulder_diff > 0.1:
-                feedback.append("⚖️ Level your shoulders!")
-            else:
-                feedback.append("✅ Perfect shoulder alignment!")
-            
-            if hip_diff > 0.1:
-                feedback.append("⚖️ Keep your hips level!")
-            else:
-                feedback.append("✅ Perfect hip alignment!")
-            
-            # Draw pose on image
-            annotated_image = image.copy()
-            self.mp_drawing.draw_landmarks(
-                annotated_image,
-                results.pose_landmarks,
-                self.mp_pose.POSE_CONNECTIONS,
-                self.mp_drawing.DrawingSpec(color=(0, 255, 0), thickness=2, circle_radius=2),
-                self.mp_drawing.DrawingSpec(color=(255, 0, 0), thickness=2)
-            )
-            
-            return posture_score, feedback, annotated_image
-        
-        return 0, ["No pose detected. Please position yourself clearly in frame."], image
+# Posture detection logic is implemented in posture_detection.py.
+# The imported class handles MediaPipe pose detection and scoring.
 
 # ---------------------------------------------------------
 # DATA MANAGEMENT
@@ -197,23 +119,113 @@ def save_data(df):
     """Save data to CSV"""
     df.to_csv(DATA_FILE, index=False)
 
+def posture_score_to_rating(score):
+    """Convert a posture score (0-100) to a 1-4 rating."""
+    if score is None:
+        return None
+    if score >= 75:
+        return 4
+    if score >= 50:
+        return 3
+    if score >= 25:
+        return 2
+    return 1
+
 def calculate_stage_confidence_score(posture, mood, steps, water, workout_done):
     """
-    Calculate Stage Confidence Score (0-100)
-    Formula: (Posture × 25) + (Mood × 25) + (Steps/100 × 25) + (Water × 5) + (Workout × 20)
+    Calculate Stage Confidence Score (0-100).
+    Formula weights:
+      - 25% posture
+      - 25% mood
+      - 25% steps
+      - 15% water
+      - 10% workout
     """
-    posture_score = min(posture * 25, 25) if posture else 0
+    posture_score = (posture / 4) * 25 if posture else 0
     mood_score = {"Happy": 25, "Neutral": 15, "Nervous": 5, "Confident": 25, "Anxious": 0}.get(mood, 0)
-    steps_score = min((steps / 100) * 25, 25) if steps > 0 else 0
-    water_score = min(water * 5, 25)
-    workout_score = 20 if workout_done else 0
+    steps_score = min((steps / 10000) * 25, 25) if steps > 0 else 0
+    water_score = min((water / 8) * 15, 15) if water > 0 else 0
+    workout_score = 10 if workout_done else 0
     
     total_score = posture_score + mood_score + steps_score + water_score + workout_score
     return min(total_score, 100)
 
+def get_posture_chatbot_response(message, posture_score=None):
+    """Return a chatbot response, using OpenAI when available."""
+    prompt = message.strip()
+    if not prompt:
+        return "Ask me a question about posture, alignment, or how to improve your form."
+
+    if OPENAI_AVAILABLE:
+        try:
+            response = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {
+                        "role": "system",
+                        "content": (
+                            "You are a helpful posture and pageant fitness assistant. "
+                            "Answer user questions accurately, provide actionable health and beauty tips, "
+                            "and explain things clearly. If the user asks a general lifestyle question, answer it directly."
+                        )
+                    },
+                    {"role": "user", "content": prompt}
+                ],
+                max_tokens=350,
+                temperature=0.8,
+            )
+            return response.choices[0].message.content.strip()
+        except Exception as e:
+            return f"I couldn't fetch an AI response right now. Please try again or ask a simpler question. (Error: {e})"
+
+    prompt_lower = prompt.lower()
+    if "hair" in prompt_lower or "hair care" in prompt_lower:
+        return "For hair care, keep your scalp healthy by washing with a gentle shampoo, conditioning regularly, minimizing heat styling, and using a wide-tooth comb to detangle. Drink plenty of water and eat a balanced diet for strong hair."
+    if "skin" in prompt_lower or "skincare" in prompt_lower or "acne" in prompt_lower:
+        return "For skincare, cleanse gently, hydrate daily, and apply SPF every morning. If acne or sensitivity is an issue, use non-comedogenic products and consider seeing a dermatologist."
+    if "makeup" in prompt_lower or "beauty" in prompt_lower:
+        return "For makeup, start with a smooth, moisturized base, choose products that suit your skin type, and blend carefully. Highlight one feature at a time for a polished look."
+    if "diet" in prompt_lower or "nutrition" in prompt_lower:
+        return "A balanced diet with lean protein, fruits, vegetables, whole grains, and healthy fats supports energy, skin, hair, and recovery. Hydration is also key."
+    if "sleep" in prompt_lower or "rest" in prompt_lower:
+        return "Aim for 7-9 hours of sleep each night, keep a regular bedtime, and avoid screens before bed. Good sleep supports recovery, mood, and focus."
+    if "confidence" in prompt_lower or "mindset" in prompt_lower:
+        return "Build confidence by setting small daily goals, celebrating progress, and practicing positive self-talk. Posture and presence also influence how confident you feel."
+    if "pageant" in prompt_lower or "stage" in prompt_lower:
+        return "Pageant prep is about confidence, posture, and presence. Practice your walk, rehearse answers, and maintain strong alignment so you look composed on stage."
+    if "shoulder" in prompt_lower:
+        return "Keep your shoulders level and relaxed. Roll them back and down, then check your posture again to avoid tension."
+    if "hip" in prompt_lower or "pelvis" in prompt_lower:
+        return "Keep your hips square and avoid tilting. A strong core and glute activation help maintain an even stance."
+    if "spine" in prompt_lower or "back" in prompt_lower:
+        return "Stand tall with your spine elongated, shoulders over hips, and head aligned over your neck. Imagine a string pulling your crown upward."
+    if "score" in prompt_lower:
+        if posture_score is not None:
+            if posture_score >= 80:
+                return f"Your posture score is {posture_score}/100 — great job! Keep maintaining this alignment."
+            if posture_score >= 50:
+                return f"Your posture score is {posture_score}/100. You're on the right track; focus on small alignment improvements each day."
+            return f"Your posture score is {posture_score}/100. Try standing straighter, keeping your shoulders level, and aligning your hips."
+        return "I can help with posture advice, but first upload a photo so I can see your current alignment."
+    if "improve" in prompt_lower or "better" in prompt_lower or "fix" in prompt_lower:
+        return "To improve posture, practice standing with your weight distributed evenly on both feet, relax your shoulders, and engage your core. Repeat posture checks daily."
+    if "tips" in prompt_lower or "advice" in prompt_lower:
+        return "Keep your chin tucked slightly, shoulders relaxed, and imagine a line from your ears through your shoulders to your hips. Small corrections matter."
+    if "neck" in prompt_lower:
+        return "Avoid jutting your chin forward. Keep your head centered over your shoulders and your gaze level."
+    if "camera" in prompt_lower or "photo" in prompt_lower or "upload" in prompt_lower:
+        return "Use good lighting, stand straight, and make sure your full upper body is visible for the best posture detection."
+    return "I can answer general fitness, beauty, posture, and pageant preparation questions. Ask me anything and I’ll do my best to help."
 # ---------------------------------------------------------
-# SIDEBAR NAVIGATION
+# SESSION STATE / SIDEBAR NAVIGATION
 # ---------------------------------------------------------
+if "detected_posture_score" not in st.session_state:
+    st.session_state.detected_posture_score = None
+if "detected_posture_rating" not in st.session_state:
+    st.session_state.detected_posture_rating = None
+if "posture_chatbot_history" not in st.session_state:
+    st.session_state.posture_chatbot_history = []
+
 st.sidebar.markdown("# 👑 CrownFit 👑")
 st.sidebar.markdown("---")
 
@@ -316,7 +328,13 @@ elif page == "➕ Add Entry":
     col1, col2 = st.columns(2)
     
     with col1:
-        posture = st.slider("Posture rating (1-4, where 4 is excellent):", 1, 4, 3)
+        default_posture = st.session_state.detected_posture_rating or 3
+        posture = st.slider("Posture rating (1-4, where 4 is excellent):", 1, 4, default_posture)
+        if st.session_state.detected_posture_score is not None:
+            st.info(
+                f"Detected posture score {st.session_state.detected_posture_score}/100 has been saved. "
+                f"Rating {st.session_state.detected_posture_rating} will be used unless adjusted."
+            )
         mood = st.selectbox("How's your mood?", ["Happy", "Confident", "Neutral", "Nervous", "Anxious"])
     
     with col2:
@@ -509,6 +527,7 @@ elif page == "📸 Posture Check":
     st.info("💡 Use your camera or upload a photo to get real-time posture feedback powered by MediaPipe!")
     
     posture_detector = PostureDetector()
+    posture_score = None
     
     col1, col2 = st.columns(2)
     
@@ -535,8 +554,39 @@ elif page == "📸 Posture Check":
                 
                 # Option to save this posture rating
                 if st.button("💾 Use this posture score for today", use_container_width=True):
-                    st.session_state.detected_posture = posture_score
+                    st.session_state.detected_posture_score = posture_score
+                    st.session_state.detected_posture_rating = posture_score_to_rating(posture_score)
                     st.success(f"✅ Posture score {posture_score}/100 saved! Go to 'Add Entry' to save your daily log.")
+    
+    st.subheader("🤖 Posture Coach Chatbot")
+    if OPENAI_AVAILABLE:
+        st.success("OpenAI chatbot enabled: ask anything and get a broader answer.")
+    else:
+        st.info("OpenAI not enabled. The chatbot can still answer common posture and beauty questions locally.")
+    st.markdown("Ask the assistant for posture tips, alignment advice, or support with your score.")
+    
+    chat_col1, chat_col2 = st.columns([3, 1])
+    with chat_col1:
+        user_query = st.text_input("Ask the coach a question:", key="posture_chatbot_query")
+        if st.button("Send", key="posture_chatbot_send"):
+            if user_query.strip():
+                assistant_response = get_posture_chatbot_response(user_query, posture_score or st.session_state.detected_posture_score)
+                st.session_state.posture_chatbot_history.append(("You", user_query.strip()))
+                st.session_state.posture_chatbot_history.append(("Coach", assistant_response))
+            else:
+                st.warning("Please type a question before sending.")
+    with chat_col2:
+        if st.button("Clear chat", key="posture_chatbot_clear"):
+            st.session_state.posture_chatbot_history = []
+
+    if st.session_state.posture_chatbot_history:
+        for speaker, message in st.session_state.posture_chatbot_history:
+            if speaker == "You":
+                st.markdown(f"**You:** {message}")
+            else:
+                st.markdown(f"**Coach:** {message}")
+    else:
+        st.info("Start the conversation by asking the coach about shoulders, hips, spine, or score improvement.")
     
     # Display info
     st.subheader("ℹ️ How It Works")

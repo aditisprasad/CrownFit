@@ -5,3 +5,4 @@ numpy==1.24.3
 opencv-python==4.8.1.78
 mediapipe==0.10.0
 Pillow==10.0.0
+openai>=1.0.0
