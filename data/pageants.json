@@ -1,0 +1,55 @@
+[
+  {
+    "id": 1,
+    "name": "National Pageant Open",
+    "region": "Mumbai",
+    "category": "National",
+    "event_date": "2026-11-15",
+    "status": "Open",
+    "website": "https://example.org/pageant-open",
+    "eligibility_summary": "Open to candidates aged 18-30, minimum height 160 cm.",
+    "description": "The premier national pageant with a focus on stage presence, intelligence, and community advocacy.",
+    "auditions": [
+      {
+        "id": 1,
+        "title": "Mumbai Open Audition",
+        "venue": "Nehru Centre Auditorium",
+        "audition_date": "2026-09-20",
+        "application_deadline": "2026-09-10",
+        "status": "Open"
+      }
+    ],
+    "deadlines": [
+      {
+        "id": 1,
+        "label": "Registration Deadline",
+        "deadline_date": "2026-09-10",
+        "description": "Final registration cut-off for contestants."
+      }
+    ],
+    "registration_windows": [
+      {
+        "id": 1,
+        "start_date": "2026-08-01",
+        "end_date": "2026-09-10",
+        "label": "Contestant Registration Window"
+      }
+    ],
+    "eligibility_rules": [
+      {"id": 1, "rule_text": "Ages 18-30"},
+      {"id": 2, "rule_text": "Minimum height 160 cm"},
+      {"id": 3, "rule_text": "Indian citizen or permanent resident"}
+    ],
+    "documents": [
+      {"id": 1, "document_name": "Passport Copy", "required": true},
+      {"id": 2, "document_name": "Professional Headshots", "required": true},
+      {"id": 3, "document_name": "Medical Fitness Certificate", "required": true}
+    ],
+    "venues": [
+      {"id": 1, "name": "Nehru Centre Auditorium", "city": "Mumbai", "address": "Dr. Annie Besant Rd, Worli"}
+    ],
+    "announcements": [
+      {"id": 1, "title": "Applications Open", "body": "Contestant applications are now open for the National Pageant Open.", "published_at": "2026-08-01"}
+    ]
+  }
+]
