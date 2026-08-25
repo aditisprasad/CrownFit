@@ -45,9 +45,10 @@ export const saveMyProfile = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) => ProfileInput.parse(input))
   .handler(async ({ data, context }) => {
+    const clean = Object.fromEntries(Object.entries(data).filter(([, v]) => v !== undefined));
     const { data: row, error } = await context.supabase
       .from("contestant_profiles")
-      .upsert({ ...data, user_id: context.userId }, { onConflict: "user_id" })
+      .upsert({ ...clean, user_id: context.userId }, { onConflict: "user_id" })
       .select()
       .single();
     if (error) throw new Error(error.message);
