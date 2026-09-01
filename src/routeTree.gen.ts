@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedAnairaRouteImport } from './routes/_authenticated.anaira'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated.dashboard'
 import { Route as AuthenticatedMockJuryRouteImport } from './routes/_authenticated.mock-jury'
+import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated.profile'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -45,6 +46,11 @@ const AuthenticatedMockJuryRoute = AuthenticatedMockJuryRouteImport.update({
   path: '/mock-jury',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/anaira': typeof AuthenticatedAnairaRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/mock-jury': typeof AuthenticatedMockJuryRoute
+  '/profile': typeof AuthenticatedProfileRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   '/anaira': typeof AuthenticatedAnairaRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/mock-jury': typeof AuthenticatedMockJuryRoute
+  '/profile': typeof AuthenticatedProfileRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -68,12 +76,14 @@ export interface FileRoutesById {
   '/_authenticated/anaira': typeof AuthenticatedAnairaRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/mock-jury': typeof AuthenticatedMockJuryRoute
+  '/_authenticated/profile': typeof AuthenticatedProfileRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/anaira' | '/dashboard' | '/mock-jury'
+  fullPaths:
+    '/' | '/auth' | '/anaira' | '/dashboard' | '/mock-jury' | '/profile'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/anaira' | '/dashboard' | '/mock-jury'
+  to: '/' | '/auth' | '/anaira' | '/dashboard' | '/mock-jury' | '/profile'
   id:
     | '__root__'
     | '/'
@@ -82,6 +92,7 @@ export interface FileRouteTypes {
     | '/_authenticated/anaira'
     | '/_authenticated/dashboard'
     | '/_authenticated/mock-jury'
+    | '/_authenticated/profile'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -134,6 +145,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMockJuryRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/profile': {
+      id: '/_authenticated/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthenticatedProfileRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
@@ -141,12 +159,14 @@ interface AuthenticatedRouteChildren {
   AuthenticatedAnairaRoute: typeof AuthenticatedAnairaRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedMockJuryRoute: typeof AuthenticatedMockJuryRoute
+  AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedAnairaRoute: AuthenticatedAnairaRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedMockJuryRoute: AuthenticatedMockJuryRoute,
+  AuthenticatedProfileRoute: AuthenticatedProfileRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
