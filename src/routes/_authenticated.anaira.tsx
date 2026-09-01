@@ -21,7 +21,7 @@ export const Route = createFileRoute("/_authenticated/anaira")({
       { name: "twitter:card", content: "summary" },
     ],
   }),
-  component: AnairaPage;
+  component: AnairaPage,
 });
 
 const STARTERS = [
