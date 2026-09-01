@@ -70,7 +70,6 @@ function Landing() {
           </Link>
           <Link
             to="/auth"
-            search={{ mode: "signup" }}
             className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
           >
             Begin your reign
@@ -90,7 +89,6 @@ function Landing() {
         <div className="mt-10 flex items-center justify-center gap-4">
           <Link
             to="/auth"
-            search={{ mode: "signup" }}
             className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 font-medium text-primary-foreground transition-opacity hover:opacity-90"
           >
             Start preparing <ArrowRight className="h-4 w-4" />
@@ -125,7 +123,6 @@ function Landing() {
           </p>
           <Link
             to="/auth"
-            search={{ mode: "signup" }}
             className="mt-8 inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 font-medium text-primary-foreground transition-opacity hover:opacity-90"
           >
             Claim your seat <Crown className="h-4 w-4" />
