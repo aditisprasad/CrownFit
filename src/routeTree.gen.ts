@@ -15,7 +15,9 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedAnairaRouteImport } from './routes/_authenticated.anaira'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated.dashboard'
 import { Route as AuthenticatedMockJuryRouteImport } from './routes/_authenticated.mock-jury'
+import { Route as AuthenticatedPageantsRouteImport } from './routes/_authenticated.pageants'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated.profile'
+import { Route as AuthenticatedProvidersRouteImport } from './routes/_authenticated.providers'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,9 +48,19 @@ const AuthenticatedMockJuryRoute = AuthenticatedMockJuryRouteImport.update({
   path: '/mock-jury',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedPageantsRoute = AuthenticatedPageantsRouteImport.update({
+  id: '/pageants',
+  path: '/pageants',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedProvidersRoute = AuthenticatedProvidersRouteImport.update({
+  id: '/providers',
+  path: '/providers',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 
@@ -58,7 +70,9 @@ export interface FileRoutesByFullPath {
   '/anaira': typeof AuthenticatedAnairaRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/mock-jury': typeof AuthenticatedMockJuryRoute
+  '/pageants': typeof AuthenticatedPageantsRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/providers': typeof AuthenticatedProvidersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -66,7 +80,9 @@ export interface FileRoutesByTo {
   '/anaira': typeof AuthenticatedAnairaRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/mock-jury': typeof AuthenticatedMockJuryRoute
+  '/pageants': typeof AuthenticatedPageantsRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/providers': typeof AuthenticatedProvidersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -76,14 +92,31 @@ export interface FileRoutesById {
   '/_authenticated/anaira': typeof AuthenticatedAnairaRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/mock-jury': typeof AuthenticatedMockJuryRoute
+  '/_authenticated/pageants': typeof AuthenticatedPageantsRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
+  '/_authenticated/providers': typeof AuthenticatedProvidersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/auth' | '/anaira' | '/dashboard' | '/mock-jury' | '/profile'
+    | '/'
+    | '/auth'
+    | '/anaira'
+    | '/dashboard'
+    | '/mock-jury'
+    | '/pageants'
+    | '/profile'
+    | '/providers'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/anaira' | '/dashboard' | '/mock-jury' | '/profile'
+  to:
+    | '/'
+    | '/auth'
+    | '/anaira'
+    | '/dashboard'
+    | '/mock-jury'
+    | '/pageants'
+    | '/profile'
+    | '/providers'
   id:
     | '__root__'
     | '/'
@@ -92,7 +125,9 @@ export interface FileRouteTypes {
     | '/_authenticated/anaira'
     | '/_authenticated/dashboard'
     | '/_authenticated/mock-jury'
+    | '/_authenticated/pageants'
     | '/_authenticated/profile'
+    | '/_authenticated/providers'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -145,11 +180,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMockJuryRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/pageants': {
+      id: '/_authenticated/pageants'
+      path: '/pageants'
+      fullPath: '/pageants'
+      preLoaderRoute: typeof AuthenticatedPageantsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/profile': {
       id: '/_authenticated/profile'
       path: '/profile'
       fullPath: '/profile'
       preLoaderRoute: typeof AuthenticatedProfileRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/providers': {
+      id: '/_authenticated/providers'
+      path: '/providers'
+      fullPath: '/providers'
+      preLoaderRoute: typeof AuthenticatedProvidersRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
   }
@@ -159,14 +208,18 @@ interface AuthenticatedRouteChildren {
   AuthenticatedAnairaRoute: typeof AuthenticatedAnairaRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedMockJuryRoute: typeof AuthenticatedMockJuryRoute
+  AuthenticatedPageantsRoute: typeof AuthenticatedPageantsRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedProvidersRoute: typeof AuthenticatedProvidersRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedAnairaRoute: AuthenticatedAnairaRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedMockJuryRoute: AuthenticatedMockJuryRoute,
+  AuthenticatedPageantsRoute: AuthenticatedPageantsRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+  AuthenticatedProvidersRoute: AuthenticatedProvidersRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
