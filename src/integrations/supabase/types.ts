@@ -243,6 +243,7 @@ export type Database = {
       }
       contestant_profiles: {
         Row: {
+          activity_level: string | null
           avatar_url: string | null
           bio: string | null
           budget_band: string | null
@@ -250,34 +251,54 @@ export type Database = {
           city: string | null
           comp_card_url: string | null
           created_at: string
+          daily_schedule: string | null
           date_of_birth: string | null
+          dietary_preference: string | null
           dress_size: string | null
           education: string | null
           experience: string | null
+          experience_level: string | null
           eye_color: string | null
+          fitness_preferences: string | null
+          food_allergies: string | null
+          food_preferences: string | null
           full_name: string | null
           gender: string | null
           hair_color: string | null
+          hair_concerns: string | null
+          hair_type: string | null
           height_cm: number | null
           hips_cm: number | null
+          improvement_areas: string[]
           is_public: boolean
           languages: string[]
           nationality: string | null
           onboarding_completed: boolean
+          pageant_category: string | null
+          preparation_level: string | null
+          primary_goal: string | null
           public_slug: string | null
           resume_url: string | null
           shoe_size: string | null
           skills: string[]
+          skin_concerns: string | null
+          skin_type: string | null
+          sleep_target_hours: number | null
           social_links: Json
           state: string | null
+          step_target: number | null
+          target_date: string | null
           target_pageant: string | null
           target_year: number | null
+          training_minutes_per_day: number | null
           updated_at: string
           user_id: string
           waist_cm: number | null
+          water_target_ml: number | null
           weight_kg: number | null
         }
         Insert: {
+          activity_level?: string | null
           avatar_url?: string | null
           bio?: string | null
           budget_band?: string | null
@@ -285,34 +306,54 @@ export type Database = {
           city?: string | null
           comp_card_url?: string | null
           created_at?: string
+          daily_schedule?: string | null
           date_of_birth?: string | null
+          dietary_preference?: string | null
           dress_size?: string | null
           education?: string | null
           experience?: string | null
+          experience_level?: string | null
           eye_color?: string | null
+          fitness_preferences?: string | null
+          food_allergies?: string | null
+          food_preferences?: string | null
           full_name?: string | null
           gender?: string | null
           hair_color?: string | null
+          hair_concerns?: string | null
+          hair_type?: string | null
           height_cm?: number | null
           hips_cm?: number | null
+          improvement_areas?: string[]
           is_public?: boolean
           languages?: string[]
           nationality?: string | null
           onboarding_completed?: boolean
+          pageant_category?: string | null
+          preparation_level?: string | null
+          primary_goal?: string | null
           public_slug?: string | null
           resume_url?: string | null
           shoe_size?: string | null
           skills?: string[]
+          skin_concerns?: string | null
+          skin_type?: string | null
+          sleep_target_hours?: number | null
           social_links?: Json
           state?: string | null
+          step_target?: number | null
+          target_date?: string | null
           target_pageant?: string | null
           target_year?: number | null
+          training_minutes_per_day?: number | null
           updated_at?: string
           user_id: string
           waist_cm?: number | null
+          water_target_ml?: number | null
           weight_kg?: number | null
         }
         Update: {
+          activity_level?: string | null
           avatar_url?: string | null
           bio?: string | null
           budget_band?: string | null
@@ -320,31 +361,50 @@ export type Database = {
           city?: string | null
           comp_card_url?: string | null
           created_at?: string
+          daily_schedule?: string | null
           date_of_birth?: string | null
+          dietary_preference?: string | null
           dress_size?: string | null
           education?: string | null
           experience?: string | null
+          experience_level?: string | null
           eye_color?: string | null
+          fitness_preferences?: string | null
+          food_allergies?: string | null
+          food_preferences?: string | null
           full_name?: string | null
           gender?: string | null
           hair_color?: string | null
+          hair_concerns?: string | null
+          hair_type?: string | null
           height_cm?: number | null
           hips_cm?: number | null
+          improvement_areas?: string[]
           is_public?: boolean
           languages?: string[]
           nationality?: string | null
           onboarding_completed?: boolean
+          pageant_category?: string | null
+          preparation_level?: string | null
+          primary_goal?: string | null
           public_slug?: string | null
           resume_url?: string | null
           shoe_size?: string | null
           skills?: string[]
+          skin_concerns?: string | null
+          skin_type?: string | null
+          sleep_target_hours?: number | null
           social_links?: Json
           state?: string | null
+          step_target?: number | null
+          target_date?: string | null
           target_pageant?: string | null
           target_year?: number | null
+          training_minutes_per_day?: number | null
           updated_at?: string
           user_id?: string
           waist_cm?: number | null
+          water_target_ml?: number | null
           weight_kg?: number | null
         }
         Relationships: []
@@ -379,6 +439,69 @@ export type Database = {
           source_url?: string | null
           updated_by?: string | null
           verification_status?: string | null
+        }
+        Relationships: []
+      }
+      diet_logs: {
+        Row: {
+          calories: number | null
+          created_at: string
+          description: string
+          id: string
+          logged_on: string
+          meal: string
+          notes: string | null
+          user_id: string
+        }
+        Insert: {
+          calories?: number | null
+          created_at?: string
+          description: string
+          id?: string
+          logged_on?: string
+          meal?: string
+          notes?: string | null
+          user_id: string
+        }
+        Update: {
+          calories?: number | null
+          created_at?: string
+          description?: string
+          id?: string
+          logged_on?: string
+          meal?: string
+          notes?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      digital_twin_snapshots: {
+        Row: {
+          components: Json
+          created_at: string
+          data_points: number
+          id: string
+          notes: string | null
+          readiness: number | null
+          user_id: string
+        }
+        Insert: {
+          components?: Json
+          created_at?: string
+          data_points?: number
+          id?: string
+          notes?: string | null
+          readiness?: number | null
+          user_id: string
+        }
+        Update: {
+          components?: Json
+          created_at?: string
+          data_points?: number
+          id?: string
+          notes?: string | null
+          readiness?: number | null
+          user_id?: string
         }
         Relationships: []
       }
@@ -659,6 +782,7 @@ export type Database = {
           state: string | null
           status: string
           updated_at: string
+          verification_status: string
           verified: boolean
           verified_by: string | null
         }
@@ -690,6 +814,7 @@ export type Database = {
           state?: string | null
           status?: string
           updated_at?: string
+          verification_status?: string
           verified?: boolean
           verified_by?: string | null
         }
@@ -721,6 +846,7 @@ export type Database = {
           state?: string | null
           status?: string
           updated_at?: string
+          verification_status?: string
           verified?: boolean
           verified_by?: string | null
         }
@@ -729,7 +855,10 @@ export type Database = {
       portfolio_items: {
         Row: {
           caption: string | null
+          category: string | null
           created_at: string
+          credits: string | null
+          description: string | null
           external_url: string | null
           id: string
           kind: string
@@ -740,7 +869,10 @@ export type Database = {
         }
         Insert: {
           caption?: string | null
+          category?: string | null
           created_at?: string
+          credits?: string | null
+          description?: string | null
           external_url?: string | null
           id?: string
           kind: string
@@ -751,7 +883,10 @@ export type Database = {
         }
         Update: {
           caption?: string | null
+          category?: string | null
           created_at?: string
+          credits?: string | null
+          description?: string | null
           external_url?: string | null
           id?: string
           kind?: string
@@ -795,6 +930,48 @@ export type Database = {
           posture_score?: number | null
           shoulder_alignment?: number | null
           user_id?: string
+        }
+        Relationships: []
+      }
+      preparation_plans: {
+        Row: {
+          created_at: string
+          focus_areas: string[]
+          horizon_weeks: number | null
+          id: string
+          is_active: boolean
+          summary: string | null
+          target_date: string | null
+          target_pageant: string | null
+          updated_at: string
+          user_id: string
+          weeks: Json
+        }
+        Insert: {
+          created_at?: string
+          focus_areas?: string[]
+          horizon_weeks?: number | null
+          id?: string
+          is_active?: boolean
+          summary?: string | null
+          target_date?: string | null
+          target_pageant?: string | null
+          updated_at?: string
+          user_id: string
+          weeks?: Json
+        }
+        Update: {
+          created_at?: string
+          focus_areas?: string[]
+          horizon_weeks?: number | null
+          id?: string
+          is_active?: boolean
+          summary?: string | null
+          target_date?: string | null
+          target_pageant?: string | null
+          updated_at?: string
+          user_id?: string
+          weeks?: Json
         }
         Relationships: []
       }
@@ -859,6 +1036,7 @@ export type Database = {
           state: string | null
           subcategories: string[] | null
           updated_at: string
+          verification_status: string
           verified: boolean
           verified_by: string | null
           website: string | null
@@ -890,6 +1068,7 @@ export type Database = {
           state?: string | null
           subcategories?: string[] | null
           updated_at?: string
+          verification_status?: string
           verified?: boolean
           verified_by?: string | null
           website?: string | null
@@ -921,6 +1100,7 @@ export type Database = {
           state?: string | null
           subcategories?: string[] | null
           updated_at?: string
+          verification_status?: string
           verified?: boolean
           verified_by?: string | null
           website?: string | null
@@ -990,6 +1170,69 @@ export type Database = {
         }
         Relationships: []
       }
+      sleep_logs: {
+        Row: {
+          bedtime: string | null
+          created_at: string
+          duration_hours: number | null
+          id: string
+          logged_on: string
+          notes: string | null
+          quality: number | null
+          user_id: string
+          wake_time: string | null
+        }
+        Insert: {
+          bedtime?: string | null
+          created_at?: string
+          duration_hours?: number | null
+          id?: string
+          logged_on?: string
+          notes?: string | null
+          quality?: number | null
+          user_id: string
+          wake_time?: string | null
+        }
+        Update: {
+          bedtime?: string | null
+          created_at?: string
+          duration_hours?: number | null
+          id?: string
+          logged_on?: string
+          notes?: string | null
+          quality?: number | null
+          user_id?: string
+          wake_time?: string | null
+        }
+        Relationships: []
+      }
+      step_logs: {
+        Row: {
+          created_at: string
+          id: string
+          logged_on: string
+          source: string
+          steps: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          logged_on?: string
+          source?: string
+          steps: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          logged_on?: string
+          source?: string
+          steps?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -1050,6 +1293,30 @@ export type Database = {
           transcript?: string | null
           user_id?: string
           words_per_minute?: number | null
+        }
+        Relationships: []
+      }
+      water_logs: {
+        Row: {
+          amount_ml: number
+          created_at: string
+          id: string
+          logged_on: string
+          user_id: string
+        }
+        Insert: {
+          amount_ml: number
+          created_at?: string
+          id?: string
+          logged_on?: string
+          user_id: string
+        }
+        Update: {
+          amount_ml?: number
+          created_at?: string
+          id?: string
+          logged_on?: string
+          user_id?: string
         }
         Relationships: []
       }
