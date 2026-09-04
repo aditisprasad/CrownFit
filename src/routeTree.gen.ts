@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedAnairaRouteImport } from './routes/_authenticated.anaira'
+import { Route as AuthenticatedCalendarRouteImport } from './routes/_authenticated.calendar'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated.dashboard'
 import { Route as AuthenticatedMockJuryRouteImport } from './routes/_authenticated.mock-jury'
 import { Route as AuthenticatedPageantsRouteImport } from './routes/_authenticated.pageants'
@@ -37,6 +38,11 @@ const AuthRoute = AuthRouteImport.update({
 const AuthenticatedAnairaRoute = AuthenticatedAnairaRouteImport.update({
   id: '/anaira',
   path: '/anaira',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedCalendarRoute = AuthenticatedCalendarRouteImport.update({
+  id: '/calendar',
+  path: '/calendar',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
@@ -74,6 +80,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/anaira': typeof AuthenticatedAnairaRoute
+  '/calendar': typeof AuthenticatedCalendarRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/mock-jury': typeof AuthenticatedMockJuryRoute
   '/pageants': typeof AuthenticatedPageantsRoute
@@ -85,6 +92,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/anaira': typeof AuthenticatedAnairaRoute
+  '/calendar': typeof AuthenticatedCalendarRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/mock-jury': typeof AuthenticatedMockJuryRoute
   '/pageants': typeof AuthenticatedPageantsRoute
@@ -98,6 +106,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/anaira': typeof AuthenticatedAnairaRoute
+  '/_authenticated/calendar': typeof AuthenticatedCalendarRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/mock-jury': typeof AuthenticatedMockJuryRoute
   '/_authenticated/pageants': typeof AuthenticatedPageantsRoute
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/anaira'
+    | '/calendar'
     | '/dashboard'
     | '/mock-jury'
     | '/pageants'
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/anaira'
+    | '/calendar'
     | '/dashboard'
     | '/mock-jury'
     | '/pageants'
@@ -134,6 +145,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/anaira'
+    | '/_authenticated/calendar'
     | '/_authenticated/dashboard'
     | '/_authenticated/mock-jury'
     | '/_authenticated/pageants'
@@ -176,6 +188,13 @@ declare module '@tanstack/react-router' {
       path: '/anaira'
       fullPath: '/anaira'
       preLoaderRoute: typeof AuthenticatedAnairaRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/calendar': {
+      id: '/_authenticated/calendar'
+      path: '/calendar'
+      fullPath: '/calendar'
+      preLoaderRoute: typeof AuthenticatedCalendarRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/dashboard': {
@@ -225,6 +244,7 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteChildren {
   AuthenticatedAnairaRoute: typeof AuthenticatedAnairaRoute
+  AuthenticatedCalendarRoute: typeof AuthenticatedCalendarRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedMockJuryRoute: typeof AuthenticatedMockJuryRoute
   AuthenticatedPageantsRoute: typeof AuthenticatedPageantsRoute
@@ -235,6 +255,7 @@ interface AuthenticatedRouteChildren {
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedAnairaRoute: AuthenticatedAnairaRoute,
+  AuthenticatedCalendarRoute: AuthenticatedCalendarRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedMockJuryRoute: AuthenticatedMockJuryRoute,
   AuthenticatedPageantsRoute: AuthenticatedPageantsRoute,
