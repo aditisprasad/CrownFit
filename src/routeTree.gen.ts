@@ -18,6 +18,7 @@ import { Route as AuthenticatedMockJuryRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedPageantsRouteImport } from './routes/_authenticated.pageants'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated.profile'
 import { Route as AuthenticatedProvidersRouteImport } from './routes/_authenticated.providers'
+import { Route as AuthenticatedTrackerRouteImport } from './routes/_authenticated.tracker'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -63,6 +64,11 @@ const AuthenticatedProvidersRoute = AuthenticatedProvidersRouteImport.update({
   path: '/providers',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedTrackerRoute = AuthenticatedTrackerRouteImport.update({
+  id: '/tracker',
+  path: '/tracker',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -73,6 +79,7 @@ export interface FileRoutesByFullPath {
   '/pageants': typeof AuthenticatedPageantsRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/providers': typeof AuthenticatedProvidersRoute
+  '/tracker': typeof AuthenticatedTrackerRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -83,6 +90,7 @@ export interface FileRoutesByTo {
   '/pageants': typeof AuthenticatedPageantsRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/providers': typeof AuthenticatedProvidersRoute
+  '/tracker': typeof AuthenticatedTrackerRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -95,6 +103,7 @@ export interface FileRoutesById {
   '/_authenticated/pageants': typeof AuthenticatedPageantsRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/providers': typeof AuthenticatedProvidersRoute
+  '/_authenticated/tracker': typeof AuthenticatedTrackerRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -107,6 +116,7 @@ export interface FileRouteTypes {
     | '/pageants'
     | '/profile'
     | '/providers'
+    | '/tracker'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -117,6 +127,7 @@ export interface FileRouteTypes {
     | '/pageants'
     | '/profile'
     | '/providers'
+    | '/tracker'
   id:
     | '__root__'
     | '/'
@@ -128,6 +139,7 @@ export interface FileRouteTypes {
     | '/_authenticated/pageants'
     | '/_authenticated/profile'
     | '/_authenticated/providers'
+    | '/_authenticated/tracker'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -201,6 +213,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProvidersRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/tracker': {
+      id: '/_authenticated/tracker'
+      path: '/tracker'
+      fullPath: '/tracker'
+      preLoaderRoute: typeof AuthenticatedTrackerRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
@@ -211,6 +230,7 @@ interface AuthenticatedRouteChildren {
   AuthenticatedPageantsRoute: typeof AuthenticatedPageantsRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedProvidersRoute: typeof AuthenticatedProvidersRoute
+  AuthenticatedTrackerRoute: typeof AuthenticatedTrackerRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
@@ -220,6 +240,7 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedPageantsRoute: AuthenticatedPageantsRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedProvidersRoute: AuthenticatedProvidersRoute,
+  AuthenticatedTrackerRoute: AuthenticatedTrackerRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
