@@ -150,8 +150,9 @@
   }
 
   html {
-    color-scheme: dark;
+    color-scheme: light;
   }
+
 
   body {
     background-color: var(--color-background);
