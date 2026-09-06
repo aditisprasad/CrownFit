@@ -18,6 +18,7 @@ import { Route as AuthenticatedDashboardRouteImport } from './routes/_authentica
 import { Route as AuthenticatedInsightsRouteImport } from './routes/_authenticated.insights'
 import { Route as AuthenticatedMockJuryRouteImport } from './routes/_authenticated.mock-jury'
 import { Route as AuthenticatedPageantsRouteImport } from './routes/_authenticated.pageants'
+import { Route as AuthenticatedPlanRouteImport } from './routes/_authenticated.plan'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated.profile'
 import { Route as AuthenticatedProvidersRouteImport } from './routes/_authenticated.providers'
 import { Route as AuthenticatedTrackerRouteImport } from './routes/_authenticated.tracker'
@@ -66,6 +67,11 @@ const AuthenticatedPageantsRoute = AuthenticatedPageantsRouteImport.update({
   path: '/pageants',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedPlanRoute = AuthenticatedPlanRouteImport.update({
+  id: '/plan',
+  path: '/plan',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
@@ -91,6 +97,7 @@ export interface FileRoutesByFullPath {
   '/insights': typeof AuthenticatedInsightsRoute
   '/mock-jury': typeof AuthenticatedMockJuryRoute
   '/pageants': typeof AuthenticatedPageantsRoute
+  '/plan': typeof AuthenticatedPlanRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/providers': typeof AuthenticatedProvidersRoute
   '/tracker': typeof AuthenticatedTrackerRoute
@@ -104,6 +111,7 @@ export interface FileRoutesByTo {
   '/insights': typeof AuthenticatedInsightsRoute
   '/mock-jury': typeof AuthenticatedMockJuryRoute
   '/pageants': typeof AuthenticatedPageantsRoute
+  '/plan': typeof AuthenticatedPlanRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/providers': typeof AuthenticatedProvidersRoute
   '/tracker': typeof AuthenticatedTrackerRoute
@@ -119,6 +127,7 @@ export interface FileRoutesById {
   '/_authenticated/insights': typeof AuthenticatedInsightsRoute
   '/_authenticated/mock-jury': typeof AuthenticatedMockJuryRoute
   '/_authenticated/pageants': typeof AuthenticatedPageantsRoute
+  '/_authenticated/plan': typeof AuthenticatedPlanRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/providers': typeof AuthenticatedProvidersRoute
   '/_authenticated/tracker': typeof AuthenticatedTrackerRoute
@@ -134,6 +143,7 @@ export interface FileRouteTypes {
     | '/insights'
     | '/mock-jury'
     | '/pageants'
+    | '/plan'
     | '/profile'
     | '/providers'
     | '/tracker'
@@ -147,6 +157,7 @@ export interface FileRouteTypes {
     | '/insights'
     | '/mock-jury'
     | '/pageants'
+    | '/plan'
     | '/profile'
     | '/providers'
     | '/tracker'
@@ -161,6 +172,7 @@ export interface FileRouteTypes {
     | '/_authenticated/insights'
     | '/_authenticated/mock-jury'
     | '/_authenticated/pageants'
+    | '/_authenticated/plan'
     | '/_authenticated/profile'
     | '/_authenticated/providers'
     | '/_authenticated/tracker'
@@ -237,6 +249,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPageantsRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/plan': {
+      id: '/_authenticated/plan'
+      path: '/plan'
+      fullPath: '/plan'
+      preLoaderRoute: typeof AuthenticatedPlanRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/profile': {
       id: '/_authenticated/profile'
       path: '/profile'
@@ -268,6 +287,7 @@ interface AuthenticatedRouteChildren {
   AuthenticatedInsightsRoute: typeof AuthenticatedInsightsRoute
   AuthenticatedMockJuryRoute: typeof AuthenticatedMockJuryRoute
   AuthenticatedPageantsRoute: typeof AuthenticatedPageantsRoute
+  AuthenticatedPlanRoute: typeof AuthenticatedPlanRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedProvidersRoute: typeof AuthenticatedProvidersRoute
   AuthenticatedTrackerRoute: typeof AuthenticatedTrackerRoute
@@ -280,6 +300,7 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedInsightsRoute: AuthenticatedInsightsRoute,
   AuthenticatedMockJuryRoute: AuthenticatedMockJuryRoute,
   AuthenticatedPageantsRoute: AuthenticatedPageantsRoute,
+  AuthenticatedPlanRoute: AuthenticatedPlanRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedProvidersRoute: AuthenticatedProvidersRoute,
   AuthenticatedTrackerRoute: AuthenticatedTrackerRoute,
