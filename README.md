@@ -1,449 +1,710 @@
-# 👑 CrownFit
+# 👑 Crown-Fit
 
-### AI-Powered Pageant Preparation & Performance Intelligence Platform
+### AI-Powered Pageant Discovery, Preparation & Performance Platform
 
-CrownFit is an AI-powered platform designed to help pageant contestants prepare, practice, track, and improve their overall pageant performance.
+Crown-Fit is a modern AI-powered platform designed to help aspiring pageant contestants discover opportunities, prepare strategically, connect with professionals, practice with AI, learn from curated content, and track their progress — all within one connected ecosystem.
 
-The platform combines **Computer Vision, Machine Learning, Speech Analysis, Generative AI, Predictive Analytics, and preparation tracking** to create a personalized digital preparation experience.
+Instead of treating pageant preparation as a collection of disconnected activities, Crown-Fit brings **pageant discovery, professional services, preparation planning, learning, AI practice, performance analysis, and progress tracking** together in one platform.
 
-Instead of focusing only on fitness, CrownFit brings multiple aspects of pageant preparation into one intelligent platform — including **posture, confidence, mood, voice, performance readiness, preparation tracking, pageant discovery, professional services, and AI-powered coaching**.
+The goal is simple:
 
----
-
-## ✨ Overview
-
-Preparing for a pageant involves much more than physical fitness.
-
-Contestants need to work on:
-
-- 👠 Stage presence
-- 🚶 Posture & walking
-- 🎤 Interview skills
-- 🗣️ Voice & communication
-- 😊 Confidence & emotional presentation
-- 💪 Fitness & wellness
-- 💄 Grooming & styling
-- 📚 Pageant knowledge
-- 📅 Preparation consistency
-- 👑 Overall readiness
-
-CrownFit brings these areas together into a unified preparation platform.
-
-The goal is to move from:
-
-**Track → Analyze → Practice → Improve → Prepare**
+**Discover → Prepare → Practice → Analyze → Improve → Compete**
 
 ---
 
-## 🚀 Key Features
+## ✨ Why Crown-Fit?
 
-### 👑 Pageant Discovery
+Preparing for a pageant involves much more than walking and fitness.
 
-Discover pageants and explore opportunities based on relevant information such as:
+Contestants often need to manage:
 
-- Pageant category
+- 👑 Finding the right pageants
+- 📋 Understanding eligibility and deadlines
+- 🎤 Interview preparation
+- 👠 Runway and stage presence
+- 🗣️ Communication and public speaking
+- 🧍 Posture and body language
+- 💄 Grooming and styling
+- 💪 Fitness and wellness
+- 📚 Learning and pageant knowledge
+- 🤝 Finding mentors and professionals
+- 📅 Managing preparation schedules
+- 📊 Tracking progress
+- 🧠 Understanding strengths and improvement areas
+
+Crown-Fit brings these requirements into a single digital preparation ecosystem.
+
+---
+
+# 🚀 Core Features
+
+## 👑 Pageant Discovery
+
+Discover pageants based on the contestant's interests, location, category, and eligibility.
+
+Users can explore opportunities across categories such as:
+
+- National
+- State
+- Regional
+- College
+- International
+
+Each pageant can provide useful information such as:
+
+- Pageant name
+- Organization
 - Location
+- Category
 - Eligibility
+- Age requirements
 - Registration information
-- Important dates
-- Pageant status
+- Registration deadline
+- Event date
+- Prize information
+- Current status
 - Preparation requirements
 
-The discovery experience helps contestants find opportunities that match their goals.
+The discovery experience is designed to help contestants move from simply browsing pageants to identifying opportunities worth pursuing.
 
 ---
 
-### 🤝 Professional & Provider Discovery
+# 🔎 Smart Pageant Search & Filtering
 
-CrownFit connects contestants with professionals who can support their preparation.
+Contestants can narrow down opportunities using filters such as:
 
-Potential provider categories include:
+- 📍 Location
+- 👑 Pageant category
+- 🎂 Age eligibility
+- 🏆 Experience level
+- 📅 Registration status
+- 🗓️ Event date
+- 💰 Prize information
+
+Users can also search pageants by name, organization, location, or relevant keywords.
+
+---
+
+# 🤝 Professional Discovery
+
+Crown-Fit connects contestants with professionals who can help them prepare for different aspects of their pageant journey.
+
+Professional categories include:
 
 - 👩‍🏫 Pageant Mentors
-- 🏫 Training Institutes
 - 🎤 Pageant Coaches
+- 🏫 Training Institutes
 - 👗 Designers
 - 📸 Photographers
 - 💄 Makeup Artists
 - 💪 Fitness Coaches
 - 💇 Stylists
 
-This creates a preparation ecosystem rather than a standalone tracking application.
+Users can discover professionals based on:
+
+- Location
+- Specialization
+- Experience
+- Ratings
+- Reviews
+- Availability
+- Services
+- Pricing
+
+This transforms Crown-Fit from a preparation tracker into a broader **pageant preparation marketplace and ecosystem**.
 
 ---
 
-### 🧍 AI Posture Analysis
+# ⭐ Professional Profiles
 
-CrownFit uses computer vision to analyze body posture and movement.
+Each professional can have a dedicated profile containing information such as:
 
-The posture analysis pipeline can be used to identify posture-related patterns and provide feedback that helps contestants improve their stage presence.
+- Name
+- Professional category
+- Specialization
+- Location
+- Experience
+- Rating
+- Reviews
+- Services
+- Availability
+- Portfolio
+- Contact / booking options
 
-**Technology:**
-
-- OpenCV
-- MediaPipe
-- Computer Vision
-- Pose Estimation
-
----
-
-### 😊 Mood Intelligence
-
-CrownFit incorporates mood-related signals into its preparation experience.
-
-Mood intelligence can help track emotional state and provide additional context around a contestant's preparation journey.
-
-This allows preparation analytics to go beyond purely physical metrics.
+Users can shortlist professionals and build their own preparation team.
 
 ---
 
-### 🎤 Voice & Speech Intelligence
+# 🤖 AI Mock Interviews
 
-Voice-related analysis can be used to evaluate communication and speaking patterns.
+Crown-Fit provides AI-powered mock interview practice designed specifically around pageant-style interviews.
 
-This is particularly relevant to:
+Users can practice questions covering:
 
-- Pageant interviews
-- Public speaking
-- Introductions
-- Confidence-building exercises
-- Communication practice
-
----
-
-### 🧠 AI Mock Interviews
-
-CrownFit provides AI-powered interview practice designed around pageant-style questions.
-
-The system can be used to practice:
-
-- Personal questions
+- Personal background
+- Current affairs
 - Situational questions
 - Opinion-based questions
-- Pageant-related questions
-- Public speaking
+- Pageant-related topics
+- Social issues
+- Leadership
+- Personality
+- Confidence and communication
 
-The goal is to allow contestants to repeatedly practice before an actual interview or pageant.
+The AI evaluates the response and can provide feedback around areas such as:
+
+- Answer quality
+- Relevance
+- Clarity
+- Confidence
+- Communication
+- Structure
+- Overall presentation
+
+The objective is to create a realistic practice environment before contestants face an actual pageant interview.
 
 ---
 
-### 📊 Performance & Readiness Analytics
+# 🧍 AI Posture & Stage Analysis
 
-CrownFit brings multiple preparation signals together to provide a broader picture of contestant readiness.
+Crown-Fit incorporates computer-vision-based analysis to help contestants understand their posture and physical presentation.
 
-Potential signals include:
+Potential analysis areas include:
 
 - Posture
-- Mood
+- Body alignment
+- Stage presence
+- Movement
+- Body language
+
+Computer vision can be used to extract useful signals and convert them into understandable feedback.
+
+The goal is not simply to detect posture — it is to help the contestant understand:
+
+**What can I improve before stepping onto the stage?**
+
+---
+
+# 🎙️ Voice & Communication Intelligence
+
+Strong communication is an important part of pageant preparation.
+
+Crown-Fit provides voice-oriented preparation and analysis to help users practice:
+
+- Public speaking
+- Interview responses
+- Introductions
+- Confidence
+- Voice delivery
+- Communication
+
+Voice-related insights can become another signal within the contestant's overall preparation journey.
+
+---
+
+# 📚 Crown-Fit Watch
+
+Crown-Fit includes a dedicated learning experience where contestants can discover curated pageant-related video content.
+
+Content categories include:
+
+- 🎤 Pageant Interviews
+- 👠 Runway & Walk
+- 😊 Confidence & Personality
+- 🗣️ Public Speaking
+- 💄 Grooming & Styling
+- 💪 Fitness & Wellness
+- 💅 Makeup
+- 👑 Pageant Strategy
+- 🏆 Winning Moments
+- 🎬 Behind the Scenes
+- 📰 Pageant News
+
+Users can:
+
+- Search videos
+- Filter by category
+- Explore recommendations
+- Save videos
+- Create a watchlist
+- Track learning progress
+- Add useful content to their preparation journey
+
+This creates a **Discover → Learn → Practice** loop instead of simply embedding videos.
+
+---
+
+# 📅 Preparation Planner
+
+Crown-Fit helps contestants organize their preparation journey.
+
+Users can create and manage preparation activities around areas such as:
+
 - Fitness
-- Practice consistency
-- Interview performance
-- Voice-related signals
+- Interview practice
+- Runway practice
+- Public speaking
+- Grooming
+- Styling
+- Learning
+- Coaching
+- Personal development
+
+Preparation activities can be tracked over time to help users maintain consistency.
+
+---
+
+# 📊 Preparation Dashboard
+
+The dashboard acts as the contestant's personal preparation command center.
+
+It can bring together:
+
 - Preparation progress
+- Upcoming activities
+- Pageant deadlines
+- Practice history
+- Learning progress
+- AI feedback
+- Saved pageants
+- Saved professionals
+- Performance indicators
 
-These signals can be combined to support a more comprehensive readiness assessment.
+The objective is to give contestants a clear understanding of:
 
----
+**Where am I now?**
 
-### 🤖 ML-Based Readiness Prediction
+**What should I do next?**
 
-Machine learning is used to analyze preparation-related information and generate readiness-oriented predictions.
-
-The system can help identify areas where additional preparation may be required.
-
-The purpose is not simply to produce a score, but to help contestants understand:
-
-**What am I doing well?**
-
-**What needs improvement?**
-
-**What should I focus on next?**
+**How prepared am I?**
 
 ---
 
-### 📅 Preparation Tracking
+# 🧠 Personalized AI Recommendations
 
-Contestants can track their preparation activities and progress over time.
+Crown-Fit can use a contestant's goals, preparation activity, selected pageants, and performance information to provide personalized recommendations.
 
-This creates a structured preparation journey instead of relying entirely on manual planning.
+Examples include:
+
+- Suggested preparation activities
+- Recommended learning content
+- Relevant professionals
+- Interview practice topics
+- Areas requiring additional attention
+- Preparation priorities
+- Pageant opportunities
+
+Instead of providing the same experience to every user, Crown-Fit aims to create a more personalized preparation journey.
 
 ---
 
-### 🗺️ Location & Provider Discovery
+# ❤️ Favorites & Shortlists
 
-CrownFit can integrate location-based services to help users discover relevant opportunities and professionals.
+Users can save important resources for later.
 
-The platform uses location-aware functionality for pageant and provider discovery.
+### Pageants
+
+Save pageants that match their interests and eligibility.
+
+### Professionals
+
+Shortlist mentors, coaches, designers, photographers, and other providers.
+
+### Learning Content
+
+Save useful videos and educational resources.
+
+This allows users to build a personalized preparation workspace.
 
 ---
 
-### 🔗 Preparation Ecosystem
+# 📍 Location-Based Discovery
 
-CrownFit connects multiple stages of the preparation journey:
+Crown-Fit supports location-aware discovery to help contestants find relevant opportunities and professionals.
 
-    Discover
-       ↓
+Users can discover:
+
+- Pageants near their location
+- Training institutes
+- Coaches
+- Designers
+- Makeup artists
+- Fitness professionals
+- Other preparation services
+
+Location-based discovery makes the platform more useful for real-world preparation.
+
+---
+
+# 🔗 The Crown-Fit Ecosystem
+
+Crown-Fit connects the major stages of the pageant journey.
+
+    DISCOVER
+        │
+        ▼
+    Find Pageants
+        │
+        ▼
+    Check Eligibility
+        │
+        ▼
+    SELECT
+        │
+        ▼
     Choose a Pageant
-       ↓
-    Assess Preparation
-       ↓
-    Find Professionals
-       ↓
-    Practice
-       ↓
-    Analyze Performance
-       ↓
-    Track Progress
-       ↓
-    Improve
-       ↓
-    Compete
+        │
+        ▼
+    ASSESS
+        │
+        ▼
+    Understand Preparation Needs
+        │
+        ▼
+    BUILD YOUR TEAM
+        │
+        ├───────────────┬───────────────┐
+        ▼               ▼               ▼
+      Mentor          Coach          Designer
+        │               │               │
+        └───────────────┼───────────────┘
+                        ▼
+                     PREPARE
+                        │
+              ┌─────────┼─────────┐
+              ▼         ▼         ▼
+           Fitness   Interview   Runway
+              │         │         │
+              └─────────┼─────────┘
+                        ▼
+                      LEARN
+                        │
+                        ▼
+                  Crown-Fit Watch
+                        │
+                        ▼
+                     PRACTICE
+                        │
+                        ▼
+                  AI Mock Interview
+                        │
+                        ▼
+                     ANALYZE
+                        │
+              ┌─────────┼─────────┐
+              ▼         ▼         ▼
+           Posture     Voice     Progress
+              │         │         │
+              └─────────┼─────────┘
+                        ▼
+                     IMPROVE
+                        │
+                        ▼
+                      TRACK
+                        │
+                        ▼
+                    COMPETE 👑
 
 ---
 
-# 🧠 AI & Intelligence Layer
+# 🧠 AI Intelligence Layer
 
-CrownFit combines multiple intelligent technologies rather than relying on a single AI model.
+Crown-Fit's AI capabilities are designed around the actual preparation journey rather than being added as isolated features.
 
-    ┌──────────────────────┐
-    │      Contestant      │
-    └──────────┬───────────┘
-               │
-               ▼
-    ┌──────────────────────┐
-    │   CrownFit Platform  │
-    └──────────┬───────────┘
-               │
-       ┌───────┼────────┐
-       │       │        │
-       ▼       ▼        ▼
-    Computer  Voice     ML
-    Vision    Analysis  Analytics
-       │       │        │
-       ▼       ▼        ▼
-    Posture   Speech   Readiness
-    Analysis  Analysis Prediction
-       │       │        │
-       └───────┼────────┘
-               │
-               ▼
-    ┌──────────────────────┐
-    │ Personalized         │
-    │ Preparation Insights │
-    └──────────────────────┘
-
----
-
-# 🔄 Preparation Intelligence Workflow
-
-    User Activity
-         │
-         ▼
-    Data Collection
-         │
-         ├──────────────┐
-         │              │
-         ▼              ▼
-    Physical Data    Performance Data
-         │              │
-         ▼              ▼
-    Computer Vision  Speech / Mood
-         │              │
-         └───────┬──────┘
-                 ▼
-          Feature Processing
-                 │
-                 ▼
-            ML / AI Analysis
-                 │
-                 ▼
-          Readiness Insights
-                 │
-                 ▼
-         Personalized Guidance
-                 │
-                 ▼
-          Preparation Tracking
+    Contestant
+        │
+        ▼
+    Preparation Data
+        │
+        ├─────────────────┬──────────────────┐
+        │                 │                  │
+        ▼                 ▼                  ▼
+    Interview          Posture             Voice
+      Data              Data               Data
+        │                 │                  │
+        ▼                 ▼                  ▼
+    AI Analysis      Computer Vision     Voice Analysis
+        │                 │                  │
+        └─────────────────┼──────────────────┘
+                          │
+                          ▼
+                Preparation Intelligence
+                          │
+                          ▼
+                Personalized Insights
+                          │
+                          ▼
+                Recommendations
+                          │
+                          ▼
+                     Improvement
 
 ---
 
 # 🏗️ Platform Architecture
 
-    ┌─────────────────────┐
-    │        User         │
-    └──────────┬──────────┘
-               │
-               ▼
-    ┌─────────────────────┐
-    │    CrownFit UI      │
-    │    Streamlit App    │
-    └──────────┬──────────┘
-               │
-       ┌───────┼────────┐
-       │       │        │
-       ▼       ▼        ▼
-    Authentication  Pageant Data  Preparation
-                       │          Tracking
-                       │             │
-                       ▼             ▼
-                  Discovery     Progress
-                    Layer        Layer
-                       │             │
-                       └──────┬──────┘
-                              │
-                              ▼
-                   ┌──────────────────┐
-                   │   AI Engine      │
-                   │      Layer       │
-                   └────────┬─────────┘
-                            │
-             ┌──────────────┼──────────────┐
-             │              │              │
-             ▼              ▼              ▼
-       Posture Analysis  Mood          ML Engine
-             │          Intelligence        │
-             ▼              │               ▼
-        OpenCV /       Speech /        Prediction /
-        MediaPipe      Analysis         Analytics
-             │              │               │
-             └──────────────┼───────────────┘
-                            │
-                            ▼
-                   ┌──────────────────┐
-                   │ Personalized     │
-                   │ Insights &       │
-                   │ Progress         │
-                   └──────────────────┘
+    ┌──────────────────────────────────────┐
+    │             CROWN-FIT                │
+    │       Pageant Preparation Platform   │
+    └──────────────────┬───────────────────┘
+                       │
+          ┌────────────┼────────────┐
+          │            │            │
+          ▼            ▼            ▼
+       DISCOVER     PREPARE       LEARN
+          │            │            │
+          ▼            ▼            ▼
+      Pageants     Planner       Watch
+      Providers    Tracking      Content
+          │            │            │
+          └────────────┼────────────┘
+                       │
+                       ▼
+                 PRACTICE LAYER
+                       │
+          ┌────────────┼────────────┐
+          │            │            │
+          ▼            ▼            ▼
+       Interview    Posture       Voice
+          │            │            │
+          └────────────┼────────────┘
+                       │
+                       ▼
+                AI INTELLIGENCE
+                       │
+                       ▼
+               Recommendations
+                       │
+                       ▼
+                Progress & Insights
 
 ---
 
-# 🧩 Core Modules
+# 🖥️ Product Experience
 
-CrownFit is organized around several major modules.
+Crown-Fit is designed as a modern premium SaaS-style experience rather than a traditional utility dashboard.
 
-### `ai_engine.py`
+The interface focuses on:
 
-Central AI-related functionality and intelligent processing.
+- Clean visual hierarchy
+- Editorial pageant-inspired aesthetics
+- Premium typography
+- Elegant neutral color palette
+- Responsive layouts
+- Clear discovery experiences
+- Visual content cards
+- Strong calls-to-action
+- Consistent navigation
+- Personalized user experiences
 
-### `ml_engine.py`
-
-Machine learning functionality for analytics and prediction.
-
-### `posture_detection.py`
-
-Computer-vision-based posture analysis using OpenCV and pose-related processing.
-
-### `mood_intelligence.py`
-
-Mood-related analysis and intelligence functionality.
-
-### `digital_twin.py`
-
-Digital representation and modeling functionality within the preparation ecosystem.
-
-### `ecosystem.py`
-
-Preparation ecosystem functionality connecting different platform components.
-
-### `pageant_data_service.py`
-
-Pageant-related data retrieval and management.
-
-### `pageant_status_service.py`
-
-Pageant status and opportunity-related functionality.
-
-### `google_places_service.py`
-
-Location and place-related integration.
-
-### `crownfit_db.py`
-
-Database-related functionality.
-
-### `views.py`
-
-Application views and interface functionality.
-
-### `services.py`
-
-Application service layer.
-
-### `login_page.py`
-
-Authentication and login interface.
+The product is designed to feel aspirational while remaining functional and easy to navigate.
 
 ---
 
-# 🛠️ Tech Stack
+# 🧩 Main Product Sections
 
-## 🐍 Programming
+## 🏠 Home
 
-- Python
+Introduces Crown-Fit and communicates its value proposition.
 
-## 🤖 AI / Machine Learning
+The homepage guides users toward the core actions:
 
-- Scikit-learn
-- Machine Learning
-- Predictive Analytics
+**Discover → Prepare → Practice → Improve**
+
+---
+
+## 👑 Pageants
+
+A dedicated discovery experience for finding pageants.
+
+Includes:
+
+- Search
+- Categories
+- Location filters
+- Eligibility filters
+- Dates
+- Registration information
+- Pageant cards
+- Pageant detail pages
+- Saved pageants
+
+---
+
+## 🤝 Providers
+
+A marketplace-style discovery experience for preparation professionals.
+
+Includes:
+
+- Provider categories
+- Search
+- Location filters
+- Professional cards
+- Ratings
+- Reviews
+- Experience
+- Specializations
+- Availability
+- Provider profiles
+- Shortlisting
+
+---
+
+## 🎥 Watch
+
+A learning hub for pageant-related video content.
+
+Includes:
+
+- Search
+- Categories
+- Featured videos
+- Recommendations
+- Watchlist
+- Learning progress
+- Pageant-specific content
+
+---
+
+## 🎤 Practice
+
+A dedicated area for preparation activities such as:
+
+- AI mock interviews
+- Speaking practice
+- Preparation exercises
+- Performance practice
+
+---
+
+## 📊 Dashboard
+
+The contestant's personalized preparation workspace.
+
+Includes:
+
+- Progress
+- Upcoming activities
+- Saved opportunities
+- Recommendations
+- Practice activity
+- Learning activity
+- Preparation insights
+
+---
+
+# 🗺️ User Journey
+
+### Step 1 — Discover
+
+The contestant explores pageants and identifies opportunities that match their goals.
+
+### Step 2 — Select
+
+The contestant chooses a target pageant and reviews its requirements.
+
+### Step 3 — Assess
+
+The contestant identifies the preparation areas that require attention.
+
+### Step 4 — Build a Team
+
+The contestant discovers mentors, coaches, designers, photographers, stylists, and other professionals.
+
+### Step 5 — Prepare
+
+The contestant creates a structured preparation plan.
+
+### Step 6 — Learn
+
+The contestant explores curated educational content through Crown-Fit Watch.
+
+### Step 7 — Practice
+
+The contestant practices interviews, communication, stage presence, and other skills.
+
+### Step 8 — Analyze
+
+AI-powered tools provide feedback on selected preparation areas.
+
+### Step 9 — Improve
+
+The contestant follows recommendations and focuses on improvement areas.
+
+### Step 10 — Compete
+
+The contestant approaches the pageant with a structured and personalized preparation journey.
+
+---
+
+# 🛠️ Technology Stack
+
+## Frontend
+
+- React
+- TypeScript
+- Tailwind CSS
+- Modern responsive UI components
+
+## AI & Machine Learning
+
 - Generative AI
+- Large Language Models
+- Machine Learning
+- AI Recommendations
+- AI Mock Interviews
 
-## 👁️ Computer Vision
+## Computer Vision
 
 - OpenCV
 - MediaPipe
 - Pose Estimation
+- Posture Analysis
 
-## 📊 Data & Analytics
+## Data & Analytics
 
+- Python
 - Pandas
-- CSV-based data processing
-- Data Analytics
-- Visualization
+- Scikit-learn
+- Performance Analytics
 
-## 🎨 Application
+## Maps & Location
 
-- Streamlit
+- Google Maps / Places APIs
+- Location-based discovery
 
-## 🗺️ External Services
+## Data Management
 
-- Google Places API
-
-## 🗄️ Data
-
-- Application database
-- Structured pageant data
-- Preparation and performance records
+- Structured application data
+- User profiles
+- Pageant information
+- Provider information
+- Preparation records
+- Learning content
 
 ---
 
 # 📁 Project Structure
 
-    CrownFit/
+    Crown-Fit/
     │
-    ├── data/
+    ├── src/
+    │   ├── components/
+    │   ├── pages/
+    │   ├── features/
+    │   ├── services/
+    │   ├── hooks/
+    │   ├── lib/
+    │   └── App.tsx
     │
-    ├── reports/
+    ├── public/
     │
-    ├── tests/
+    ├── screenshots/
     │
-    ├── ai_engine.py
-    ├── app.py
-    ├── crownfit_db.py
-    ├── digital_twin.py
-    ├── ecosystem.py
-    ├── google_places_service.py
-    ├── login_page.py
-    ├── ml_engine.py
-    ├── mood_intelligence.py
-    ├── pageant_data_service.py
-    ├── pageant_status_service.py
-    ├── posture_detection.py
-    ├── services.py
-    ├── theme.py
-    ├── views.py
-    │
-    └── README.md
+    ├── package.json
+    ├── README.md
+    └── .env.example
 
 ---
 
@@ -453,289 +714,274 @@ Authentication and login interface.
 
 Make sure you have:
 
-- Python 3.9+
-- pip
+- Node.js 18+
+- npm
 - Git
+
+If AI or external service integrations are enabled, the required API credentials will also be needed.
 
 ---
 
 ## 1. Clone the Repository
 
-    git clone https://github.com/aditisprasad/CrownFit.git
+    git clone https://github.com/aditisprasad/Crown-Fit.git
 
-    cd CrownFit
-
----
-
-## 2. Create a Virtual Environment
-
-### Windows
-
-    python -m venv venv
-
-    venv\Scripts\activate
-
-### macOS / Linux
-
-    python3 -m venv venv
-
-    source venv/bin/activate
+    cd Crown-Fit
 
 ---
 
-## 3. Install Dependencies
+## 2. Install Dependencies
 
-If a `requirements.txt` file is available:
-
-    pip install -r requirements.txt
+    npm install
 
 ---
 
-## 4. Configure Environment Variables
+## 3. Configure Environment Variables
 
-If external API services are enabled, configure the required credentials in your environment.
+Create a `.env` file based on `.env.example`.
 
-For example:
+Example:
 
-    GOOGLE_PLACES_API_KEY=your_api_key
+    VITE_GOOGLE_MAPS_API_KEY=your_api_key
+    VITE_AI_API_KEY=your_api_key
 
-Never commit API keys or other secrets to GitHub.
+Only expose client-side variables that are safe to expose.
 
----
-
-## 5. Run the Application
-
-    streamlit run app.py
-
-The application will open in the local Streamlit environment.
+Sensitive API keys should be handled through secure server-side functionality.
 
 ---
 
-# 📊 Analytics & Intelligence
+## 4. Start the Development Server
 
-CrownFit is designed to bring different preparation signals together rather than treating each activity independently.
+    npm run dev
 
-The platform can analyze areas such as:
+The application will be available through the local development server.
 
-| Area | Purpose |
+---
+
+## 5. Build for Production
+
+    npm run build
+
+---
+
+# 📊 Product Intelligence
+
+Crown-Fit can bring together multiple signals to provide a broader view of preparation.
+
+| Preparation Area | Intelligence |
 |---|---|
-| Posture | Improve stage presence and physical presentation |
-| Mood | Understand emotional preparation patterns |
-| Voice | Support communication and speaking practice |
-| Fitness | Track physical preparation |
-| Interviews | Practice pageant-style responses |
-| Preparation | Track consistency and progress |
-| Pageant Data | Discover relevant opportunities |
-| Providers | Build a preparation support network |
+| Pageant Discovery | Opportunity matching |
+| Interview | AI-powered practice and feedback |
+| Posture | Computer vision analysis |
+| Voice | Communication insights |
+| Learning | Content recommendations |
+| Preparation | Activity tracking |
+| Professionals | Personalized discovery |
+| Progress | Preparation analytics |
+| Goals | Personalized recommendations |
 
 ---
 
-# 🎯 Why CrownFit?
+# 🎯 Design Principles
 
-Most pageant preparation tools focus on one specific area such as fitness, coaching, or discovery.
+## Personalization
 
-CrownFit is designed as a broader **pageant preparation ecosystem**.
+Every contestant has different goals, strengths, timelines, and preparation needs.
 
-    CROWNFIT
-        │
-        ├───────────────┬───────────────┐
-        │               │               │
-        ▼               ▼               ▼
-    DISCOVER         PREPARE         ANALYZE
-        │               │               │
-        ▼               ▼               ▼
-    Pageants        Training        AI Tools
-    Providers       Tracking        ML Insights
-        │               │               │
-        └───────────────┼───────────────┘
-                        │
-                        ▼
-                     IMPROVE
-                        │
-                        ▼
-                     COMPETE
+Crown-Fit is designed to adapt the experience around the individual.
 
----
+## Intelligence
 
-# 💡 Product Vision
+AI should provide useful insights and recommendations rather than simply adding a chatbot to the product.
 
-CrownFit aims to become a digital preparation companion for contestants throughout their pageant journey.
+## Discoverability
 
-The platform brings together:
+Finding the right pageant, professional, and learning resource should be simple.
 
-**Discovery + Preparation + Practice + AI Analysis + Professional Support + Progress Tracking**
+## Actionability
 
-into one connected ecosystem.
+Insights should lead to clear next steps.
+
+## Ecosystem Thinking
+
+Pageant preparation involves multiple people, services, and activities. Crown-Fit connects them into one experience.
+
+## Premium Experience
+
+The product combines a polished interface with practical preparation tools to create an experience that feels aspirational and professional.
 
 ---
 
-# 🔮 Future Improvements
+# 🔐 Security & Privacy
 
-Potential future extensions include:
+Crown-Fit should follow secure application practices including:
 
-- 🎤 Advanced AI interview evaluation
-- 🧍 Real-time runway and walk analysis
-- 🎙️ More advanced voice analytics
-- 🧠 Personalized AI preparation plans
-- 📈 Longitudinal readiness tracking
-- 🏆 Pageant-specific preparation programs
-- 🤝 Mentor-contestant collaboration
-- 📅 Integrated preparation calendars
-- 🔔 Deadline and registration reminders
-- 💄 Personalized grooming recommendations
-- 👗 Designer and stylist recommendations
-- 📸 Portfolio and photoshoot preparation
-- 🌍 International pageant discovery
-- 📱 Mobile application
-- 🤖 AI preparation assistant
+- Secure authentication
+- Protected user data
+- Environment-based secret management
+- Server-side handling of sensitive API credentials
+- Input validation
+- Controlled access to user information
+- Secure API communication
+- Appropriate access controls
+
+Sensitive credentials should never be hard-coded or committed to the repository.
 
 ---
 
 # 🧪 Testing
 
-The repository includes a testing structure for validating application functionality.
+The platform should include testing across key user flows and functionality.
 
-Tests can be run according to the project's configured Python testing setup.
+Important areas include:
 
-For example:
+- Authentication
+- Pageant discovery
+- Search and filters
+- Provider discovery
+- Favorites
+- Preparation tracking
+- AI mock interviews
+- API integrations
+- Responsive layouts
+- Error states
+- Empty states
 
-    pytest
+Example test command:
 
----
+    npm test
 
-# 🔐 Security
-
-CrownFit follows standard application security practices including:
-
-- Environment-based API credentials
-- Separation of application logic and external services
-- Input validation
-- Controlled database access
-- Secure handling of external API keys
-
-API credentials should never be hard-coded or committed to the repository.
-
----
-
-# 📚 What I Learned
-
-Building CrownFit involved working across several areas of software and AI development:
-
-- Designing an AI-powered application around a real-world user problem
-- Working with computer vision and pose estimation
-- Implementing machine-learning-based analytics
-- Integrating external location services
-- Building Streamlit application interfaces
-- Working with structured application data
-- Combining multiple AI capabilities into one product
-- Designing a product ecosystem instead of a single-purpose application
-- Translating a niche domain problem into a technology-driven solution
-
----
-
-# 🌟 Project Highlights
-
-| Capability | Technology |
-|---|---|
-| AI Preparation | Generative AI |
-| Posture Analysis | OpenCV + MediaPipe |
-| ML Analytics | Scikit-learn |
-| Mood Intelligence | AI / Data Analysis |
-| Voice Intelligence | Speech Analysis |
-| Pageant Discovery | Data Services |
-| Location Discovery | Google Places API |
-| Application UI | Streamlit |
-| Data Processing | Pandas / Python |
-| Preparation Ecosystem | Python |
+Use the project's configured testing framework and scripts when available.
 
 ---
 
 # 📸 Screenshots
 
-Add screenshots of the application here to showcase the product visually.
+Screenshots should be added here to showcase the product.
 
 Recommended screenshots:
 
-1. CrownFit Dashboard
-2. Pageant Discovery
-3. AI Mock Interview
-4. Posture Analysis
-5. Mood / Performance Analytics
-6. Provider Discovery
-7. Preparation Tracking
+1. Crown-Fit Landing Page
+2. Contestant Dashboard
+3. Pageant Discovery
+4. Pageant Details
+5. Provider Discovery
+6. Provider Profile
+7. AI Mock Interview
+8. Posture Analysis
+9. Crown-Fit Watch
+10. Preparation Planner
 
-Once screenshots are added to the repository, they can be displayed using paths such as:
+Example:
 
-    ![CrownFit Dashboard](./screenshots/dashboard.png)
+    ![Crown-Fit Dashboard](./screenshots/dashboard.png)
 
     ![Pageant Discovery](./screenshots/pageants.png)
 
+    ![Provider Discovery](./screenshots/providers.png)
+
     ![AI Mock Interview](./screenshots/interview.png)
 
-    ![Posture Analysis](./screenshots/posture.png)
-
-    ![Performance Analytics](./screenshots/analytics.png)
+    ![Crown-Fit Watch](./screenshots/watch.png)
 
 ---
 
-# 👑 The CrownFit Journey
+# 🔮 Future Improvements
 
-    DISCOVER
-        │
-        ▼
-    Find Opportunities
-        │
-        ▼
-    ASSESS
-        │
-        ▼
-    Understand Readiness
-        │
-        ▼
-    PREPARE
-        │
-        ├──────────┬──────────┐
-        ▼          ▼          ▼
-      Fitness   Interview    Stage
-        │          │          │
-        └──────────┼──────────┘
-                   │
-                   ▼
-                PRACTICE
-                   │
-                   ▼
-                ANALYZE
-                   │
-             ┌─────┼─────┐
-             ▼     ▼     ▼
-          Posture Voice  Mood
-             │     │     │
-             └─────┼─────┘
-                   │
-                   ▼
-                IMPROVE
-                   │
-                   ▼
-                 TRACK
-                   │
-                   ▼
-                COMPETE
+Crown-Fit can evolve into a complete digital ecosystem for pageant preparation.
+
+Potential future capabilities include:
+
+- 🤖 Advanced AI preparation coach
+- 🎤 Advanced interview evaluation
+- 🧍 Real-time runway analysis
+- 👠 Walk and stage-presence scoring
+- 🎙️ Advanced voice analysis
+- 🧠 Personalized preparation plans
+- 📊 Long-term performance analytics
+- 🏆 Pageant-specific preparation roadmaps
+- 🤝 Mentor-contestant collaboration
+- 📅 Integrated preparation calendars
+- 🔔 Registration and deadline reminders
+- 💄 Personalized grooming recommendations
+- 👗 Outfit and styling recommendations
+- 📸 Portfolio preparation
+- 🌍 International pageant discovery
+- 📱 Mobile application
+- 💳 Professional booking and payments
+- 🔔 Personalized notifications
+- 🧠 AI-powered preparation assistant
 
 ---
 
-# 🚀 Future Vision
+# 💡 What Makes Crown-Fit Different?
 
-CrownFit is designed to evolve beyond a fitness or tracking application into a complete **AI-powered pageant preparation ecosystem**.
+Crown-Fit is not designed to be just:
+
+**a pageant directory**
+
+or
+
+**a fitness tracker**
+
+or
+
+**an AI chatbot**
+
+or
+
+**a professional marketplace.**
+
+It connects all of these experiences into a single preparation journey.
+
+    PAGEANTS
+        +
+    PROFESSIONALS
+        +
+    LEARNING
+        +
+    AI PRACTICE
+        +
+    PERFORMANCE ANALYSIS
+        +
+    PREPARATION TRACKING
+        =
+    CROWN-FIT 👑
+
+---
+
+# 🌟 Product Highlights
+
+| Capability | Purpose |
+|---|---|
+| 👑 Pageant Discovery | Find relevant pageant opportunities |
+| 🤝 Professional Discovery | Build a preparation team |
+| 🤖 AI Mock Interviews | Practice interview performance |
+| 🧍 Posture Analysis | Improve physical presentation |
+| 🎙️ Voice Intelligence | Improve communication |
+| 🎥 Crown-Fit Watch | Learn from pageant content |
+| 📅 Preparation Planner | Organize preparation |
+| 📊 Dashboard | Track progress |
+| 🧠 AI Recommendations | Personalize next steps |
+| 📍 Location Discovery | Find nearby opportunities and services |
+| ❤️ Favorites | Save important resources |
+
+---
+
+# 🚀 Product Vision
+
+Crown-Fit aims to become a **digital preparation companion for aspiring pageant contestants** — from discovering their first opportunity to stepping onto the stage.
 
 The long-term vision is to connect:
 
-**Pageants + Contestants + Mentors + Training Institutes + Designers + Coaches + AI**
+**Contestants + Pageants + Mentors + Coaches + Designers + Training Institutes + AI**
 
-in one platform.
+within one intelligent ecosystem.
 
-The goal is simple:
+The platform is built around a simple idea:
 
-> **Help contestants prepare smarter, practice consistently, understand their performance, and step onto the stage with greater confidence.**
+> **Don't just prepare for the crown. Prepare smarter for the journey that leads to it. 👑**
 
 ---
 
@@ -757,7 +1003,7 @@ The goal is simple:
 
 <p align="center">
 
-### 👑 CrownFit
+### 👑 CROWN-FIT
 
 **Discover. Prepare. Practice. Analyze. Improve. Compete.**
 
