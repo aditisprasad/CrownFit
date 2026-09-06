@@ -106,7 +106,7 @@ export const getInsights = createServerFn({ method: "GET" })
       : null;
     const postureTrend =
       postureRows.length >= 2
-        ? Math.round(Number(postureRows[0].posture_score ?? 0) - Number(postureRows[postureRows.length - 1].posture_score ?? 0))
+        ? Math.round(Number(postureRows[0]?.posture_score ?? 0) - Number(postureRows[postureRows.length - 1]?.posture_score ?? 0))
         : null;
 
     const moodRows = mood.data ?? [];
