@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedAnairaRouteImport } from './routes/_authenticated.anaira'
 import { Route as AuthenticatedCalendarRouteImport } from './routes/_authenticated.calendar'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated.dashboard'
+import { Route as AuthenticatedInsightsRouteImport } from './routes/_authenticated.insights'
 import { Route as AuthenticatedMockJuryRouteImport } from './routes/_authenticated.mock-jury'
 import { Route as AuthenticatedPageantsRouteImport } from './routes/_authenticated.pageants'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated.profile'
@@ -50,6 +51,11 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedInsightsRoute = AuthenticatedInsightsRouteImport.update({
+  id: '/insights',
+  path: '/insights',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedMockJuryRoute = AuthenticatedMockJuryRouteImport.update({
   id: '/mock-jury',
   path: '/mock-jury',
@@ -82,6 +88,7 @@ export interface FileRoutesByFullPath {
   '/anaira': typeof AuthenticatedAnairaRoute
   '/calendar': typeof AuthenticatedCalendarRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/insights': typeof AuthenticatedInsightsRoute
   '/mock-jury': typeof AuthenticatedMockJuryRoute
   '/pageants': typeof AuthenticatedPageantsRoute
   '/profile': typeof AuthenticatedProfileRoute
@@ -94,6 +101,7 @@ export interface FileRoutesByTo {
   '/anaira': typeof AuthenticatedAnairaRoute
   '/calendar': typeof AuthenticatedCalendarRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/insights': typeof AuthenticatedInsightsRoute
   '/mock-jury': typeof AuthenticatedMockJuryRoute
   '/pageants': typeof AuthenticatedPageantsRoute
   '/profile': typeof AuthenticatedProfileRoute
@@ -108,6 +116,7 @@ export interface FileRoutesById {
   '/_authenticated/anaira': typeof AuthenticatedAnairaRoute
   '/_authenticated/calendar': typeof AuthenticatedCalendarRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/insights': typeof AuthenticatedInsightsRoute
   '/_authenticated/mock-jury': typeof AuthenticatedMockJuryRoute
   '/_authenticated/pageants': typeof AuthenticatedPageantsRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
@@ -122,6 +131,7 @@ export interface FileRouteTypes {
     | '/anaira'
     | '/calendar'
     | '/dashboard'
+    | '/insights'
     | '/mock-jury'
     | '/pageants'
     | '/profile'
@@ -134,6 +144,7 @@ export interface FileRouteTypes {
     | '/anaira'
     | '/calendar'
     | '/dashboard'
+    | '/insights'
     | '/mock-jury'
     | '/pageants'
     | '/profile'
@@ -147,6 +158,7 @@ export interface FileRouteTypes {
     | '/_authenticated/anaira'
     | '/_authenticated/calendar'
     | '/_authenticated/dashboard'
+    | '/_authenticated/insights'
     | '/_authenticated/mock-jury'
     | '/_authenticated/pageants'
     | '/_authenticated/profile'
@@ -204,6 +216,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/insights': {
+      id: '/_authenticated/insights'
+      path: '/insights'
+      fullPath: '/insights'
+      preLoaderRoute: typeof AuthenticatedInsightsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/mock-jury': {
       id: '/_authenticated/mock-jury'
       path: '/mock-jury'
@@ -246,6 +265,7 @@ interface AuthenticatedRouteChildren {
   AuthenticatedAnairaRoute: typeof AuthenticatedAnairaRoute
   AuthenticatedCalendarRoute: typeof AuthenticatedCalendarRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedInsightsRoute: typeof AuthenticatedInsightsRoute
   AuthenticatedMockJuryRoute: typeof AuthenticatedMockJuryRoute
   AuthenticatedPageantsRoute: typeof AuthenticatedPageantsRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
@@ -257,6 +277,7 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedAnairaRoute: AuthenticatedAnairaRoute,
   AuthenticatedCalendarRoute: AuthenticatedCalendarRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedInsightsRoute: AuthenticatedInsightsRoute,
   AuthenticatedMockJuryRoute: AuthenticatedMockJuryRoute,
   AuthenticatedPageantsRoute: AuthenticatedPageantsRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
