@@ -97,7 +97,7 @@ export const getInsights = createServerFn({ method: "GET" })
       : null;
     const juryTrend =
       juryScored.length >= 2
-        ? Number((Number(juryScored[0].final_score) - Number(juryScored[juryScored.length - 1].final_score)).toFixed(1))
+        ? Number((Number(juryScored[0]?.final_score ?? 0) - Number(juryScored[juryScored.length - 1]?.final_score ?? 0)).toFixed(1))
         : null;
 
     const postureRows = posture.data ?? [];
@@ -106,7 +106,7 @@ export const getInsights = createServerFn({ method: "GET" })
       : null;
     const postureTrend =
       postureRows.length >= 2
-        ? Math.round(Number(postureRows[0].posture_score ?? 0) - Number(postureRows[postureRows.length - 1].posture_score ?? 0))
+        ? Math.round(Number(postureRows[0]?.posture_score ?? 0) - Number(postureRows[postureRows.length - 1]?.posture_score ?? 0))
         : null;
 
     const moodRows = mood.data ?? [];
