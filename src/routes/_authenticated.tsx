@@ -42,6 +42,7 @@ const navGroups = [
     items: [
       { to: "/anaira", label: "Anaira — AI Coach", icon: Sparkles },
       { to: "/mock-jury", label: "Mock Jury", icon: Mic2 },
+      { to: "/plan", label: "Preparation Plan", icon: CalendarCheck },
     ],
   },
   {
