@@ -12,6 +12,7 @@ import {
   UserRound,
   Activity,
   CalendarDays,
+  Gauge,
   Menu,
   X,
 } from "lucide-react";
