@@ -31,7 +31,10 @@ export const Route = createFileRoute("/_authenticated")({
 const navGroups = [
   {
     label: "Overview",
-    items: [{ to: "/dashboard", label: "Dashboard", icon: LayoutDashboard }],
+    items: [
+      { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+      { to: "/insights", label: "Digital Twin", icon: Gauge },
+    ],
   },
   {
     label: "Coaching",
