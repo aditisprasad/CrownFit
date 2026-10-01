@@ -54,7 +54,10 @@ function Providers() {
   });
 
   function run(next: Cat | undefined = category) {
-    if (!city.trim() && !q.trim()) return toast.error("Enter a city or a search term.");
+    if (!city.trim() && !q.trim()) {
+      toast.error("Enter a city or a search term.");
+      return;
+    }
     setApplied({ q: q.trim(), city: city.trim(), ...(next ? { category: next } : {}) });
   }
 
