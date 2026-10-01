@@ -13,6 +13,7 @@ import {
   Activity,
   CalendarDays,
   Gauge,
+  CalendarCheck,
   Menu,
   X,
 } from "lucide-react";

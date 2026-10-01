@@ -1,1014 +1,2157 @@
-# 👑 Crown-Fit
+# CrownFit 
 
-### AI-Powered Pageant Discovery, Preparation & Performance Platform
+Build CrownFit, a production-ready, AI-powered Pageant Preparation & Performance Operating System for aspiring and professional pageant contestants.
 
-Crown-Fit is a modern AI-powered platform designed to help aspiring pageant contestants discover opportunities, prepare strategically, connect with professionals, practice with AI, learn from curated content, and track their progress — all within one connected ecosystem.
+This is NOT a basic fitness tracker, static dashboard, mockup, or collection of informational pages.
 
-Instead of treating pageant preparation as a collection of disconnected activities, Crown-Fit brings **pageant discovery, professional services, preparation planning, learning, AI practice, performance analysis, and progress tracking** together in one platform.
+CrownFit should function as a real product that helps a contestant discover opportunities, determine eligibility, prepare for competitions, connect with professionals, book services, track performance, and build a professional pageant portfolio.
 
-The goal is simple:
+Use a premium, feminine, sophisticated visual identity inspired by luxury fashion/editorial platforms: deep charcoal/black, soft blush pink, champagne/gold accents, elegant typography, glassmorphism used selectively, subtle animations, high-quality imagery, responsive layouts, excellent spacing, and polished micro-interactions.
 
-**Discover → Prepare → Practice → Analyze → Improve → Compete**
+====================================================
 
----
+CORE PRODUCT
+====================================================
 
-## ✨ Why Crown-Fit?
+CrownFit combines:
 
-Preparing for a pageant involves much more than walking and fitness.
+• AI Pageant Coach — "Anaira"
+• AI Digital Twin
+• AI Mock Jury Interview
+• AI Pageant Matching
+• Eligibility Checker
+• Real-world Pageant Discovery
+• Modelling Institute Discovery
+• Mentor & Expert Discovery
+• Fashion Designer Discovery
+• Makeup Artist Discovery
+• Photographer Discovery
+• Location-based recommendations
+• Booking management
+• Event calendar
+• Mood Intelligence
+• OpenCV/posture analysis
+• Voice analysis
+• Portfolio builder
+• Preparation roadmap
+• Fitness tracking
+• Progress analytics
+• ML insights
+• Notifications
+• Contestant profile
+• Admin/verification system
 
-Contestants often need to manage:
+The application must be fully functional.
 
-- 👑 Finding the right pageants
-- 📋 Understanding eligibility and deadlines
-- 🎤 Interview preparation
-- 👠 Runway and stage presence
-- 🗣️ Communication and public speaking
-- 🧍 Posture and body language
-- 💄 Grooming and styling
-- 💪 Fitness and wellness
-- 📚 Learning and pageant knowledge
-- 🤝 Finding mentors and professionals
-- 📅 Managing preparation schedules
-- 📊 Tracking progress
-- 🧠 Understanding strengths and improvement areas
+====================================================
+2. CRITICAL DATA RULE
 
-Crown-Fit brings these requirements into a single digital preparation ecosystem.
+NEVER fabricate real-world information.
 
----
+Do NOT use:
 
-# 🚀 Core Features
+• Fake pageants
+• Fake registration dates
+• Fake countdowns
+• Fake mentors
+• Fake modelling institutes
+• Fake designers
+• Fake makeup artists
+• Fake photographers
+• Fake ratings
+• Fake reviews
+• Fake achievements
+• Fake bookings
+• Fake phone numbers
+• Fake websites
+• Fake AI scores
+• Random ML metrics
+• Placeholder "verified" badges
 
-## 👑 Pageant Discovery
+Do not display information simply because it makes the UI look populated.
 
-Discover pageants based on the contestant's interests, location, category, and eligibility.
+If verified information is unavailable, explicitly show:
 
-Users can explore opportunities across categories such as:
+"Official information currently unavailable."
 
-- National
-- State
-- Regional
-- College
-- International
+or
 
-Each pageant can provide useful information such as:
+"No verified providers found in this location."
 
-- Pageant name
-- Organization
-- Location
-- Category
-- Eligibility
-- Age requirements
-- Registration information
-- Registration deadline
-- Event date
-- Prize information
-- Current status
-- Preparation requirements
+The application must never pretend that fictional information is real.
 
-The discovery experience is designed to help contestants move from simply browsing pageants to identifying opportunities worth pursuing.
+====================================================
+3. AUTHENTICATION
 
----
+Implement proper authentication.
 
-# 🔎 Smart Pageant Search & Filtering
+Support:
 
-Contestants can narrow down opportunities using filters such as:
+• Sign up
+• Login
+• Logout
+• Password reset
+• Email verification
+• Persistent sessions
+• Profile onboarding
 
-- 📍 Location
-- 👑 Pageant category
-- 🎂 Age eligibility
-- 🏆 Experience level
-- 📅 Registration status
-- 🗓️ Event date
-- 💰 Prize information
+Use Supabase Authentication and Supabase PostgreSQL unless another production-ready backend is required.
 
-Users can also search pageants by name, organization, location, or relevant keywords.
+Each user must have their own private data.
 
----
+Use row-level security so users cannot access another contestant's private information.
 
-# 🤝 Professional Discovery
+====================================================
+4. CONTESTANT ONBOARDING
 
-Crown-Fit connects contestants with professionals who can help them prepare for different aspects of their pageant journey.
+On first login, do NOT create fake contestant information.
 
-Professional categories include:
+The user must enter their own information.
 
-- 👩‍🏫 Pageant Mentors
-- 🎤 Pageant Coaches
-- 🏫 Training Institutes
-- 👗 Designers
-- 📸 Photographers
-- 💄 Makeup Artists
-- 💪 Fitness Coaches
-- 💇 Stylists
+Ask progressively for:
 
-Users can discover professionals based on:
+Name
 
-- Location
-- Specialization
-- Experience
-- Ratings
-- Reviews
-- Availability
-- Services
-- Pricing
+Profile photo
 
-This transforms Crown-Fit from a preparation tracker into a broader **pageant preparation marketplace and ecosystem**.
+Age/date of birth
 
----
+City
 
-# ⭐ Professional Profiles
+State
 
-Each professional can have a dedicated profile containing information such as:
+Nationality
 
-- Name
-- Professional category
-- Specialization
-- Location
-- Experience
-- Rating
-- Reviews
-- Services
-- Availability
-- Portfolio
-- Contact / booking options
+Height
 
-Users can shortlist professionals and build their own preparation team.
+Measurements
 
----
+Languages
 
-# 🤖 AI Mock Interviews
+Education
 
-Crown-Fit provides AI-powered mock interview practice designed specifically around pageant-style interviews.
+Experience
 
-Users can practice questions covering:
+Skills
 
-- Personal background
-- Current affairs
-- Situational questions
-- Opinion-based questions
-- Pageant-related topics
-- Social issues
-- Leadership
-- Personality
-- Confidence and communication
+Target pageant
 
-The AI evaluates the response and can provide feedback around areas such as:
+Target year
 
-- Answer quality
-- Relevance
-- Clarity
-- Confidence
-- Communication
-- Structure
-- Overall presentation
+Competition history
 
-The objective is to create a realistic practice environment before contestants face an actual pageant interview.
+Achievements
 
----
+Social links
 
-# 🧍 AI Posture & Stage Analysis
+Portfolio
 
-Crown-Fit incorporates computer-vision-based analysis to help contestants understand their posture and physical presentation.
+Videos
 
-Potential analysis areas include:
+Certificates
 
-- Posture
-- Body alignment
-- Stage presence
-- Movement
-- Body language
+Resume
 
-Computer vision can be used to extract useful signals and convert them into understandable feedback.
+Comp card
 
-The goal is not simply to detect posture — it is to help the contestant understand:
+All fields must initially be empty.
 
-**What can I improve before stepping onto the stage?**
+Never assume the user has won a pageant.
 
----
+Never display fake titles such as:
 
-# 🎙️ Voice & Communication Intelligence
+"Miss Karnataka Runner Up"
 
-Strong communication is an important part of pageant preparation.
+"Miss India Contender"
 
-Crown-Fit provides voice-oriented preparation and analysis to help users practice:
+unless the user explicitly enters them.
 
-- Public speaking
-- Interview responses
-- Introductions
-- Confidence
-- Voice delivery
-- Communication
+====================================================
+5. CONTESTANT PROFILE
 
-Voice-related insights can become another signal within the contestant's overall preparation journey.
+Create a professional digital pageant portfolio.
 
----
+Sections:
 
-# 📚 Crown-Fit Watch
+• Basic Information
+• Measurements
+• Education
+• Languages
+• Skills
+• Achievements
+• Competition History
+• Portfolio
+• Videos
+• Certificates
+• Awards
+• Social Links
+• Resume
+• Comp Card
 
-Crown-Fit includes a dedicated learning experience where contestants can discover curated pageant-related video content.
+Allow:
 
-Content categories include:
+Edit
 
-- 🎤 Pageant Interviews
-- 👠 Runway & Walk
-- 😊 Confidence & Personality
-- 🗣️ Public Speaking
-- 💄 Grooming & Styling
-- 💪 Fitness & Wellness
-- 💅 Makeup
-- 👑 Pageant Strategy
-- 🏆 Winning Moments
-- 🎬 Behind the Scenes
-- 📰 Pageant News
+Save
 
-Users can:
+Delete
 
-- Search videos
-- Filter by category
-- Explore recommendations
-- Save videos
-- Create a watchlist
-- Track learning progress
-- Add useful content to their preparation journey
+Upload
 
-This creates a **Discover → Learn → Practice** loop instead of simply embedding videos.
+Download
 
----
+Share public profile
 
-# 📅 Preparation Planner
+Generate PDF portfolio
 
-Crown-Fit helps contestants organize their preparation journey.
+Generate pageant resume
 
-Users can create and manage preparation activities around areas such as:
+Generate comp card
 
-- Fitness
-- Interview practice
-- Runway practice
-- Public speaking
-- Grooming
-- Styling
-- Learning
-- Coaching
-- Personal development
+Calculate profile completion dynamically.
 
-Preparation activities can be tracked over time to help users maintain consistency.
+Empty sections should say:
 
----
+"No information added yet."
 
-# 📊 Preparation Dashboard
+====================================================
+6. HOME DASHBOARD
 
-The dashboard acts as the contestant's personal preparation command center.
+Create a personalized dashboard.
 
-It can bring together:
+Show only information derived from actual user data.
 
-- Preparation progress
-- Upcoming activities
-- Pageant deadlines
-- Practice history
-- Learning progress
-- AI feedback
-- Saved pageants
-- Saved professionals
-- Performance indicators
+Sections:
 
-The objective is to give contestants a clear understanding of:
+Welcome
 
-**Where am I now?**
+Current Preparation Stage
 
-**What should I do next?**
+Readiness Score
 
-**How prepared am I?**
+Profile Completion
 
----
+Today's Goals
 
-# 🧠 Personalized AI Recommendations
+Upcoming Pageant Opportunities
 
-Crown-Fit can use a contestant's goals, preparation activity, selected pageants, and performance information to provide personalized recommendations.
+Upcoming Auditions
 
-Examples include:
+Upcoming Bookings
 
-- Suggested preparation activities
-- Recommended learning content
-- Relevant professionals
-- Interview practice topics
-- Areas requiring additional attention
-- Preparation priorities
-- Pageant opportunities
+Preparation Streak
 
-Instead of providing the same experience to every user, Crown-Fit aims to create a more personalized preparation journey.
+Mood Summary
 
----
+AI Insights
 
-# ❤️ Favorites & Shortlists
+Weakest Areas
 
-Users can save important resources for later.
+Recommended Actions
 
-### Pageants
+Upcoming Deadlines
 
-Save pageants that match their interests and eligibility.
+Calendar Preview
 
-### Professionals
+Recent Notifications
 
-Shortlist mentors, coaches, designers, photographers, and other providers.
+Do not show fake statistics.
 
-### Learning Content
+If insufficient data exists, clearly state that more data is required.
 
-Save useful videos and educational resources.
+====================================================
+7. ANAIRA — AI PAGEANT COACH
 
-This allows users to build a personalized preparation workspace.
+Create a fully functional AI chatbot named:
 
----
+"ANAIRA"
 
-# 📍 Location-Based Discovery
+Anaira is CrownFit's personal AI pageant coach.
 
-Crown-Fit supports location-aware discovery to help contestants find relevant opportunities and professionals.
+She should answer pageant-related questions naturally and intelligently.
 
-Users can discover:
+Capabilities:
 
-- Pageants near their location
-- Training institutes
-- Coaches
-- Designers
-- Makeup artists
-- Fitness professionals
-- Other preparation services
-
-Location-based discovery makes the platform more useful for real-world preparation.
-
----
-
-# 🔗 The Crown-Fit Ecosystem
-
-Crown-Fit connects the major stages of the pageant journey.
-
-    DISCOVER
-        │
-        ▼
-    Find Pageants
-        │
-        ▼
-    Check Eligibility
-        │
-        ▼
-    SELECT
-        │
-        ▼
-    Choose a Pageant
-        │
-        ▼
-    ASSESS
-        │
-        ▼
-    Understand Preparation Needs
-        │
-        ▼
-    BUILD YOUR TEAM
-        │
-        ├───────────────┬───────────────┐
-        ▼               ▼               ▼
-      Mentor          Coach          Designer
-        │               │               │
-        └───────────────┼───────────────┘
-                        ▼
-                     PREPARE
-                        │
-              ┌─────────┼─────────┐
-              ▼         ▼         ▼
-           Fitness   Interview   Runway
-              │         │         │
-              └─────────┼─────────┘
-                        ▼
-                      LEARN
-                        │
-                        ▼
-                  Crown-Fit Watch
-                        │
-                        ▼
-                     PRACTICE
-                        │
-                        ▼
-                  AI Mock Interview
-                        │
-                        ▼
-                     ANALYZE
-                        │
-              ┌─────────┼─────────┐
-              ▼         ▼         ▼
-           Posture     Voice     Progress
-              │         │         │
-              └─────────┼─────────┘
-                        ▼
-                     IMPROVE
-                        │
-                        ▼
-                      TRACK
-                        │
-                        ▼
-                    COMPETE 👑
-
----
-
-# 🧠 AI Intelligence Layer
-
-Crown-Fit's AI capabilities are designed around the actual preparation journey rather than being added as isolated features.
-
-    Contestant
-        │
-        ▼
-    Preparation Data
-        │
-        ├─────────────────┬──────────────────┐
-        │                 │                  │
-        ▼                 ▼                  ▼
-    Interview          Posture             Voice
-      Data              Data               Data
-        │                 │                  │
-        ▼                 ▼                  ▼
-    AI Analysis      Computer Vision     Voice Analysis
-        │                 │                  │
-        └─────────────────┼──────────────────┘
-                          │
-                          ▼
-                Preparation Intelligence
-                          │
-                          ▼
-                Personalized Insights
-                          │
-                          ▼
-                Recommendations
-                          │
-                          ▼
-                     Improvement
-
----
-
-# 🏗️ Platform Architecture
-
-    ┌──────────────────────────────────────┐
-    │             CROWN-FIT                │
-    │       Pageant Preparation Platform   │
-    └──────────────────┬───────────────────┘
-                       │
-          ┌────────────┼────────────┐
-          │            │            │
-          ▼            ▼            ▼
-       DISCOVER     PREPARE       LEARN
-          │            │            │
-          ▼            ▼            ▼
-      Pageants     Planner       Watch
-      Providers    Tracking      Content
-          │            │            │
-          └────────────┼────────────┘
-                       │
-                       ▼
-                 PRACTICE LAYER
-                       │
-          ┌────────────┼────────────┐
-          │            │            │
-          ▼            ▼            ▼
-       Interview    Posture       Voice
-          │            │            │
-          └────────────┼────────────┘
-                       │
-                       ▼
-                AI INTELLIGENCE
-                       │
-                       ▼
-               Recommendations
-                       │
-                       ▼
-                Progress & Insights
-
----
-
-# 🖥️ Product Experience
-
-Crown-Fit is designed as a modern premium SaaS-style experience rather than a traditional utility dashboard.
-
-The interface focuses on:
+• Pageant preparation
+• Interview preparation
+• Mock questions
+• Current affairs
+• Public speaking
+• Communication
+• Confidence
+• Runway advice
+• Body language
+• Styling
+• Grooming
+• Portfolio advice
+• Fitness guidance
+• Nutrition guidance
+• Time management
+• Competition strategy
+• Travel planning
+• Packing checklists
+• Daily preparation
+• Weekly reviews
+• Motivation
+• Stress management
+• Pageant etiquette
 
-- Clean visual hierarchy
-- Editorial pageant-inspired aesthetics
-- Premium typography
-- Elegant neutral color palette
-- Responsive layouts
-- Clear discovery experiences
-- Visual content cards
-- Strong calls-to-action
-- Consistent navigation
-- Personalized user experiences
-
-The product is designed to feel aspirational while remaining functional and easy to navigate.
-
----
-
-# 🧩 Main Product Sections
-
-## 🏠 Home
-
-Introduces Crown-Fit and communicates its value proposition.
-
-The homepage guides users toward the core actions:
-
-**Discover → Prepare → Practice → Improve**
-
----
-
-## 👑 Pageants
-
-A dedicated discovery experience for finding pageants.
-
-Includes:
-
-- Search
-- Categories
-- Location filters
-- Eligibility filters
-- Dates
-- Registration information
-- Pageant cards
-- Pageant detail pages
-- Saved pageants
-
----
-
-## 🤝 Providers
-
-A marketplace-style discovery experience for preparation professionals.
-
-Includes:
-
-- Provider categories
-- Search
-- Location filters
-- Professional cards
-- Ratings
-- Reviews
-- Experience
-- Specializations
-- Availability
-- Provider profiles
-- Shortlisting
-
----
-
-## 🎥 Watch
-
-A learning hub for pageant-related video content.
-
-Includes:
-
-- Search
-- Categories
-- Featured videos
-- Recommendations
-- Watchlist
-- Learning progress
-- Pageant-specific content
-
----
-
-## 🎤 Practice
-
-A dedicated area for preparation activities such as:
-
-- AI mock interviews
-- Speaking practice
-- Preparation exercises
-- Performance practice
-
----
-
-## 📊 Dashboard
-
-The contestant's personalized preparation workspace.
-
-Includes:
-
-- Progress
-- Upcoming activities
-- Saved opportunities
-- Recommendations
-- Practice activity
-- Learning activity
-- Preparation insights
-
----
-
-# 🗺️ User Journey
-
-### Step 1 — Discover
-
-The contestant explores pageants and identifies opportunities that match their goals.
-
-### Step 2 — Select
-
-The contestant chooses a target pageant and reviews its requirements.
-
-### Step 3 — Assess
-
-The contestant identifies the preparation areas that require attention.
-
-### Step 4 — Build a Team
-
-The contestant discovers mentors, coaches, designers, photographers, stylists, and other professionals.
-
-### Step 5 — Prepare
-
-The contestant creates a structured preparation plan.
-
-### Step 6 — Learn
-
-The contestant explores curated educational content through Crown-Fit Watch.
-
-### Step 7 — Practice
-
-The contestant practices interviews, communication, stage presence, and other skills.
-
-### Step 8 — Analyze
-
-AI-powered tools provide feedback on selected preparation areas.
-
-### Step 9 — Improve
-
-The contestant follows recommendations and focuses on improvement areas.
-
-### Step 10 — Compete
-
-The contestant approaches the pageant with a structured and personalized preparation journey.
-
----
-
-# 🛠️ Technology Stack
-
-## Frontend
-
-- React
-- TypeScript
-- Tailwind CSS
-- Modern responsive UI components
-
-## AI & Machine Learning
-
-- Generative AI
-- Large Language Models
-- Machine Learning
-- AI Recommendations
-- AI Mock Interviews
-
-## Computer Vision
-
-- OpenCV
-- MediaPipe
-- Pose Estimation
-- Posture Analysis
-
-## Data & Analytics
-
-- Python
-- Pandas
-- Scikit-learn
-- Performance Analytics
-
-## Maps & Location
-
-- Google Maps / Places APIs
-- Location-based discovery
-
-## Data Management
-
-- Structured application data
-- User profiles
-- Pageant information
-- Provider information
-- Preparation records
-- Learning content
-
----
-
-# 📁 Project Structure
-
-    Crown-Fit/
-    │
-    ├── src/
-    │   ├── components/
-    │   ├── pages/
-    │   ├── features/
-    │   ├── services/
-    │   ├── hooks/
-    │   ├── lib/
-    │   └── App.tsx
-    │
-    ├── public/
-    │
-    ├── screenshots/
-    │
-    ├── package.json
-    ├── README.md
-    └── .env.example
-
----
-
-# ⚙️ Getting Started
-
-## Prerequisites
-
-Make sure you have:
-
-- Node.js 18+
-- npm
-- Git
-
-If AI or external service integrations are enabled, the required API credentials will also be needed.
-
----
-
-## 1. Clone the Repository
-
-    git clone https://github.com/aditisprasad/Crown-Fit.git
-
-    cd Crown-Fit
-
----
-
-## 2. Install Dependencies
-
-    npm install
-
----
-
-## 3. Configure Environment Variables
-
-Create a `.env` file based on `.env.example`.
+Anaira should use the user's actual CrownFit data when providing personalized advice.
 
 Example:
 
-    VITE_GOOGLE_MAPS_API_KEY=your_api_key
-    VITE_AI_API_KEY=your_api_key
+"Your interview score has improved 8% this month, but your current-affairs performance is still your weakest area. I recommend two 15-minute current-affairs sessions this week."
 
-Only expose client-side variables that are safe to expose.
+Do not fabricate user history.
 
-Sensitive API keys should be handled through secure server-side functionality.
+Provide:
 
----
+• Chat history
+• Conversation memory
+• Suggested prompts
+• Voice input
+• Voice output where supported
+• Context-aware responses
+• Streaming responses
+• Clear error handling
 
-## 4. Start the Development Server
+====================================================
+8. AI MOCK JURY INTERVIEW
 
-    npm run dev
+Build a complete AI mock pageant interview system.
 
-The application will be available through the local development server.
+This must NOT behave like a generic chatbot.
 
----
+Anaira should act as a strict professional pageant jury.
 
-## 5. Build for Production
+Interview modes:
 
-    npm run build
+• Personal Interview
+• Femina Miss India-style preparation
+• Miss Universe-style preparation
+• Introduction Round
+• Current Affairs
+• Social Issues
+• Leadership
+• Rapid Fire
+• Stress Interview
+• Top 5 Final Question Simulation
+• Custom Interview
 
----
+Ask one question at a time.
 
-# 📊 Product Intelligence
+Analyze the previous answer before deciding the next question.
 
-Crown-Fit can bring together multiple signals to provide a broader view of preparation.
+Generate intelligent follow-up questions.
 
-| Preparation Area | Intelligence |
-|---|---|
-| Pageant Discovery | Opportunity matching |
-| Interview | AI-powered practice and feedback |
-| Posture | Computer vision analysis |
-| Voice | Communication insights |
-| Learning | Content recommendations |
-| Preparation | Activity tracking |
-| Professionals | Personalized discovery |
-| Progress | Preparation analytics |
-| Goals | Personalized recommendations |
+Challenge vague answers.
 
----
+Cross-question inconsistent answers.
 
-# 🎯 Design Principles
+Ask unexpected questions.
 
-## Personalization
+====================================================
+9. STRICT JURY EVALUATION
 
-Every contestant has different goals, strengths, timelines, and preparation needs.
+Do NOT give inflated scores.
 
-Crown-Fit is designed to adapt the experience around the individual.
+95–100 = exceptional international finalist-level performance
 
-## Intelligence
+90–94 = outstanding national finalist-level performance
 
-AI should provide useful insights and recommendations rather than simply adding a chatbot to the product.
+80–89 = strong but has noticeable weaknesses
 
-## Discoverability
+70–79 = average contestant performance
 
-Finding the right pageant, professional, and learning resource should be simple.
+60–69 = weak
 
-## Actionability
+Below 60 = poor
 
-Insights should lead to clear next steps.
+Evaluate:
 
-## Ecosystem Thinking
+• Originality
+• Authenticity
+• Confidence
+• Depth of thought
+• Emotional intelligence
+• Leadership
+• Social awareness
+• Critical thinking
+• Relevance
+• Persuasiveness
+• Communication
+• Grammar
+• Vocabulary
+• Structure
+• Voice clarity
+• Voice modulation
+• Speaking pace
+• Filler words
+• Eye contact
+• Facial expression
+• Body language
+• Poise
+• Stage presence
 
-Pageant preparation involves multiple people, services, and activities. Crown-Fit connects them into one experience.
+Do NOT reward generic clichés.
 
-## Premium Experience
+Statements such as:
 
-The product combines a polished interface with practical preparation tools to create an experience that feels aspirational and professional.
+"Beauty lies within."
 
----
+"Believe in yourself."
 
-# 🔐 Security & Privacy
+"Never give up."
 
-Crown-Fit should follow secure application practices including:
+should receive lower originality/depth scores unless developed into a genuinely personal and insightful answer.
 
-- Secure authentication
-- Protected user data
-- Environment-based secret management
-- Server-side handling of sensitive API credentials
-- Input validation
-- Controlled access to user information
-- Secure API communication
-- Appropriate access controls
+====================================================
+10. AI JURY PANEL
 
-Sensitive credentials should never be hard-coded or committed to the repository.
+Simulate multiple jury perspectives:
 
----
+• Former Pageant Winner
+• Communication Coach
+• Journalist
+• Psychology/Emotional Intelligence evaluator
+• Social Impact evaluator
 
-# 🧪 Testing
+Each evaluator should provide:
 
-The platform should include testing across key user flows and functionality.
+Score
 
-Important areas include:
+Strengths
 
-- Authentication
-- Pageant discovery
-- Search and filters
-- Provider discovery
-- Favorites
-- Preparation tracking
-- AI mock interviews
-- API integrations
-- Responsive layouts
-- Error states
-- Empty states
+Weaknesses
 
-Example test command:
+Feedback
 
-    npm test
+The final score should be calculated from the actual evaluations.
 
-Use the project's configured testing framework and scripts when available.
+====================================================
+11. VIDEO/VOICE INTERVIEW ANALYSIS
 
----
+If the user gives camera/microphone permission:
 
-# 📸 Screenshots
+Analyze:
 
-Screenshots should be added here to showcase the product.
+• Eye contact
+• Head posture
+• Facial expressions
+• Smile
+• Body posture
+• Speaking pace
+• Pauses
+• Filler words
+• Voice clarity
+• Voice confidence
+• Voice modulation
 
-Recommended screenshots:
+Clearly communicate that these are AI-assisted estimates and not objective psychological judgments.
 
-1. Crown-Fit Landing Page
-2. Contestant Dashboard
-3. Pageant Discovery
-4. Pageant Details
-5. Provider Discovery
-6. Provider Profile
-7. AI Mock Interview
-8. Posture Analysis
-9. Crown-Fit Watch
-10. Preparation Planner
+Provide actionable feedback.
 
-Example:
+====================================================
+12. AI DIGITAL TWIN
 
-    ![Crown-Fit Dashboard](./screenshots/dashboard.png)
+The Digital Twin is the intelligence layer connecting CrownFit's modules.
 
-    ![Pageant Discovery](./screenshots/pageants.png)
+It should represent the contestant's evolving preparation state.
 
-    ![Provider Discovery](./screenshots/providers.png)
+Feed it actual data from:
 
-    ![AI Mock Interview](./screenshots/interview.png)
+• Profile
+• Posture analysis
+• Voice analysis
+• Mood analysis
+• Fitness
+• Sleep if provided
+• Nutrition if provided
+• Mock interviews
+• Current affairs quizzes
+• Portfolio completion
+• Calendar consistency
+• Mentor feedback
+• Preparation tasks
+• Competition history
 
-    ![Crown-Fit Watch](./screenshots/watch.png)
+Display:
 
----
+Current Readiness
 
-# 🔮 Future Improvements
+Confidence
 
-Crown-Fit can evolve into a complete digital ecosystem for pageant preparation.
+Consistency
 
-Potential future capabilities include:
+Weaknesses
 
-- 🤖 Advanced AI preparation coach
-- 🎤 Advanced interview evaluation
-- 🧍 Real-time runway analysis
-- 👠 Walk and stage-presence scoring
-- 🎙️ Advanced voice analysis
-- 🧠 Personalized preparation plans
-- 📊 Long-term performance analytics
-- 🏆 Pageant-specific preparation roadmaps
-- 🤝 Mentor-contestant collaboration
-- 📅 Integrated preparation calendars
-- 🔔 Registration and deadline reminders
-- 💄 Personalized grooming recommendations
-- 👗 Outfit and styling recommendations
-- 📸 Portfolio preparation
-- 🌍 International pageant discovery
-- 📱 Mobile application
-- 💳 Professional booking and payments
-- 🔔 Personalized notifications
-- 🧠 AI-powered preparation assistant
+Strengths
 
----
+Preparation Stage
 
-# 💡 What Makes Crown-Fit Different?
+Progress Trend
 
-Crown-Fit is not designed to be just:
+Predicted Readiness
 
-**a pageant directory**
+Recommended Actions
 
-or
+Do NOT display random percentages.
 
-**a fitness tracker**
+If insufficient data exists:
 
-or
+"Not enough data to generate a reliable prediction."
 
-**an AI chatbot**
+====================================================
+13. DIGITAL TWIN WHAT-IF SIMULATOR
 
-or
+Allow users to simulate:
 
-**a professional marketplace.**
+• More workouts
+• More interview practice
+• Better sleep
+• Improved posture
+• Portfolio completion
+• Current-affairs practice
+• Mentor sessions
+• Runway practice
 
-It connects all of these experiences into a single preparation journey.
+Show how these changes could affect projected readiness.
 
-    PAGEANTS
-        +
-    PROFESSIONALS
-        +
-    LEARNING
-        +
-    AI PRACTICE
-        +
-    PERFORMANCE ANALYSIS
-        +
-    PREPARATION TRACKING
-        =
-    CROWN-FIT 👑
+Clearly label projections as estimates, not guarantees.
 
----
+====================================================
+14. MACHINE LEARNING
 
-# 🌟 Product Highlights
+Use actual Scikit-learn models where sufficient data exists.
 
-| Capability | Purpose |
-|---|---|
-| 👑 Pageant Discovery | Find relevant pageant opportunities |
-| 🤝 Professional Discovery | Build a preparation team |
-| 🤖 AI Mock Interviews | Practice interview performance |
-| 🧍 Posture Analysis | Improve physical presentation |
-| 🎙️ Voice Intelligence | Improve communication |
-| 🎥 Crown-Fit Watch | Learn from pageant content |
-| 📅 Preparation Planner | Organize preparation |
-| 📊 Dashboard | Track progress |
-| 🧠 AI Recommendations | Personalize next steps |
-| 📍 Location Discovery | Find nearby opportunities and services |
-| ❤️ Favorites | Save important resources |
+Potential models:
 
----
+• Random Forest Regressor — readiness prediction
+• Linear Regression — progress forecasting
+• K-Means — preparation-stage clustering
+• Isolation Forest — anomaly/inconsistency detection
 
-# 🚀 Product Vision
+Do NOT fabricate model metrics.
 
-Crown-Fit aims to become a **digital preparation companion for aspiring pageant contestants** — from discovering their first opportunity to stepping onto the stage.
+Only display:
 
-The long-term vision is to connect:
+R²
 
-**Contestants + Pageants + Mentors + Coaches + Designers + Training Institutes + AI**
+MAE
 
-within one intelligent ecosystem.
+RMSE
 
-The platform is built around a simple idea:
+Silhouette Score
 
-> **Don't just prepare for the crown. Prepare smarter for the journey that leads to it. 👑**
+Accuracy
 
----
+Feature Importance
 
-# 👩‍💻 Author
+when they have actually been calculated from real training/evaluation data.
 
-## Aditi S Prasad
+If there is insufficient real training data:
 
-**Software Engineering Student | AI/ML | Full-Stack | Data**
+"Model evaluation unavailable until sufficient training data is collected."
 
-📍 Bengaluru, India
+Never display fake values such as:
 
-[![GitHub](https://img.shields.io/badge/GitHub-aditisprasad-181717?style=flat-square&logo=github)](https://github.com/aditisprasad)
+R² = 0.942
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Aditi%20Prasad-0A66C2?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/aditi-prasad-678808299/)
+unless that is the actual calculated metric.
 
-[![Email](https://img.shields.io/badge/Email-aditisprasad-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:aditisprasad16@gmail.com)
+Use proper train/test splits and cross-validation where appropriate.
 
----
+====================================================
+15. ML FEATURE IMPORTANCE
 
-<p align="center">
+Calculate feature importance dynamically.
 
-### 👑 CROWN-FIT
+Potential features:
 
-**Discover. Prepare. Practice. Analyze. Improve. Compete.**
+Posture
 
-</p>
+Interview
 
-<p align="center">
-  <b>AI-powered preparation for the stage of your dreams. ✨</b>
-</p>
+Confidence
+
+Fitness
+
+Portfolio
+
+Current Affairs
+
+Consistency
+
+Mood-related signals
+
+Communication
+
+Do NOT hardcode feature percentages.
+
+====================================================
+16. ML DEVELOPER VIEW
+
+Create a separate expandable "ML Insights" section.
+
+Contestants see:
+
+Readiness
+
+Weaknesses
+
+Recommendations
+
+Developers/recruiters can optionally view:
+
+Model
+
+Training samples
+
+Features
+
+Cross-validation
+
+R²
+
+MAE
+
+RMSE
+
+Feature importance
+
+Cluster analysis
+
+Model version
+
+Last training date
+
+====================================================
+17. PAGEANT DISCOVERY PORTAL
+
+Build a real Pageant Discovery Portal.
+
+Every listing must have:
+
+• Official name
+• Organizer
+• Category
+• Country
+• State
+• City
+• Registration status
+• Registration opening date
+• Registration closing date
+• Audition dates
+• Finale date
+• Eligibility
+• Age requirements
+• Height requirements where officially specified
+• Application fee where officially specified
+• Required documents
+• Official website
+• Official application URL
+• Last updated
+• Source
+
+Only show:
+
+"Registrations Open"
+
+when verified from an official source.
+
+Never hardcode:
+
+"Miss India 2027 Registrations Open."
+
+If official registration has not been announced:
+
+"Official announcement pending."
+
+Show:
+
+Visit Official Website
+
+Notify Me
+
+Bookmark
+
+instead of Apply Now.
+
+Apply Now must only appear when a valid official application URL exists and registration is confirmed open.
+
+====================================================
+18. REAL-WORLD PAGEANT DATA
+
+Use official sources whenever available.
+
+Design the architecture around a PageantDataService.
+
+Do not rely on hardcoded Python/JavaScript arrays.
+
+Create a database table for pageants with:
+
+id
+
+name
+
+organizer
+
+status
+
+registration_open
+
+registration_close
+
+audition_date
+
+finale_date
+
+eligibility
+
+official_url
+
+application_url
+
+source_url
+
+verified
+
+last_verified
+
+last_updated
+
+When information is unavailable, do not invent it.
+
+Create an admin verification workflow for updating pageant data.
+
+====================================================
+19. PAGEANT ELIGIBILITY ENGINE
+
+Automatically determine eligibility based on the user's actual profile.
+
+Compare:
+
+Age
+
+Height
+
+Nationality
+
+State/residency if relevant
+
+Gender requirements if officially stated
+
+Marital requirements if officially stated
+
+Education requirements if officially stated
+
+Other official requirements
+
+Output:
+
+Eligible
+
+Possibly Eligible — Verify Requirement
+
+Not Eligible
+
+Explain every decision.
+
+Never infer requirements that are not published.
+
+Show the exact source of the eligibility requirement.
+
+====================================================
+20. AI PAGEANT MATCHING
+
+Recommend pageants based on:
+
+Actual eligibility
+
+Location
+
+Target pageant
+
+Experience
+
+Preparation stage
+
+Budget
+
+Profile completeness
+
+Skills
+
+Competition history
+
+Explain:
+
+"Recommended because..."
+
+Do not generate arbitrary match percentages.
+
+If using ML, calculate the score from the actual model.
+
+====================================================
+21. LOCATION-BASED DISCOVERY
+
+The platform must work throughout India.
+
+Support every Indian state and major city.
+
+At minimum include all state capitals and major cities.
+
+Examples:
+
+New Delhi
+
+Mumbai
+
+Bengaluru
+
+Hyderabad
+
+Chennai
+
+Kolkata
+
+Jaipur
+
+Lucknow
+
+Ahmedabad
+
+Pune
+
+Chandigarh
+
+Bhopal
+
+Patna
+
+Ranchi
+
+Bhubaneswar
+
+Raipur
+
+Dehradun
+
+Shimla
+
+Srinagar
+
+Jammu
+
+Guwahati
+
+Shillong
+
+Kohima
+
+Imphal
+
+Aizawl
+
+Agartala
+
+Itanagar
+
+Gangtok
+
+Panaji
+
+Thiruvananthapuram
+
+and allow any city to be searched.
+
+When a contestant selects a city, dynamically fetch relevant providers for THAT city.
+
+Do NOT always return Mumbai.
+
+====================================================
+22. REAL-WORLD PROVIDER DISCOVERY
+
+Integrate a real location/business data provider such as Google Maps Places API, subject to API availability, licensing and terms.
+
+Search dynamically for:
+
+• Modelling Institutes
+• Runway Coaches
+• Pageant Coaches
+• Fashion Designers
+• Boutique Designers
+• Evening Gown Designers
+• Makeup Artists
+• Hair Stylists
+• Photographers
+• Fitness Coaches
+• Nutritionists
+• Public Speaking Coaches
+• Image Consultants
+
+Use real provider data.
+
+Store:
+
+Business Name
+
+Category
+
+Address
+
+Latitude
+
+Longitude
+
+Phone
+
+Website
+
+Maps URL
+
+Place ID
+
+Rating where available
+
+Review count where available
+
+Opening hours where available
+
+Photos where permitted
+
+Price level where available
+
+Do NOT fabricate information.
+
+If no verified provider exists:
+
+"No verified providers found in this location."
+
+Then optionally search a configurable nearby radius.
+
+====================================================
+23. MODELLING INSTITUTES
+
+Each institute profile should show:
+
+Logo/photo
+
+Name
+
+Verification/source status
+
+Address
+
+Distance
+
+Website
+
+Phone
+
+Email if available
+
+Instagram if officially provided
+
+Courses
+
+Fees only when verified
+
+Upcoming batches only when verified
+
+Reviews/ratings only when sourced
+
+Map
+
+Official booking/enquiry link
+
+Buttons:
+
+Visit Website
+
+Book Consultation
+
+Call
+
+Email
+
+Directions
+
+WhatsApp where officially available
+
+The app must NEVER generate a fake booking URL.
+
+====================================================
+24. MENTORS & EXPERTS
+
+Support:
+
+Runway Coaches
+
+Interview Coaches
+
+Image Consultants
+
+Fitness Coaches
+
+Nutritionists
+
+Public Speaking Coaches
+
+Former Pageant Professionals
+
+Fashion Mentors
+
+Experts
+
+Include real verified information where available.
+
+Profiles:
+
+Photo
+
+Name
+
+Location
+
+Experience
+
+Specialization
+
+Languages
+
+Website
+
+Social profile
+
+Contact
+
+Consultation information
+
+Booking link if available
+
+If an official booking page exists:
+
+Book Consultation → official booking page.
+
+If only official email exists:
+
+Book Consultation → mailto link.
+
+If only official phone exists:
+
+Book Consultation → tel link.
+
+If only an official social profile exists:
+
+Open the official profile.
+
+Never redirect to a fabricated route.
+
+====================================================
+25. FASHION DESIGNERS
+
+Replace the generic Marketplace concept with:
+
+"Fashion Designers & Beauty Professionals"
+
+Prioritize location-based results.
+
+Support:
+
+Budget Designers
+
+Independent Designers
+
+Boutique Designers
+
+Evening Gown Designers
+
+National Costume Designers
+
+Rental Designers
+
+Luxury Designers
+
+Display:
+
+Portfolio
+
+Location
+
+Price range only when verified
+
+Rental availability only when verified
+
+Website
+
+Instagram
+
+Phone
+
+Email
+
+Maps
+
+Booking/contact link
+
+Request Quote
+
+Book Consultation
+
+Call
+
+Directions
+
+====================================================
+26. MAKEUP ARTISTS
+
+Display real professionals by city.
+
+Categories:
+
+Pageant
+
+Fashion
+
+Editorial
+
+Photoshoot
+
+Bridal
+
+Budget-friendly
+
+Premium
+
+Display verified information only.
+
+====================================================
+27. PHOTOGRAPHERS
+
+Support:
+
+Pageant photographers
+
+Fashion photographers
+
+Portfolio studios
+
+Comp-card photographers
+
+Editorial photographers
+
+Display:
+
+Portfolio
+
+Location
+
+Packages where verified
+
+Website
+
+Contact
+
+Booking
+
+Map
+
+====================================================
+28. AFFORDABILITY
+
+CrownFit should be accessible to students and contestants with limited budgets.
+
+Do not only show premium providers.
+
+Add filters:
+
+Under ₹2,000
+
+₹2,000–₹5,000
+
+₹5,000–₹10,000
+
+₹10,000–₹25,000
+
+₹25,000+
+
+Premium
+
+Only show price information when verified.
+
+Add:
+
+Budget Friendly
+
+Student Friendly
+
+Best Value
+
+where these labels are derived from actual price data or verified information.
+
+Never invent prices.
+
+====================================================
+29. MAP VIEW
+
+Add an interactive map for provider discovery.
+
+Show:
+
+Institutes
+
+Mentors
+
+Designers
+
+Makeup Artists
+
+Photographers
+
+Allow:
+
+Search radius
+
+Distance sorting
+
+Directions
+
+Provider preview
+
+Open official website
+
+====================================================
+30. BOOKING SYSTEM
+
+Create a real user booking tracker.
+
+Users can save bookings for:
+
+Mentor consultations
+
+Institute sessions
+
+Designer consultations
+
+Makeup appointments
+
+Photoshoots
+
+Training
+
+Mock interviews
+
+Auditions
+
+Personal tasks
+
+Each booking contains:
+
+Title
+
+Provider
+
+Date
+
+Time
+
+Location
+
+Booking URL
+
+Contact
+
+Status
+
+Notes
+
+Confirmation reference if supplied
+
+Never create a fake booking confirmation.
+
+If external booking is used, clearly distinguish:
+
+"External booking"
+
+and open the provider's official page.
+
+====================================================
+31. CALENDAR
+
+Build a functional calendar.
+
+Automatically display:
+
+User bookings
+
+Pageant deadlines
+
+Auditions
+
+Training
+
+Mock interviews
+
+Appointments
+
+Personal tasks
+
+Preparation milestones
+
+Allow:
+
+Create event
+
+Edit
+
+Delete
+
+Reschedule
+
+Cancel
+
+Reminder
+
+Export to Google Calendar where supported
+
+Only show actual events.
+
+Never create fake appointments.
+
+====================================================
+32. NOTIFICATIONS
+
+Create a notification center.
+
+Notify users about:
+
+Pageant registration openings when verified
+
+Registration deadlines
+
+Upcoming auditions
+
+Bookings
+
+Mentor responses
+
+Institute responses
+
+Calendar reminders
+
+Preparation tasks
+
+Mood trends where appropriate
+
+Profile completion
+
+New relevant opportunities
+
+Allow users to enable/disable notification categories.
+
+====================================================
+33. MOOD INTELLIGENCE
+
+Create an actual opt-in mood intelligence module.
+
+Inputs may include:
+
+• Camera/image analysis
+• Facial expression signals
+• Voice sentiment
+• Journal text sentiment
+• Optional self-reported mood
+
+Use appropriate ML/computer vision models.
+
+Do not claim to diagnose emotions or mental health conditions.
+
+Label results as:
+
+"AI-estimated emotional state"
+
+rather than definitive psychological diagnosis.
+
+Analyze signals such as:
+
+Positive/neutral/negative expression
+
+Stress-related indicators
+
+Energy indicators
+
+Confidence-related indicators
+
+Provide cautious suggestions:
+
+Breathing exercise
+
+Break
+
+Hydration
+
+Rest
+
+Preparation pause
+
+Motivational exercise
+
+Interview practice
+
+If the system detects concerning wellbeing signals, encourage the user to seek appropriate professional support rather than making a diagnosis.
+
+Store historical results only with user consent.
+
+Allow users to delete mood history.
+
+====================================================
+34. OPEN-CV POSTURE ANALYSIS
+
+Retain the existing OpenCV functionality.
+
+Analyze:
+
+Posture
+
+Shoulder alignment
+
+Head position
+
+Body alignment
+
+Runway posture
+
+Provide scores only when calculated from actual analysis.
+
+Show:
+
+Current Analysis
+
+Previous Analysis
+
+Improvement
+
+Exercises
+
+Never fabricate results.
+
+====================================================
+35. VOICE ANALYSIS
+
+Analyze uploaded/recorded speech for:
+
+Speaking pace
+
+Pauses
+
+Filler words
+
+Volume consistency
+
+Clarity
+
+Voice modulation
+
+Use these as coaching signals, not medical or personality diagnoses.
+
+====================================================
+36. FITNESS
+
+Create a preparation-oriented fitness tracker.
+
+Track user-entered:
+
+Workout
+
+Duration
+
+Consistency
+
+Goals
+
+Progress
+
+Do not provide unsafe medical advice.
+
+Fitness recommendations should be general wellness guidance and clearly distinguish from medical advice.
+
+====================================================
+37. PREPARATION ROADMAP
+
+Generate a personalized preparation roadmap based on:
+
+Target pageant
+
+Official deadline if verified
+
+Current readiness
+
+Weaknesses
+
+Available time
+
+Bookings
+
+User goals
+
+Stages:
+
+Profile
+
+Fitness
+
+Runway
+
+Interview
+
+Current Affairs
+
+Communication
+
+Portfolio
+
+Grooming
+
+Mock Interviews
+
+Final Preparation
+
+The roadmap must update dynamically.
+
+====================================================
+38. PORTFOLIO BUILDER
+
+Allow uploads for:
+
+Headshot
+
+Full-length
+
+Editorial
+
+Evening gown
+
+Ethnic wear
+
+Runway video
+
+Introduction video
+
+Talent video
+
+Certificates
+
+Resume
+
+Comp card
+
+Generate:
+
+Public portfolio
+
+PDF portfolio
+
+Comp card
+
+Allow sharing through a public link.
+
+====================================================
+39. MARKETPLACE REPLACEMENT
+
+Do NOT create a fake Amazon-style marketplace containing fictional products.
+
+The primary ecosystem should instead focus on real:
+
+Designers
+
+Makeup Artists
+
+Photographers
+
+Mentors
+
+Institutes
+
+Coaches
+
+Professionals
+
+Use external official websites where purchases/bookings happen.
+
+====================================================
+40. SEARCH & FILTERS
+
+Global search should support:
+
+Pageants
+
+Institutes
+
+Mentors
+
+Designers
+
+Makeup Artists
+
+Photographers
+
+Events
+
+Use:
+
+Location
+
+Category
+
+Budget
+
+Rating when available
+
+Distance
+
+Availability
+
+Online/Offline
+
+====================================================
+41. ADMIN DASHBOARD
+
+Create an admin interface for verified data management.
+
+Admins can:
+
+Add/update pageants
+
+Verify pageants
+
+Update registration status
+
+Add/edit verified mentors
+
+Add providers
+
+Remove inactive providers
+
+Verify provider links
+
+Manage announcements
+
+Manage reported listings
+
+Manage users
+
+View analytics
+
+Manage data sources
+
+Every admin update should record:
+
+Updated by
+
+Updated date
+
+Source
+
+Verification status
+
+====================================================
+42. DATA SOURCE TRANSPARENCY
+
+Every real-world listing should show:
+
+Source
+
+Last Updated
+
+Verification Status
+
+For pageants:
+
+Official Source
+
+For businesses:
+
+Business/Maps source
+
+Never claim official verification when only a third-party source exists.
+
+====================================================
+43. BROKEN LINK PREVENTION
+
+Every external action must have a valid destination.
+
+Priority for booking/contact:
+
+Official booking URL
+
+Official website/contact page
+
+Official email using mailto:
+
+Official phone using tel:
+
+Official social profile
+
+Maps listing
+
+Never generate URLs.
+
+Before saving a provider, validate that external links are correctly formed.
+
+====================================================
+44. SECURITY & PRIVACY
+
+Implement:
+
+Authentication
+
+Authorization
+
+Row-level security
+
+Secure API key handling
+
+Environment variables
+
+Do not expose API keys in frontend code.
+
+Camera/microphone access must require permission.
+
+Allow users to delete personal data.
+
+Do not expose private contestant data publicly.
+
+====================================================
+45. RESPONSIVE UI
+
+Design for:
+
+Desktop
+
+Tablet
+
+Mobile
+
+Create:
+
+Elegant sidebar
+
+Mobile navigation
+
+Responsive cards
+
+Loading skeletons
+
+Empty states
+
+Error states
+
+Toast notifications
+
+Confirmation dialogs
+
+Accessible buttons
+
+Keyboard navigation where practical
+
+====================================================
+46. EMPTY STATES
+
+Never fill empty pages with fake content.
+
+Examples:
+
+"No verified pageants are currently open."
+
+"No mentors found in Bengaluru."
+
+"No bookings yet."
+
+"No portfolio photos uploaded."
+
+"Not enough data for an AI prediction yet."
+
+Provide useful actions beside each empty state.
+
+====================================================
+47. DATABASE
+
+Create appropriate database tables including:
+
+users
+
+contestant_profiles
+
+measurements
+
+achievements
+
+competitions
+
+portfolio_items
+
+pageants
+
+pageant_sources
+
+pageant_eligibility
+
+providers
+
+institutes
+
+mentors
+
+designers
+
+makeup_artists
+
+photographers
+
+bookings
+
+calendar_events
+
+notifications
+
+mood_records
+
+posture_records
+
+voice_records
+
+interview_sessions
+
+interview_answers
+
+readiness_records
+
+ml_predictions
+
+preparation_tasks
+
+saved_items
+
+reviews where legitimately sourced/allowed
+
+admin_users
+
+data_verification_logs
+
+====================================================
+48. AI DATA SAFETY
+
+Never generate fake user history.
+
+Never generate fake model performance.
+
+Never claim guaranteed pageant qualification.
+
+Use language such as:
+
+"AI estimate"
+
+"Based on available data"
+
+"Prediction confidence"
+
+"Official eligibility should be confirmed with the organizer."
+
+====================================================
+49. ANALYTICS
+
+Create meaningful analytics:
+
+Readiness trend
+
+Interview trend
+
+Posture trend
+
+Mood trend
+
+Fitness consistency
+
+Portfolio completion
+
+Preparation consistency
+
+Weakness trend
+
+Strength trend
+
+Goal progress
+
+All charts must use actual stored data.
+
+====================================================
+50. DESIGN
+
+The final UI should feel like:
+
+A premium fashion platform
+
+AI coaching product
+
+professional networking platform
+
+opportunity discovery platform
+
+preparation management system
+
+Do not make it look like a generic Streamlit dashboard.
+
+Use a sophisticated luxury visual language.
+
+Pages should include:
+
+Home
+
+Anaira AI Coach
+
+Digital Twin
+
+Mock Jury
+
+Discover Pageants
+
+AI Matching
+
+Institutes
+
+Mentors & Experts
+
+Designers & Makeup Artists
+
+Photographers
+
+Bookings
+
+Calendar
+
+Mood Intelligence
+
+Posture Analysis
+
+Portfolio
+
+Preparation Plan
+
+Analytics
+
+Notifications
+
+Profile
+
+Settings
+
+Admin
+
+====================================================
+51. TECHNICAL ARCHITECTURE
+
+Use a clean modular architecture.
+
+Recommended:
+
+Frontend:
+React + TypeScript
+
+UI:
+Tailwind CSS + shadcn/ui
+
+Backend:
+Supabase
+
+Database:
+PostgreSQL
+
+Authentication:
+Supabase Auth
+
+Storage:
+Supabase Storage
+
+ML:
+Python microservice or server-side ML service using Scikit-learn
+
+Computer Vision:
+OpenCV / compatible browser or backend processing
+
+AI:
+LLM API through secure backend
+
+Location:
+Google Maps/Places API or another licensed provider
+
+External calendar:
+Google Calendar integration where available
+
+Never expose secret API keys in client-side code.
+
+Use environment variables.
+
+====================================================
+52. PERFORMANCE
+
+Use:
+
+Caching
+
+Lazy loading
+
+Pagination
+
+Debounced search
+
+API request deduplication
+
+Database indexing
+
+Optimized image loading
+
+Skeleton loading
+
+Do not call external APIs repeatedly on every UI rerender.
+
+====================================================
+53. FINAL QUALITY STANDARD
+
+Before considering the application complete, test every user flow.
+
+Test:
+
+Registration
+
+Login
+
+Profile creation
+
+Profile editing
+
+Pageant discovery
+
+Eligibility checking
+
+Pageant matching
+
+Official application redirect
+
+City selection
+
+Provider discovery
+
+Bengaluru
+
+Mumbai
+
+Delhi
+
+Hyderabad
+
+Chennai
+
+Kolkata
+
+All state capitals
+
+Institute website redirect
+
+Mentor consultation redirect
+
+Designer contact
+
+Makeup artist contact
+
+Booking creation
+
+Booking editing
+
+Booking cancellation
+
+Calendar synchronization
+
+Notification creation
+
+AI Coach
+
+Mock Interview
+
+Voice analysis
+
+Posture analysis
+
+Mood analysis
+
+Digital Twin
+
+ML predictions
+
+Portfolio upload
+
+PDF generation
+
+Logout
+
+Error handling
+
+Empty states
+
+Mobile responsiveness
+
+====================================================
+54. MOST IMPORTANT REQUIREMENT
+
+CrownFit must be a REAL FUNCTIONAL APPLICATION.
+
+Do not optimize for making the interface look populated.
+
+Optimize for:
+
+Accuracy
+
+Real data
+
+Functional interactions
+
+Correct external links
+
+User-owned information
+
+Reliable calculations
+
+Transparent AI
+
+Scalable architecture
+
+Privacy
+
+Accessibility
+
+Maintainability
+
+If a feature cannot currently obtain verified real-world data, build the integration architecture and show a transparent empty state rather than fake content.
+
+The final product should feel like a genuine AI-powered Pageant Operating System that a contestant can use throughout her complete journey — from discovering a pageant, checking eligibility, preparing for it, finding affordable professionals nearby, booking consultations, practicing with Anaira, tracking performance, building her portfolio, and managing the competition calendar through to the final event.
+
+This project was built with [Lovable](https://lovable.dev).
+
+## Build with Lovable
+
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/02d4d855-9552-4681-8120-6c2c11191c72).
+
+- **Ship faster**: describe what you want to build and Lovable handles the code.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+
+## Development
+
+Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+
+```sh
+git clone <this-repository-url>
+cd <repository-name>
+npm i
+npm run dev
+```
