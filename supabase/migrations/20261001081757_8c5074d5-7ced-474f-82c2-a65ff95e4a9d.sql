@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX IF NOT EXISTS providers_place_id_key ON public.providers(place_id);
