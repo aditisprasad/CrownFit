@@ -44,8 +44,18 @@ type RawPlace = {
 };
 
 const FIELDS = [
-  "id", "displayName", "formattedAddress", "rating", "userRatingCount", "nationalPhoneNumber",
-  "internationalPhoneNumber", "websiteUri", "googleMapsUri", "businessStatus", "primaryTypeDisplayName", "location",
+  "id",
+  "displayName",
+  "formattedAddress",
+  "rating",
+  "userRatingCount",
+  "nationalPhoneNumber",
+  "internationalPhoneNumber",
+  "websiteUri",
+  "googleMapsUri",
+  "businessStatus",
+  "primaryTypeDisplayName",
+  "location",
 ];
 
 function creds() {
@@ -73,15 +83,31 @@ function map(p: RawPlace): PlaceResult | null {
 export const searchProviders = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) =>
-    z.object({ q: z.string().max(100).default(""), city: z.string().max(80).default(""), category: CatEnum.optional() }).parse(input ?? {}),
+    z
+      .object({
+        q: z.string().max(100).default(""),
+        city: z.string().max(80).default(""),
+        category: CatEnum.optional(),
+      })
+      .parse(input ?? {}),
   )
   .handler(async ({ data, context }) => {
     const c = creds();
-    if (!c) return { status: "not_configured" as const, results: [] as PlaceResult[], saved: [] as string[] };
-    if (!data.city.trim() && !data.q.trim()) return { status: "need_input" as const, results: [], saved: [] };
+    if (!c)
+      return {
+        status: "not_configured" as const,
+        results: [] as PlaceResult[],
+        saved: [] as string[],
+      };
+    if (!data.city.trim() && !data.q.trim())
+      return { status: "need_input" as const, results: [], saved: [] };
 
-    const cat = data.category ? PROVIDER_CATEGORIES[data.category].query : "pageant coach makeup artist modeling";
-    const textQuery = [data.q.trim(), cat, data.city.trim() ? `in ${data.city.trim()}` : ""].filter(Boolean).join(" ");
+    const cat = data.category
+      ? PROVIDER_CATEGORIES[data.category].query
+      : "pageant coach makeup artist modeling";
+    const textQuery = [data.q.trim(), cat, data.city.trim() ? `in ${data.city.trim()}` : ""]
+      .filter(Boolean)
+      .join(" ");
     try {
       const res = await fetch(`${GATEWAY}/places/v1/places:searchText`, {
         method: "POST",
@@ -105,7 +131,10 @@ export const searchProviders = createServerFn({ method: "POST" })
         const { data: rows } = await context.supabase
           .from("providers")
           .select("id, place_id")
-          .in("place_id", results.map((r) => r.placeId));
+          .in(
+            "place_id",
+            results.map((r) => r.placeId),
+          );
         const ids = (rows ?? []).map((r) => r.id);
         if (ids.length) {
           const { data: s } = await context.supabase
@@ -128,7 +157,16 @@ export const searchProviders = createServerFn({ method: "POST" })
 export const toggleSavedPlace = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) =>
-    z.object({ placeId: z.string().min(3).max(300).regex(/^[A-Za-z0-9_-]+$/), category: CatEnum.optional() }).parse(input),
+    z
+      .object({
+        placeId: z
+          .string()
+          .min(3)
+          .max(300)
+          .regex(/^[A-Za-z0-9_-]+$/),
+        category: CatEnum.optional(),
+      })
+      .parse(input),
   )
   .handler(async ({ data, context }) => {
     const c = creds();
@@ -136,7 +174,11 @@ export const toggleSavedPlace = createServerFn({ method: "POST" })
 
     // Re-fetch details server-side so stored data always comes from Google, never the client.
     const res = await fetch(`${GATEWAY}/places/v1/places/${data.placeId}`, {
-      headers: { Authorization: `Bearer ${c.lovable}`, "X-Connection-Api-Key": c.maps, "X-Goog-FieldMask": FIELDS.join(",") },
+      headers: {
+        Authorization: `Bearer ${c.lovable}`,
+        "X-Connection-Api-Key": c.maps,
+        "X-Goog-FieldMask": FIELDS.join(","),
+      },
     });
     if (!res.ok) {
       console.error("Place details failed", res.status, await res.text());
