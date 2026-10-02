@@ -128,7 +128,10 @@ export const searchProviders = createServerFn({ method: "POST" })
 
       let saved: string[] = [];
       if (results.length) {
-        const { data: rows } = await context.supabase
+        // Google-sourced rows are unverified, so user RLS hides them; look up only
+        // id/place_id for these results server-side. Saved state stays user-scoped below.
+        const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+        const { data: rows } = await supabaseAdmin
           .from("providers")
           .select("id, place_id")
           .in(
