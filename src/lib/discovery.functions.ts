@@ -26,12 +26,16 @@ export const listPageants = createServerFn({ method: "GET" })
 
     const today = new Date().toISOString().slice(0, 10);
     let query = context.supabase.from("pageants").select("*").order("name").limit(60);
-    if (data.q) query = query.or(`name.ilike.%${data.q.replace(/[,()%]/g, "")}%,organizer.ilike.%${data.q.replace(/[,()%]/g, "")}%`);
+    if (data.q)
+      query = query.or(
+        `name.ilike.%${data.q.replace(/[,()%]/g, "")}%,organizer.ilike.%${data.q.replace(/[,()%]/g, "")}%`,
+      );
     if (data.country) query = query.ilike("country", `%${data.country}%`);
     if (data.state) query = query.ilike("state", `%${data.state}%`);
     if (data.city) query = query.ilike("city", `%${data.city}%`);
     if (data.age != null) query = query.lte("min_age", data.age).gte("max_age", data.age);
-    if (data.registration === "open") query = query.lte("registration_open", today).gte("registration_close", today);
+    if (data.registration === "open")
+      query = query.lte("registration_open", today).gte("registration_close", today);
     if (data.registration === "upcoming") query = query.gt("registration_open", today);
     if (data.registration === "closed") query = query.lt("registration_close", today);
     const { data: rows, error } = await query;
@@ -51,7 +55,9 @@ export const listPageants = createServerFn({ method: "GET" })
 
 export const listProviders = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) => Search.extend({ category: z.string().optional() }).parse(input ?? {}))
+  .inputValidator((input: unknown) =>
+    Search.extend({ category: z.string().optional() }).parse(input ?? {}),
+  )
   .handler(async ({ data, context }) => {
     let query = context.supabase.from("providers").select("*").order("name").limit(60);
     if (data.q) query = query.ilike("name", `%${data.q}%`);
@@ -65,7 +71,13 @@ export const listProviders = createServerFn({ method: "GET" })
 export const toggleSaved = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) =>
-    z.object({ itemType: z.enum(["pageant", "provider"]), itemId: z.string().uuid(), label: z.string().optional() }).parse(input),
+    z
+      .object({
+        itemType: z.enum(["pageant", "provider"]),
+        itemId: z.string().uuid(),
+        label: z.string().optional(),
+      })
+      .parse(input),
   )
   .handler(async ({ data, context }) => {
     const { data: existing } = await context.supabase
