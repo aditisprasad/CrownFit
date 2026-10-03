@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { Loader2, Sparkles, Activity, Gauge, CalendarDays } from "lucide-react";
 import { getInsights } from "@/lib/insights.functions";
+import { listSkinData, FINDING_LABELS } from "@/lib/skin.functions";
 import { Progress } from "@/components/ui/progress";
 
 export const Route = createFileRoute("/_authenticated/insights")({
@@ -215,6 +216,67 @@ function InsightsPage() {
           )}
         </div>
       </div>
+      <SkinPresentationSection />
+    </div>
+  );
+}
+
+function SkinPresentationSection() {
+  const fetchSkin = useServerFn(listSkinData);
+  const { data, isLoading } = useQuery({ queryKey: ["skin-data"], queryFn: () => fetchSkin() });
+  const latest = data?.analyses[0];
+  const prev = data?.analyses[1];
+  const changed =
+    latest && prev
+      ? latest.findings.filter((f) => prev.findings.find((p) => p.key === f.key)?.level !== f.level)
+      : [];
+  const lastCheck = data?.checkins[0];
+  return (
+    <div className="rounded-lg border border-border bg-card p-6">
+      <div className="mb-3 flex items-center justify-between">
+        <h2 className="font-display text-2xl">Skin & Presentation</h2>
+        <Link to="/skin-analysis" className="text-sm text-gold underline">
+          Open analyzer
+        </Link>
+      </div>
+      {isLoading ? (
+        <Loader2 className="h-4 w-4 animate-spin text-gold" />
+      ) : !latest && !lastCheck ? (
+        <p className="text-sm text-muted-foreground">Not enough data yet.</p>
+      ) : (
+        <div className="grid gap-4 text-sm md:grid-cols-2">
+          <div>
+            <p className="eyebrow mb-1">Visual assessment (non-medical)</p>
+            {latest ? (
+              <>
+                <p>Last saved {new Date(latest.created_at).toLocaleDateString()}.</p>
+                {prev ? (
+                  <p className="text-muted-foreground">
+                    {changed.length
+                      ? `Visible appearance changed since your previous analysis: ${changed.map((c) => FINDING_LABELS[c.key]).join(", ")}.`
+                      : "No visible change in labels since your previous analysis."}
+                  </p>
+                ) : (
+                  <p className="text-muted-foreground">Not enough data yet to compare.</p>
+                )}
+              </>
+            ) : (
+              <p className="text-muted-foreground">Not enough data yet.</p>
+            )}
+          </div>
+          <div>
+            <p className="eyebrow mb-1">Self-reported check-in</p>
+            {lastCheck ? (
+              <p>
+                Confidence {lastCheck.confidence}/10 · Prepared {lastCheck.preparedness}/10 · Camera comfort{" "}
+                {lastCheck.camera_comfort}/10
+              </p>
+            ) : (
+              <p className="text-muted-foreground">Not enough data yet.</p>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

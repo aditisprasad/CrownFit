@@ -8,6 +8,13 @@
       "when": 1790959213415,
       "tag": "0000_restrict_has_role_to_self",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791038558014,
+      "tag": "0001_skin_presentation_analyzer",
+      "breakpoints": true
     }
   ]
 }

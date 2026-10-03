@@ -133,11 +133,41 @@ export async function buildCoachContext(supabase: DB, userId: string) {
   } else {
     lines.push("- Posture analysis: no sessions yet");
   }
-  if (mood.data?.length) {
-    lines.push(`- Recent mood estimates: ${mood.data.map((m) => m.estimated_state ?? "unknown").join(", ")}`);
+  // Skin & Presentation: only qualitative visual findings (no images) + self-reported check-ins.
+  const [skin, checkins] = await Promise.all([
+    supabase
+      .from("skin_analyses")
+      .select("findings, created_at")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false })
+      .limit(2),
+    supabase
+      .from("presentation_checkins")
+      .select("confidence, preparedness, camera_comfort, improvement_goal, created_at")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false })
+      .limit(3),
+  ]);
+  const fmtSkin = (f: unknown) =>
+    Array.isArray(f) ? f.map((x: { key?: string; level?: string }) => `${x.key}: ${x.level}`).join(", ") : "n/a";
+  if (skin.data?.length) {
+    lines.push(
+      `- Latest visual skin assessment (non-medical, appearance only) on ${skin.data[0]!.created_at.slice(0, 10)}: ${fmtSkin(skin.data[0]!.findings)}`,
+    );
+    if (skin.data[1])
+      lines.push(`  · Previous assessment on ${skin.data[1].created_at.slice(0, 10)}: ${fmtSkin(skin.data[1].findings)}`);
   } else {
-    lines.push("- Mood analysis: no sessions yet");
+    lines.push("- Visual skin assessment: none saved yet");
   }
+  if (checkins.data?.length) {
+    for (const c of checkins.data)
+      lines.push(
+        `  · Self-reported check-in ${c.created_at.slice(0, 10)}: confidence ${c.confidence}/10, prepared ${c.preparedness}/10, camera comfort ${c.camera_comfort}/10${c.improvement_goal ? `; wants to improve: ${c.improvement_goal}` : ""}`,
+      );
+  }
+  lines.push(
+    "- Never make medical claims from skin assessments; never infer mood, stress or hormones from appearance.",
+  );
   if (tasks.data?.length) {
     const done = tasks.data.filter((t) => t.completed_at).length;
     lines.push(`- Preparation tasks: ${done}/${tasks.data.length} complete`);
