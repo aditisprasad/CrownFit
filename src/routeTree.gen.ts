@@ -21,6 +21,7 @@ import { Route as AuthenticatedPageantsRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedPlanRouteImport } from './routes/_authenticated.plan'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated.profile'
 import { Route as AuthenticatedProvidersRouteImport } from './routes/_authenticated.providers'
+import { Route as AuthenticatedSkinAnalysisRouteImport } from './routes/_authenticated.skin-analysis'
 import { Route as AuthenticatedTrackerRouteImport } from './routes/_authenticated.tracker'
 
 const IndexRoute = IndexRouteImport.update({
@@ -82,6 +83,12 @@ const AuthenticatedProvidersRoute = AuthenticatedProvidersRouteImport.update({
   path: '/providers',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedSkinAnalysisRoute =
+  AuthenticatedSkinAnalysisRouteImport.update({
+    id: '/skin-analysis',
+    path: '/skin-analysis',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedTrackerRoute = AuthenticatedTrackerRouteImport.update({
   id: '/tracker',
   path: '/tracker',
@@ -100,6 +107,7 @@ export interface FileRoutesByFullPath {
   '/plan': typeof AuthenticatedPlanRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/providers': typeof AuthenticatedProvidersRoute
+  '/skin-analysis': typeof AuthenticatedSkinAnalysisRoute
   '/tracker': typeof AuthenticatedTrackerRoute
 }
 export interface FileRoutesByTo {
@@ -114,6 +122,7 @@ export interface FileRoutesByTo {
   '/plan': typeof AuthenticatedPlanRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/providers': typeof AuthenticatedProvidersRoute
+  '/skin-analysis': typeof AuthenticatedSkinAnalysisRoute
   '/tracker': typeof AuthenticatedTrackerRoute
 }
 export interface FileRoutesById {
@@ -130,6 +139,7 @@ export interface FileRoutesById {
   '/_authenticated/plan': typeof AuthenticatedPlanRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/providers': typeof AuthenticatedProvidersRoute
+  '/_authenticated/skin-analysis': typeof AuthenticatedSkinAnalysisRoute
   '/_authenticated/tracker': typeof AuthenticatedTrackerRoute
 }
 export interface FileRouteTypes {
@@ -146,6 +156,7 @@ export interface FileRouteTypes {
     | '/plan'
     | '/profile'
     | '/providers'
+    | '/skin-analysis'
     | '/tracker'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -160,6 +171,7 @@ export interface FileRouteTypes {
     | '/plan'
     | '/profile'
     | '/providers'
+    | '/skin-analysis'
     | '/tracker'
   id:
     | '__root__'
@@ -175,6 +187,7 @@ export interface FileRouteTypes {
     | '/_authenticated/plan'
     | '/_authenticated/profile'
     | '/_authenticated/providers'
+    | '/_authenticated/skin-analysis'
     | '/_authenticated/tracker'
   fileRoutesById: FileRoutesById
 }
@@ -270,6 +283,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProvidersRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/skin-analysis': {
+      id: '/_authenticated/skin-analysis'
+      path: '/skin-analysis'
+      fullPath: '/skin-analysis'
+      preLoaderRoute: typeof AuthenticatedSkinAnalysisRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/tracker': {
       id: '/_authenticated/tracker'
       path: '/tracker'
@@ -290,6 +310,7 @@ interface AuthenticatedRouteChildren {
   AuthenticatedPlanRoute: typeof AuthenticatedPlanRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedProvidersRoute: typeof AuthenticatedProvidersRoute
+  AuthenticatedSkinAnalysisRoute: typeof AuthenticatedSkinAnalysisRoute
   AuthenticatedTrackerRoute: typeof AuthenticatedTrackerRoute
 }
 
@@ -303,6 +324,7 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedPlanRoute: AuthenticatedPlanRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedProvidersRoute: AuthenticatedProvidersRoute,
+  AuthenticatedSkinAnalysisRoute: AuthenticatedSkinAnalysisRoute,
   AuthenticatedTrackerRoute: AuthenticatedTrackerRoute,
 }
 
