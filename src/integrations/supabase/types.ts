@@ -1008,6 +1008,36 @@ export type Database = {
         }
         Relationships: []
       }
+      presentation_checkins: {
+        Row: {
+          camera_comfort: number
+          confidence: number
+          created_at: string
+          id: string
+          improvement_goal: string | null
+          preparedness: number
+          user_id: string
+        }
+        Insert: {
+          camera_comfort: number
+          confidence: number
+          created_at?: string
+          id?: string
+          improvement_goal?: string | null
+          preparedness: number
+          user_id: string
+        }
+        Update: {
+          camera_comfort?: number
+          confidence?: number
+          created_at?: string
+          id?: string
+          improvement_goal?: string | null
+          preparedness?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
       providers: {
         Row: {
           address: string | null
@@ -1166,6 +1196,42 @@ export type Database = {
           item_id?: string | null
           item_type?: string
           label?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      skin_analyses: {
+        Row: {
+          created_at: string
+          findings: Json
+          id: string
+          image_path: string | null
+          image_quality: string
+          model: string | null
+          recommendations: Json
+          summary: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          findings?: Json
+          id?: string
+          image_path?: string | null
+          image_quality: string
+          model?: string | null
+          recommendations?: Json
+          summary?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          findings?: Json
+          id?: string
+          image_path?: string | null
+          image_quality?: string
+          model?: string | null
+          recommendations?: Json
+          summary?: string | null
           user_id?: string
         }
         Relationships: []
