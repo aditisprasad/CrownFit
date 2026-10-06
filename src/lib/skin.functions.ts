@@ -4,7 +4,13 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 export const SKIN_MODEL = "openai/gpt-6-astra";
 
-export const LEVELS = ["Low", "Mild", "Moderate", "Prominent", "Not enough visual information"] as const;
+export const LEVELS = [
+  "Low",
+  "Mild",
+  "Moderate",
+  "Prominent",
+  "Not enough visual information",
+] as const;
 export const FINDING_KEYS = [
   "blemishes",
   "redness",
@@ -81,7 +87,11 @@ async function callResponses(imageDataUrl: string): Promise<SkinResult> {
   if (!key) throw new Error("ANALYSIS_UNAVAILABLE");
   const res = await fetch("https://ai.gateway.lovable.dev/v1/responses", {
     method: "POST",
-    headers: { "Content-Type": "application/json", "Lovable-API-Key": key, "X-Lovable-AIG-SDK": "fetch" },
+    headers: {
+      "Content-Type": "application/json",
+      "Lovable-API-Key": key,
+      "X-Lovable-AIG-SDK": "fetch",
+    },
     body: JSON.stringify({
       model: SKIN_MODEL,
       stream: true,
@@ -89,12 +99,17 @@ async function callResponses(imageDataUrl: string): Promise<SkinResult> {
       reasoning: { effort: "low", summary: "auto" },
       include: ["reasoning.encrypted_content"],
       instructions: INSTRUCTIONS,
-      text: { format: { type: "json_schema", name: "skin_assessment", strict: true, schema: jsonSchema } },
+      text: {
+        format: { type: "json_schema", name: "skin_assessment", strict: true, schema: jsonSchema },
+      },
       input: [
         {
           role: "user",
           content: [
-            { type: "input_text", text: "Assess the visible skin appearance in this photo following the rules." },
+            {
+              type: "input_text",
+              text: "Assess the visible skin appearance in this photo following the rules.",
+            },
             { type: "input_image", image_url: imageDataUrl },
           ],
         },
@@ -104,9 +119,12 @@ async function callResponses(imageDataUrl: string): Promise<SkinResult> {
   if (!res.ok || !res.body) {
     const body = await res.text().catch(() => "");
     console.error("skin analysis gateway error", res.status, body.slice(0, 500));
-    if (res.status === 402) throw new Error("AI credits are exhausted for this workspace. Please try again later.");
-    if (res.status === 429) throw new Error("The analyzer is busy right now. Please wait a moment and try again.");
-    if (res.status === 403) throw new Error("Analysis is not available for this account right now.");
+    if (res.status === 402)
+      throw new Error("AI credits are exhausted for this workspace. Please try again later.");
+    if (res.status === 429)
+      throw new Error("The analyzer is busy right now. Please wait a moment and try again.");
+    if (res.status === 403)
+      throw new Error("Analysis is not available for this account right now.");
     throw new Error("Analysis is temporarily unavailable. Please try again later.");
   }
 
@@ -139,7 +157,10 @@ async function callResponses(imageDataUrl: string): Promise<SkinResult> {
       }
     }
   }
-  if (refused) throw new Error("The analyzer declined to assess this image. Try a different, clear face photo.");
+  if (refused)
+    throw new Error(
+      "The analyzer declined to assess this image. Try a different, clear face photo.",
+    );
   if (failed || !text) throw new Error("Analysis could not be completed. Please try again.");
   const parsed = ResultSchema.safeParse(JSON.parse(text));
   if (!parsed.success) throw new Error("Analysis returned an unexpected result. Please try again.");
@@ -171,8 +192,10 @@ export const saveSkinAnalysis = createServerFn({ method: "POST" })
     z.object({ result: ResultSchema, imagePath: z.string().max(300).nullable() }).parse(input),
   )
   .handler(async ({ data, context }) => {
-    if (data.imagePath && !data.imagePath.startsWith(`${context.userId}/`)) throw new Error("Invalid image path");
-    if (data.result.image_quality !== "good") throw new Error("Only completed analyses can be saved.");
+    if (data.imagePath && !data.imagePath.startsWith(`${context.userId}/`))
+      throw new Error("Invalid image path");
+    if (data.result.image_quality !== "good")
+      throw new Error("Only completed analyses can be saved.");
     const { data: row, error } = await context.supabase
       .from("skin_analyses")
       .insert({
@@ -213,10 +236,17 @@ export const listSkinData = createServerFn({ method: "GET" })
       (a.data ?? []).map(async (r) => {
         let thumb: string | null = null;
         if (r.image_path) {
-          const { data } = await context.supabase.storage.from("skin-photos").createSignedUrl(r.image_path, 600);
+          const { data } = await context.supabase.storage
+            .from("skin-photos")
+            .createSignedUrl(r.image_path, 600);
           thumb = data?.signedUrl ?? null;
         }
-        return { ...r, findings: r.findings as SkinResult["findings"], recommendations: r.recommendations as string[], thumb };
+        return {
+          ...r,
+          findings: r.findings as SkinResult["findings"],
+          recommendations: r.recommendations as string[],
+          thumb,
+        };
       }),
     );
     return { analyses, checkins: c.data ?? [] };
@@ -232,8 +262,13 @@ export const deleteSkinAnalysis = createServerFn({ method: "POST" })
       .eq("id", data.id)
       .eq("user_id", context.userId)
       .maybeSingle();
-    if (row?.image_path) await context.supabase.storage.from("skin-photos").remove([row.image_path]);
-    const { error } = await context.supabase.from("skin_analyses").delete().eq("id", data.id).eq("user_id", context.userId);
+    if (row?.image_path)
+      await context.supabase.storage.from("skin-photos").remove([row.image_path]);
+    const { error } = await context.supabase
+      .from("skin_analyses")
+      .delete()
+      .eq("id", data.id)
+      .eq("user_id", context.userId);
     if (error) throw new Error(error.message);
     return { ok: true };
   });

@@ -11,65 +11,86 @@ const daysAgo = (n: number) => new Date(Date.now() - n * 86400000).toISOString()
  */
 export async function buildCoachContext(supabase: DB, userId: string) {
   const from = daysAgo(13);
-  const [profile, tasks, sessions, posture, mood, water, steps, sleep, exercise, events, plan] = await Promise.all([
-    supabase.from("contestant_profiles").select("*").eq("user_id", userId).maybeSingle(),
-    supabase
-      .from("preparation_tasks")
-      .select("title, stage, due_date, completed_at")
-      .eq("user_id", userId)
-      .order("due_date", { ascending: true })
-      .limit(12),
-    supabase
-      .from("interview_sessions")
-      .select("mode, final_score, summary, strengths, weaknesses, started_at")
-      .eq("user_id", userId)
-      .order("started_at", { ascending: false })
-      .limit(3),
-    supabase
-      .from("posture_records")
-      .select("posture_score, shoulder_alignment, head_position, body_alignment, created_at")
-      .eq("user_id", userId)
-      .order("created_at", { ascending: false })
-      .limit(3),
-    supabase
-      .from("mood_records")
-      .select("estimated_state, positivity, stress, energy, created_at")
-      .eq("user_id", userId)
-      .order("created_at", { ascending: false })
-      .limit(5),
-    supabase.from("water_logs").select("amount_ml, logged_on").eq("user_id", userId).gte("logged_on", from),
-    supabase.from("step_logs").select("steps, logged_on").eq("user_id", userId).gte("logged_on", from),
-    supabase.from("sleep_logs").select("duration_hours, logged_on").eq("user_id", userId).gte("logged_on", from),
-    supabase
-      .from("fitness_logs")
-      .select("activity, duration_minutes, intensity, logged_on")
-      .eq("user_id", userId)
-      .gte("logged_on", from)
-      .limit(20),
-    supabase
-      .from("calendar_events")
-      .select("title, kind, starts_at, location")
-      .eq("user_id", userId)
-      .gte("starts_at", new Date().toISOString())
-      .order("starts_at", { ascending: true })
-      .limit(6),
-    supabase
-      .from("preparation_plans")
-      .select("summary, focus_areas, target_pageant, target_date")
-      .eq("user_id", userId)
-      .eq("is_active", true)
-      .order("created_at", { ascending: false })
-      .limit(1)
-      .maybeSingle(),
-  ]);
+  const [profile, tasks, sessions, posture, mood, water, steps, sleep, exercise, events, plan] =
+    await Promise.all([
+      supabase.from("contestant_profiles").select("*").eq("user_id", userId).maybeSingle(),
+      supabase
+        .from("preparation_tasks")
+        .select("title, stage, due_date, completed_at")
+        .eq("user_id", userId)
+        .order("due_date", { ascending: true })
+        .limit(12),
+      supabase
+        .from("interview_sessions")
+        .select("mode, final_score, summary, strengths, weaknesses, started_at")
+        .eq("user_id", userId)
+        .order("started_at", { ascending: false })
+        .limit(3),
+      supabase
+        .from("posture_records")
+        .select("posture_score, shoulder_alignment, head_position, body_alignment, created_at")
+        .eq("user_id", userId)
+        .order("created_at", { ascending: false })
+        .limit(3),
+      supabase
+        .from("mood_records")
+        .select("estimated_state, positivity, stress, energy, created_at")
+        .eq("user_id", userId)
+        .order("created_at", { ascending: false })
+        .limit(5),
+      supabase
+        .from("water_logs")
+        .select("amount_ml, logged_on")
+        .eq("user_id", userId)
+        .gte("logged_on", from),
+      supabase
+        .from("step_logs")
+        .select("steps, logged_on")
+        .eq("user_id", userId)
+        .gte("logged_on", from),
+      supabase
+        .from("sleep_logs")
+        .select("duration_hours, logged_on")
+        .eq("user_id", userId)
+        .gte("logged_on", from),
+      supabase
+        .from("fitness_logs")
+        .select("activity, duration_minutes, intensity, logged_on")
+        .eq("user_id", userId)
+        .gte("logged_on", from)
+        .limit(20),
+      supabase
+        .from("calendar_events")
+        .select("title, kind, starts_at, location")
+        .eq("user_id", userId)
+        .gte("starts_at", new Date().toISOString())
+        .order("starts_at", { ascending: true })
+        .limit(6),
+      supabase
+        .from("preparation_plans")
+        .select("summary, focus_areas, target_pageant, target_date")
+        .eq("user_id", userId)
+        .eq("is_active", true)
+        .order("created_at", { ascending: false })
+        .limit(1)
+        .maybeSingle(),
+    ]);
 
   const p = profile.data;
   const lines: string[] = [];
   if (!p) {
-    lines.push("The contestant has not created a profile yet — do not assume any personal details.");
+    lines.push(
+      "The contestant has not created a profile yet — do not assume any personal details.",
+    );
   } else {
     const known = (label: string, value: unknown) => {
-      if (value === null || value === undefined || value === "" || (Array.isArray(value) && !value.length)) return;
+      if (
+        value === null ||
+        value === undefined ||
+        value === "" ||
+        (Array.isArray(value) && !value.length)
+      )
+        return;
       lines.push(`- ${label}: ${Array.isArray(value) ? value.join(", ") : value}`);
     };
     lines.push("KNOWN PROFILE (only these facts are known; anything absent is unknown):");
@@ -107,7 +128,9 @@ export async function buildCoachContext(supabase: DB, userId: string) {
 
   const sum = (xs: number[]) => xs.reduce((a, b) => a + b, 0);
   const waterDays = new Set((water.data ?? []).map((w) => w.logged_on)).size;
-  const stepAvg = steps.data?.length ? Math.round(sum(steps.data.map((s) => s.steps)) / steps.data.length) : null;
+  const stepAvg = steps.data?.length
+    ? Math.round(sum(steps.data.map((s) => s.steps)) / steps.data.length)
+    : null;
   const sleepAvg = sleep.data?.length
     ? (sum(sleep.data.map((s) => Number(s.duration_hours ?? 0))) / sleep.data.length).toFixed(1)
     : null;
@@ -149,13 +172,17 @@ export async function buildCoachContext(supabase: DB, userId: string) {
       .limit(3),
   ]);
   const fmtSkin = (f: unknown) =>
-    Array.isArray(f) ? f.map((x: { key?: string; level?: string }) => `${x.key}: ${x.level}`).join(", ") : "n/a";
+    Array.isArray(f)
+      ? f.map((x: { key?: string; level?: string }) => `${x.key}: ${x.level}`).join(", ")
+      : "n/a";
   if (skin.data?.length) {
     lines.push(
       `- Latest visual skin assessment (non-medical, appearance only) on ${skin.data[0]!.created_at.slice(0, 10)}: ${fmtSkin(skin.data[0]!.findings)}`,
     );
     if (skin.data[1])
-      lines.push(`  · Previous assessment on ${skin.data[1].created_at.slice(0, 10)}: ${fmtSkin(skin.data[1].findings)}`);
+      lines.push(
+        `  · Previous assessment on ${skin.data[1].created_at.slice(0, 10)}: ${fmtSkin(skin.data[1].findings)}`,
+      );
   } else {
     lines.push("- Visual skin assessment: none saved yet");
   }
@@ -172,16 +199,25 @@ export async function buildCoachContext(supabase: DB, userId: string) {
     const done = tasks.data.filter((t) => t.completed_at).length;
     lines.push(`- Preparation tasks: ${done}/${tasks.data.length} complete`);
     lines.push(
-      `- Open tasks: ${tasks.data.filter((t) => !t.completed_at).map((t) => `${t.title}${t.due_date ? ` (due ${t.due_date})` : ""}`).join("; ") || "none"}`,
+      `- Open tasks: ${
+        tasks.data
+          .filter((t) => !t.completed_at)
+          .map((t) => `${t.title}${t.due_date ? ` (due ${t.due_date})` : ""}`)
+          .join("; ") || "none"
+      }`,
     );
   } else {
     lines.push("- Preparation tasks: none created yet");
   }
   if (events.data?.length) {
-    lines.push(`- Upcoming calendar: ${events.data.map((e) => `${e.title} on ${e.starts_at.slice(0, 16).replace("T", " ")}`).join("; ")}`);
+    lines.push(
+      `- Upcoming calendar: ${events.data.map((e) => `${e.title} on ${e.starts_at.slice(0, 16).replace("T", " ")}`).join("; ")}`,
+    );
   }
   if (plan.data) {
-    lines.push(`- Active preparation plan focus: ${(plan.data.focus_areas ?? []).join(", ") || "unspecified"}`);
+    lines.push(
+      `- Active preparation plan focus: ${(plan.data.focus_areas ?? []).join(", ") || "unspecified"}`,
+    );
   }
 
   return { text: lines.join("\n"), profile: p };
