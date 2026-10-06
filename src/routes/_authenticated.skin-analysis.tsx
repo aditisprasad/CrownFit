@@ -19,9 +19,16 @@ export const Route = createFileRoute("/_authenticated/skin-analysis")({
   head: () => ({
     meta: [
       { title: "Skin & Presentation Analyzer — CrownFit" },
-      { name: "description", content: "Non-medical visual skin and presentation assessment for pageant preparation." },
+      {
+        name: "description",
+        content: "Non-medical visual skin and presentation assessment for pageant preparation.",
+      },
       { property: "og:title", content: "Skin & Presentation Analyzer — CrownFit" },
-      { property: "og:description", content: "Track visible skin appearance and stage-readiness with private, non-medical assessments." },
+      {
+        property: "og:description",
+        content:
+          "Track visible skin appearance and stage-readiness with private, non-medical assessments.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -31,8 +38,10 @@ export const Route = createFileRoute("/_authenticated/skin-analysis")({
 
 const QUALITY_MSG: Record<string, string> = {
   no_face: "No face was detected in this photo. Please use a clear, front-facing photo.",
-  face_not_visible: "Your face isn't sufficiently visible. Face the camera directly and fill more of the frame.",
-  low_quality: "The image quality is too low for a reliable read (lighting, blur or filters). Please retake.",
+  face_not_visible:
+    "Your face isn't sufficiently visible. Face the camera directly and fill more of the frame.",
+  low_quality:
+    "The image quality is too low for a reliable read (lighting, blur or filters). Please retake.",
 };
 
 /** Downscale + re-encode in the browser (also strips EXIF/location metadata). */
@@ -50,7 +59,8 @@ async function toJpeg(src: Blob | HTMLVideoElement): Promise<{ dataUrl: string; 
     h = bmp.height;
     draw = bmp;
   }
-  if (Math.min(w, h) < 256) throw new Error("Image is too small — please use a photo at least 256px on each side.");
+  if (Math.min(w, h) < 256)
+    throw new Error("Image is too small — please use a photo at least 256px on each side.");
   const scale = Math.min(1, 1024 / Math.max(w, h));
   const c = document.createElement("canvas");
   c.width = Math.round(w * scale);
@@ -189,7 +199,8 @@ function SkinPage() {
         <p className="eyebrow">Coaching</p>
         <h1 className="font-display text-4xl">Skin & Presentation Analyzer</h1>
         <p className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
-          <ShieldCheck className="h-4 w-4 text-gold" /> Visual skin assessment — not a medical diagnosis.
+          <ShieldCheck className="h-4 w-4 text-gold" /> Visual skin assessment — not a medical
+          diagnosis.
         </p>
       </header>
 
@@ -197,9 +208,18 @@ function SkinPage() {
         <div className="space-y-3">
           <div className="flex aspect-[4/5] items-center justify-center overflow-hidden rounded-md bg-secondary">
             {camOn ? (
-              <video ref={videoRef} playsInline muted className="h-full w-full -scale-x-100 object-cover" />
+              <video
+                ref={videoRef}
+                playsInline
+                muted
+                className="h-full w-full -scale-x-100 object-cover"
+              />
             ) : image ? (
-              <img src={image.dataUrl} alt="Selected photo" className="h-full w-full object-cover" />
+              <img
+                src={image.dataUrl}
+                alt="Selected photo"
+                className="h-full w-full object-cover"
+              />
             ) : (
               <p className="px-6 text-center text-sm text-muted-foreground">No image selected</p>
             )}
@@ -207,23 +227,39 @@ function SkinPage() {
           <div className="flex flex-wrap gap-2">
             {camOn ? (
               <>
-                <button onClick={capture} className="btn-gold inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground">
+                <button
+                  onClick={capture}
+                  className="btn-gold inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground"
+                >
                   <Camera className="h-4 w-4" /> Capture
                 </button>
-                <button onClick={stopCam} className="rounded-md border border-border px-4 py-2 text-sm">
+                <button
+                  onClick={stopCam}
+                  className="rounded-md border border-border px-4 py-2 text-sm"
+                >
                   Cancel
                 </button>
               </>
             ) : (
               <>
-                <button onClick={startCam} className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm">
-                  {image ? <RefreshCw className="h-4 w-4" /> : <Camera className="h-4 w-4" />} {image ? "Retake" : "Use camera"}
+                <button
+                  onClick={startCam}
+                  className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm"
+                >
+                  {image ? <RefreshCw className="h-4 w-4" /> : <Camera className="h-4 w-4" />}{" "}
+                  {image ? "Retake" : "Use camera"}
                 </button>
-                <button onClick={() => fileRef.current?.click()} className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm">
+                <button
+                  onClick={() => fileRef.current?.click()}
+                  className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm"
+                >
                   <Upload className="h-4 w-4" /> {image ? "Replace" : "Upload photo"}
                 </button>
                 {image && (
-                  <button onClick={reset} className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm">
+                  <button
+                    onClick={reset}
+                    className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm"
+                  >
                     <Trash2 className="h-4 w-4" /> Remove
                   </button>
                 )}
@@ -262,7 +298,8 @@ function SkinPage() {
             disabled={busy || !image}
             className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm text-primary-foreground disabled:opacity-50"
           >
-            {busy && <Loader2 className="h-4 w-4 animate-spin" />} {busy ? "Analysing…" : "Analyse photo"}
+            {busy && <Loader2 className="h-4 w-4 animate-spin" />}{" "}
+            {busy ? "Analysing…" : "Analyse photo"}
           </button>
           {error && (
             <p className="flex items-start gap-2 text-sm text-destructive">
@@ -276,7 +313,9 @@ function SkinPage() {
         <section className="rounded-lg border border-border bg-card p-6">
           <h2 className="font-display text-2xl">Not enough visual information</h2>
           <p className="mt-2 text-sm text-muted-foreground">{QUALITY_MSG[result.image_quality]}</p>
-          {result.quality_note && <p className="mt-1 text-sm text-muted-foreground">{result.quality_note}</p>}
+          {result.quality_note && (
+            <p className="mt-1 text-sm text-muted-foreground">{result.quality_note}</p>
+          )}
         </section>
       )}
 
@@ -294,7 +333,9 @@ function SkinPage() {
                 <div key={f.key} className="rounded-md border border-border p-4">
                   <div className="flex items-center justify-between gap-2">
                     <p className="font-medium">{FINDING_LABELS[f.key]}</p>
-                    <span className="rounded-full bg-secondary px-2.5 py-0.5 text-xs text-gold">{f.level}</span>
+                    <span className="rounded-full bg-secondary px-2.5 py-0.5 text-xs text-gold">
+                      {f.level}
+                    </span>
                   </div>
                   <p className="mt-2 text-sm text-muted-foreground">{f.explanation}</p>
                   <p className="mt-1 text-xs text-muted-foreground">
@@ -315,12 +356,18 @@ function SkinPage() {
                   <li key={i}>{r}</li>
                 ))}
               </ul>
-              <p className="mt-2 text-xs text-muted-foreground">General, non-medical guidance. For skin concerns, consult a dermatologist.</p>
+              <p className="mt-2 text-xs text-muted-foreground">
+                General, non-medical guidance. For skin concerns, consult a dermatologist.
+              </p>
             </div>
           )}
           <div className="flex flex-wrap items-center gap-4 border-t border-border pt-4">
             <label className="flex items-center gap-2 text-sm">
-              <input type="checkbox" checked={keepPhoto} onChange={(e) => setKeepPhoto(e.target.checked)} />
+              <input
+                type="checkbox"
+                checked={keepPhoto}
+                onChange={(e) => setKeepPhoto(e.target.checked)}
+              />
               Also keep the photo (private, only you can see it)
             </label>
             <button
@@ -347,11 +394,19 @@ function SkinPage() {
             {data.analyses.map((a, i) => {
               const older = data.analyses[i + 1];
               const changed = older
-                ? a.findings.filter((f) => older.findings.find((o) => o.key === f.key)?.level !== f.level)
+                ? a.findings.filter(
+                    (f) => older.findings.find((o) => o.key === f.key)?.level !== f.level,
+                  )
                 : [];
               return (
                 <li key={a.id} className="flex gap-4 rounded-md border border-border p-4">
-                  {a.thumb && <img src={a.thumb} alt="Saved analysis photo" className="h-20 w-16 rounded object-cover" />}
+                  {a.thumb && (
+                    <img
+                      src={a.thumb}
+                      alt="Saved analysis photo"
+                      className="h-20 w-16 rounded object-cover"
+                    />
+                  )}
                   <div className="flex-1 text-sm">
                     <div className="flex items-center justify-between">
                       <p className="font-medium">{new Date(a.created_at).toLocaleString()}</p>
@@ -401,7 +456,9 @@ function CheckIn() {
   return (
     <section className="rounded-lg border border-border bg-card p-6">
       <h2 className="font-display text-2xl">Confidence check-in</h2>
-      <p className="mt-1 text-sm text-muted-foreground">Self-reported — separate from the photo analysis.</p>
+      <p className="mt-1 text-sm text-muted-foreground">
+        Self-reported — separate from the photo analysis.
+      </p>
       <div className="mt-4 space-y-4">
         {fields.map(([k, label]) => (
           <label key={k} className="block text-sm">

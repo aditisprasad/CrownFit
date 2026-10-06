@@ -12,12 +12,14 @@ export const Route = createFileRoute("/_authenticated/insights")({
       { title: "Digital Twin & Analytics — CrownFit" },
       {
         name: "description",
-        content: "Your real readiness score, consistency trends and preparation insights, computed only from what you logged.",
+        content:
+          "Your real readiness score, consistency trends and preparation insights, computed only from what you logged.",
       },
       { property: "og:title", content: "Digital Twin & Analytics — CrownFit" },
       {
         property: "og:description",
-        content: "Readiness, consistency and progress trends built from your own logged pageant preparation data.",
+        content:
+          "Readiness, consistency and progress trends built from your own logged pageant preparation data.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -73,12 +75,14 @@ function InsightsPage() {
             <>
               <p className="font-display text-4xl">{data.readiness}%</p>
               <Progress value={data.readiness} className="mt-3" />
-              <p className="mt-2 text-xs text-muted-foreground">Based on {data.dataPoints} logged data points</p>
+              <p className="mt-2 text-xs text-muted-foreground">
+                Based on {data.dataPoints} logged data points
+              </p>
             </>
           ) : (
             <p className="text-sm text-muted-foreground">
-              Not enough data yet. Log your wellness for a few days and complete a mock jury session — readiness appears
-              once there is enough real data to be honest about.
+              Not enough data yet. Log your wellness for a few days and complete a mock jury session
+              — readiness appears once there is enough real data to be honest about.
             </p>
           )}
         </div>
@@ -89,7 +93,9 @@ function InsightsPage() {
             <span className="eyebrow">Streak</span>
           </div>
           <p className="font-display text-4xl">{data.streak}</p>
-          <p className="mt-1 text-xs text-muted-foreground">consecutive days with logged preparation</p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            consecutive days with logged preparation
+          </p>
         </div>
 
         <div className="glass-panel rounded-xl p-6">
@@ -104,7 +110,9 @@ function InsightsPage() {
           )}
           {data.daysToTarget != null && (
             <p className="mt-1 text-xs text-muted-foreground">
-              {data.daysToTarget >= 0 ? `${data.daysToTarget} day(s) to go` : "Target date has passed"}
+              {data.daysToTarget >= 0
+                ? `${data.daysToTarget} day(s) to go`
+                : "Target date has passed"}
             </p>
           )}
           <Link to="/profile" className="mt-3 inline-block text-xs text-gold underline">
@@ -134,7 +142,9 @@ function InsightsPage() {
       <div className="mb-8 grid gap-5 md:grid-cols-2">
         <div className="glass-panel rounded-xl p-6">
           <h3 className="font-display mb-1 text-xl">Water — last 30 days</h3>
-          <p className="mb-3 text-xs text-muted-foreground">Target {data.targets.water_ml} ml/day</p>
+          <p className="mb-3 text-xs text-muted-foreground">
+            Target {data.targets.water_ml} ml/day
+          </p>
           <div className="flex gap-[2px]">
             {data.series.map((d) => (
               <Bar key={d.day} value={d.water_ml} max={maxWater} />
@@ -143,7 +153,9 @@ function InsightsPage() {
         </div>
         <div className="glass-panel rounded-xl p-6">
           <h3 className="font-display mb-1 text-xl">Steps — last 30 days</h3>
-          <p className="mb-3 text-xs text-muted-foreground">Target {data.targets.steps} steps/day</p>
+          <p className="mb-3 text-xs text-muted-foreground">
+            Target {data.targets.steps} steps/day
+          </p>
           <div className="flex gap-[2px]">
             {data.series.map((d) => (
               <Bar key={d.day} value={d.steps} max={maxSteps} />
@@ -268,8 +280,8 @@ function SkinPresentationSection() {
             <p className="eyebrow mb-1">Self-reported check-in</p>
             {lastCheck ? (
               <p>
-                Confidence {lastCheck.confidence}/10 · Prepared {lastCheck.preparedness}/10 · Camera comfort{" "}
-                {lastCheck.camera_comfort}/10
+                Confidence {lastCheck.confidence}/10 · Prepared {lastCheck.preparedness}/10 · Camera
+                comfort {lastCheck.camera_comfort}/10
               </p>
             ) : (
               <p className="text-muted-foreground">Not enough data yet.</p>
