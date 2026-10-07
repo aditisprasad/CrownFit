@@ -19,6 +19,7 @@ import { Route as AuthenticatedInsightsRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedMockJuryRouteImport } from './routes/_authenticated.mock-jury'
 import { Route as AuthenticatedPageantsRouteImport } from './routes/_authenticated.pageants'
 import { Route as AuthenticatedPlanRouteImport } from './routes/_authenticated.plan'
+import { Route as AuthenticatedPostureAnalysisRouteImport } from './routes/_authenticated.posture-analysis'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated.profile'
 import { Route as AuthenticatedProvidersRouteImport } from './routes/_authenticated.providers'
 import { Route as AuthenticatedSkinAnalysisRouteImport } from './routes/_authenticated.skin-analysis'
@@ -73,6 +74,12 @@ const AuthenticatedPlanRoute = AuthenticatedPlanRouteImport.update({
   path: '/plan',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedPostureAnalysisRoute =
+  AuthenticatedPostureAnalysisRouteImport.update({
+    id: '/posture-analysis',
+    path: '/posture-analysis',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
@@ -105,6 +112,7 @@ export interface FileRoutesByFullPath {
   '/mock-jury': typeof AuthenticatedMockJuryRoute
   '/pageants': typeof AuthenticatedPageantsRoute
   '/plan': typeof AuthenticatedPlanRoute
+  '/posture-analysis': typeof AuthenticatedPostureAnalysisRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/providers': typeof AuthenticatedProvidersRoute
   '/skin-analysis': typeof AuthenticatedSkinAnalysisRoute
@@ -120,6 +128,7 @@ export interface FileRoutesByTo {
   '/mock-jury': typeof AuthenticatedMockJuryRoute
   '/pageants': typeof AuthenticatedPageantsRoute
   '/plan': typeof AuthenticatedPlanRoute
+  '/posture-analysis': typeof AuthenticatedPostureAnalysisRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/providers': typeof AuthenticatedProvidersRoute
   '/skin-analysis': typeof AuthenticatedSkinAnalysisRoute
@@ -137,6 +146,7 @@ export interface FileRoutesById {
   '/_authenticated/mock-jury': typeof AuthenticatedMockJuryRoute
   '/_authenticated/pageants': typeof AuthenticatedPageantsRoute
   '/_authenticated/plan': typeof AuthenticatedPlanRoute
+  '/_authenticated/posture-analysis': typeof AuthenticatedPostureAnalysisRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/providers': typeof AuthenticatedProvidersRoute
   '/_authenticated/skin-analysis': typeof AuthenticatedSkinAnalysisRoute
@@ -154,6 +164,7 @@ export interface FileRouteTypes {
     | '/mock-jury'
     | '/pageants'
     | '/plan'
+    | '/posture-analysis'
     | '/profile'
     | '/providers'
     | '/skin-analysis'
@@ -169,6 +180,7 @@ export interface FileRouteTypes {
     | '/mock-jury'
     | '/pageants'
     | '/plan'
+    | '/posture-analysis'
     | '/profile'
     | '/providers'
     | '/skin-analysis'
@@ -185,6 +197,7 @@ export interface FileRouteTypes {
     | '/_authenticated/mock-jury'
     | '/_authenticated/pageants'
     | '/_authenticated/plan'
+    | '/_authenticated/posture-analysis'
     | '/_authenticated/profile'
     | '/_authenticated/providers'
     | '/_authenticated/skin-analysis'
@@ -269,6 +282,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPlanRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/posture-analysis': {
+      id: '/_authenticated/posture-analysis'
+      path: '/posture-analysis'
+      fullPath: '/posture-analysis'
+      preLoaderRoute: typeof AuthenticatedPostureAnalysisRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/profile': {
       id: '/_authenticated/profile'
       path: '/profile'
@@ -308,6 +328,7 @@ interface AuthenticatedRouteChildren {
   AuthenticatedMockJuryRoute: typeof AuthenticatedMockJuryRoute
   AuthenticatedPageantsRoute: typeof AuthenticatedPageantsRoute
   AuthenticatedPlanRoute: typeof AuthenticatedPlanRoute
+  AuthenticatedPostureAnalysisRoute: typeof AuthenticatedPostureAnalysisRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedProvidersRoute: typeof AuthenticatedProvidersRoute
   AuthenticatedSkinAnalysisRoute: typeof AuthenticatedSkinAnalysisRoute
@@ -322,6 +343,7 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedMockJuryRoute: AuthenticatedMockJuryRoute,
   AuthenticatedPageantsRoute: AuthenticatedPageantsRoute,
   AuthenticatedPlanRoute: AuthenticatedPlanRoute,
+  AuthenticatedPostureAnalysisRoute: AuthenticatedPostureAnalysisRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedProvidersRoute: AuthenticatedProvidersRoute,
   AuthenticatedSkinAnalysisRoute: AuthenticatedSkinAnalysisRoute,
