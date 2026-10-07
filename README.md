@@ -137,28 +137,8 @@ CrownFit follows a **no fabricated data** principle.
 
 ---
 
-## 🗺️ Roadmap
-
-* [x] AI Pageant Coach
-* [x] Preparation Plan
-* [x] Professionals Discovery
-* [x] Google Places Integration
-* [x] Skin & Presentation Analyzer
-* [x] Confidence Check-ins
-* [x] Digital Twin
-* [x] Pageant Discovery Interface
-* [ ] Posture & Stage Presence Analyzer
-* [ ] Interview Intelligence
-* [ ] Crown Readiness Engine
-* [ ] Adaptive Preparation Plan
-* [ ] Pageant Opportunity Matching
-* [ ] AI Portfolio Builder
-* [ ] Pageant Media Hub
-* [ ] Progress & Evolution Analytics
-
----
-
-## 👩‍💻 Developer
+ 
+## 👩‍💻 Author
 
 **Aditi S Prasad**
 B.Tech Computer Science — Software Engineering
