@@ -151,7 +151,7 @@ export function measureFrame(lm: Landmark[] | undefined, w: number, h: number, v
 
 /** Average multiple frames and compute stability (shoulder-midpoint sway, % of shoulder width). */
 export function aggregateFrames(
-  frames: { m: Measurements; sway?: { x: number; y: number; sw: number } }[],
+  frames: { m: Measurements; sway?: { x: number; y: number; sw: number } | undefined }[],
 ): Measurements {
   const out = {} as Measurements;
   for (const k of METRIC_KEYS) {
