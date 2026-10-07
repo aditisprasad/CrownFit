@@ -897,6 +897,42 @@ export type Database = {
         }
         Relationships: []
       }
+      posture_analyses: {
+        Row: {
+          coaching: Json
+          created_at: string
+          frames_analyzed: number
+          id: string
+          measurements: Json
+          notes: string | null
+          source: string
+          user_id: string
+          view: string
+        }
+        Insert: {
+          coaching?: Json
+          created_at?: string
+          frames_analyzed?: number
+          id?: string
+          measurements?: Json
+          notes?: string | null
+          source?: string
+          user_id: string
+          view?: string
+        }
+        Update: {
+          coaching?: Json
+          created_at?: string
+          frames_analyzed?: number
+          id?: string
+          measurements?: Json
+          notes?: string | null
+          source?: string
+          user_id?: string
+          view?: string
+        }
+        Relationships: []
+      }
       posture_records: {
         Row: {
           body_alignment: number | null
