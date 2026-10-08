@@ -17,6 +17,7 @@ import {
   Menu,
   X,
   ScanFace,
+  PersonStanding,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { AnairaWidget } from "@/components/anaira-widget";
@@ -46,6 +47,7 @@ const navGroups = [
       { to: "/mock-jury", label: "Mock Jury", icon: Mic2 },
       { to: "/plan", label: "Preparation Plan", icon: CalendarCheck },
       { to: "/skin-analysis", label: "Skin & Presentation", icon: ScanFace },
+      { to: "/posture-analysis", label: "Posture & Stage Presence", icon: PersonStanding },
     ],
   },
   {

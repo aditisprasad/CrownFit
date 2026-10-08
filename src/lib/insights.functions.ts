@@ -32,8 +32,8 @@ export const getInsights = createServerFn({ method: "GET" })
           .order("started_at", { ascending: false })
           .limit(20),
         context.supabase
-          .from("posture_records")
-          .select("posture_score, shoulder_alignment, head_position, body_alignment, created_at")
+          .from("posture_analyses")
+          .select("created_at")
           .eq("user_id", uid)
           .order("created_at", { ascending: false })
           .limit(20),
@@ -100,14 +100,8 @@ export const getInsights = createServerFn({ method: "GET" })
         ? Number((Number(juryScored[0]?.final_score ?? 0) - Number(juryScored[juryScored.length - 1]?.final_score ?? 0)).toFixed(1))
         : null;
 
+    // Posture: measurement-based analyses only (no combined score; shown separately on the page).
     const postureRows = posture.data ?? [];
-    const postureAvg = postureRows.length
-      ? Math.round(postureRows.reduce((s, r) => s + Number(r.posture_score ?? 0), 0) / postureRows.length)
-      : null;
-    const postureTrend =
-      postureRows.length >= 2
-        ? Math.round(Number(postureRows[0]?.posture_score ?? 0) - Number(postureRows[postureRows.length - 1]?.posture_score ?? 0))
-        : null;
 
     const moodRows = mood.data ?? [];
     const moodAvg = moodRows.length
@@ -171,7 +165,6 @@ export const getInsights = createServerFn({ method: "GET" })
         value: juryAvg != null ? Math.round(juryAvg * 10) : null,
         detail: juryAvg != null ? `Average mock jury score ${juryAvg}/10 across ${juryScored.length} session(s)` : "No scored mock jury sessions yet",
       },
-      { label: "Posture", value: postureAvg, detail: postureAvg != null ? `${postureRows.length} analysed session(s)` : "No posture sessions yet" },
       { label: "Wellness consistency", value: wellnessConsistency, detail: wellnessConsistency != null ? "Days hitting your water target (last 14)" : "No water logs yet" },
       { label: "Training consistency", value: trainingConsistency, detail: trainingConsistency != null ? "Days hitting your training target (last 14)" : "No training logs yet" },
       { label: "Mindset", value: moodAvg, detail: moodAvg != null ? `${moodRows.length} mood reading(s)` : "No mood readings yet" },
@@ -197,12 +190,6 @@ export const getInsights = createServerFn({ method: "GET" })
         juryTrend > 0
           ? `Your mock jury score improved by ${juryTrend.toFixed(1)} points since your first session.`
           : `Your mock jury score is down ${Math.abs(juryTrend).toFixed(1)} points since your first session.`,
-      );
-    if (postureTrend != null && postureTrend !== 0)
-      insights.push(
-        postureTrend > 0
-          ? `Your posture score is up ${postureTrend} points across your recorded sessions.`
-          : `Your posture score is down ${Math.abs(postureTrend)} points across your recorded sessions.`,
       );
     if (stepConsistency != null) insights.push(`You hit your step target on ${stepConsistency}% of the last 14 days.`);
     if (sleepConsistency != null) insights.push(`You hit your sleep target on ${sleepConsistency}% of the last 14 days.`);
@@ -231,7 +218,7 @@ export const getInsights = createServerFn({ method: "GET" })
         sleep: sleepConsistency,
       },
       jury: { average: juryAvg, trend: juryTrend, sessions: (jury.data ?? []).length, recent: juryScored.slice(0, 5) },
-      posture: { average: postureAvg, trend: postureTrend, recent: postureRows.slice(0, 5) },
+      posture: { sessions: postureRows.length },
       mood: { average: moodAvg, recent: moodRows.slice(0, 5) },
       tasks: { total: taskRows.length, completed: tasksDone },
       portfolioCount: (portfolio.data ?? []).length,

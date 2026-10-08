@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/integrations/supabase/types";
+import { METRIC_KEYS, METRIC_LABELS, type Measurements } from "./posture-metrics";
 
 type DB = SupabaseClient<Database>;
 
@@ -27,11 +28,11 @@ export async function buildCoachContext(supabase: DB, userId: string) {
         .order("started_at", { ascending: false })
         .limit(3),
       supabase
-        .from("posture_records")
-        .select("posture_score, shoulder_alignment, head_position, body_alignment, created_at")
+        .from("posture_analyses")
+        .select("view, source, measurements, created_at")
         .eq("user_id", userId)
         .order("created_at", { ascending: false })
-        .limit(3),
+        .limit(2),
       supabase
         .from("mood_records")
         .select("estimated_state, positivity, stress, energy, created_at")
@@ -150,11 +151,18 @@ export async function buildCoachContext(supabase: DB, userId: string) {
     }
   }
   if (posture.data?.length) {
-    lines.push(
-      `- Latest posture score: ${posture.data[0]?.posture_score ?? "n/a"} (shoulder ${posture.data[0]?.shoulder_alignment ?? "n/a"}, head ${posture.data[0]?.head_position ?? "n/a"})`,
-    );
+    lines.push("- Posture & Stage Presence (real MediaPipe landmark measurements, no overall score exists):");
+    for (const r of posture.data) {
+      const m = (r.measurements ?? {}) as unknown as Measurements;
+      const parts = METRIC_KEYS.map((k) => {
+        const x = m[k];
+        if (!x || x.value == null) return `${METRIC_LABELS[k]}: not enough visual information`;
+        return `${METRIC_LABELS[k]}: ${x.value}${x.unit === "ratio" ? "" : x.unit} (${x.status === "within" ? "within pageant range" : "needs adjustment"})`;
+      });
+      lines.push(`  · ${r.created_at.slice(0, 10)} (${r.view} view, ${r.source}): ${parts.join("; ")}`);
+    }
   } else {
-    lines.push("- Posture analysis: no sessions yet");
+    lines.push("- Posture & Stage Presence: not enough posture data yet (no saved analyses)");
   }
   // Skin & Presentation: only qualitative visual findings (no images) + self-reported check-ins.
   const [skin, checkins] = await Promise.all([
