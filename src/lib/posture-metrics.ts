@@ -106,18 +106,26 @@ export function measureFrame(lm: Landmark[] | undefined, w: number, h: number, v
     const sw = px(P(I.lSh), P(I.rSh));
     const mid = (P(I.lSh).x + P(I.rSh).x) / 2;
     out.head_centering =
-      sw > 10 ? judge("head_centering", (((P(I.nose).x - mid) * w) / sw) * 100, "%") : insufficient("%");
+      sw > 10
+        ? judge("head_centering", (((P(I.nose).x - mid) * w) / sw) * 100, "%")
+        : insufficient("%");
   } else out.head_centering = insufficient("%", view === "side" ? sideMsg : undefined);
 
   // Torso lean: shoulder-mid vs hip-mid from vertical (works in both views using visible side)
-  const shoulder =
-    has(I.lSh, I.rSh)
-      ? { x: (P(I.lSh).x + P(I.rSh).x) / 2, y: (P(I.lSh).y + P(I.rSh).y) / 2 }
-      : ok(I.lSh) ? P(I.lSh) : ok(I.rSh) ? P(I.rSh) : null;
-  const hip =
-    has(I.lHip, I.rHip)
-      ? { x: (P(I.lHip).x + P(I.rHip).x) / 2, y: (P(I.lHip).y + P(I.rHip).y) / 2 }
-      : ok(I.lHip) ? P(I.lHip) : ok(I.rHip) ? P(I.rHip) : null;
+  const shoulder = has(I.lSh, I.rSh)
+    ? { x: (P(I.lSh).x + P(I.rSh).x) / 2, y: (P(I.lSh).y + P(I.rSh).y) / 2 }
+    : ok(I.lSh)
+      ? P(I.lSh)
+      : ok(I.rSh)
+        ? P(I.rSh)
+        : null;
+  const hip = has(I.lHip, I.rHip)
+    ? { x: (P(I.lHip).x + P(I.rHip).x) / 2, y: (P(I.lHip).y + P(I.rHip).y) / 2 }
+    : ok(I.lHip)
+      ? P(I.lHip)
+      : ok(I.rHip)
+        ? P(I.rHip)
+        : null;
   if (shoulder && hip && hip.y > shoulder.y) {
     const lean = (Math.atan2((shoulder.x - hip.x) * w, (hip.y - shoulder.y) * h) * 180) / Math.PI;
     out.torso_lean = judge("torso_lean", lean, "°");
@@ -133,7 +141,7 @@ export function measureFrame(lm: Landmark[] | undefined, w: number, h: number, v
       const facing = ok(I.nose) ? Math.sign(P(I.nose).x - sh.x) || 1 : 1;
       out.forward_head =
         torso > 10
-          ? judge("forward_head", ((((ear.x - sh.x) * w) * facing) / torso) * 100, "%")
+          ? judge("forward_head", (((ear.x - sh.x) * w * facing) / torso) * 100, "%")
           : insufficient("%");
     } else out.forward_head = insufficient("%");
   } else out.forward_head = insufficient("%", frontMsg);
@@ -142,7 +150,10 @@ export function measureFrame(lm: Landmark[] | undefined, w: number, h: number, v
   if (view === "front" && has(I.lSh, I.rSh, I.lHip, I.rHip)) {
     const L = px(P(I.lSh), P(I.lHip));
     const R = px(P(I.rSh), P(I.rHip));
-    out.symmetry = Math.max(L, R) > 10 ? judge("symmetry", (1 - Math.abs(L - R) / Math.max(L, R)) * 100, "%") : insufficient("%");
+    out.symmetry =
+      Math.max(L, R) > 10
+        ? judge("symmetry", (1 - Math.abs(L - R) / Math.max(L, R)) * 100, "%")
+        : insufficient("%");
   } else out.symmetry = insufficient("%", view === "side" ? sideMsg : undefined);
 
   out.stability = insufficient("%", "Only measurable with live camera analysis");
@@ -158,7 +169,9 @@ export function aggregateFrames(
     if (k === "stability") continue;
     const vals = frames.map((f) => f.m[k]).filter((m) => m.value != null);
     if (vals.length < Math.max(1, Math.ceil(frames.length / 2))) {
-      out[k] = frames[0]?.m[k]?.reason ? { ...frames[0]!.m[k], value: null, status: "insufficient" } : insufficient(frames[0]?.m[k]?.unit ?? "°");
+      out[k] = frames[0]?.m[k]?.reason
+        ? { ...frames[0]!.m[k], value: null, status: "insufficient" }
+        : insufficient(frames[0]?.m[k]?.unit ?? "°");
     } else {
       const avg = vals.reduce((s, m) => s + (m.value as number), 0) / vals.length;
       out[k] = judge(k, avg, vals[0]!.unit);
@@ -172,7 +185,10 @@ export function aggregateFrames(
     const avgW = sw.reduce((s, p) => s + p.sw, 0) / sw.length;
     out.stability = avgW > 10 ? judge("stability", (sd / avgW) * 100, "%") : insufficient("%");
   } else {
-    out.stability = insufficient("%", frames.length > 1 ? NOT_ENOUGH : "Only measurable with live camera analysis");
+    out.stability = insufficient(
+      "%",
+      frames.length > 1 ? NOT_ENOUGH : "Only measurable with live camera analysis",
+    );
   }
   return out;
 }
