@@ -4,6 +4,8 @@ import { useServerFn } from "@tanstack/react-start";
 import { Loader2, Sparkles, Activity, Gauge, CalendarDays } from "lucide-react";
 import { getInsights } from "@/lib/insights.functions";
 import { listSkinData, FINDING_LABELS } from "@/lib/skin.functions";
+import { listPostureAnalyses } from "@/lib/posture.functions";
+import { METRIC_KEYS, METRIC_LABELS, measurableCount } from "@/lib/posture-metrics";
 import { Progress } from "@/components/ui/progress";
 
 export const Route = createFileRoute("/_authenticated/insights")({
@@ -288,6 +290,52 @@ function SkinPresentationSection() {
               <p className="text-muted-foreground">Not enough data yet.</p>
             )}
           </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function PostureSection() {
+  const fetchPosture = useServerFn(listPostureAnalyses);
+  const { data, isLoading } = useQuery({
+    queryKey: ["posture-analyses"],
+    queryFn: () => fetchPosture(),
+  });
+  const latest = data?.[0];
+  return (
+    <div className="rounded-lg border border-border bg-card p-6">
+      <div className="mb-3 flex items-center justify-between">
+        <h2 className="font-display text-2xl">Posture & Stage Presence</h2>
+        <Link to="/posture-analysis" className="text-sm text-gold underline">
+          Open analyzer
+        </Link>
+      </div>
+      {isLoading ? (
+        <Loader2 className="h-4 w-4 animate-spin text-gold" />
+      ) : !latest || measurableCount(latest.measurements) === 0 ? (
+        <p className="text-sm text-muted-foreground">Not enough data yet.</p>
+      ) : (
+        <div className="text-sm">
+          <p className="mb-3 text-muted-foreground">
+            Last saved {new Date(latest.created_at).toLocaleDateString()} · {latest.view} view ·{" "}
+            {data?.length} saved analysis(es). Measurements only — no overall score.
+          </p>
+          <ul className="grid gap-2 md:grid-cols-2">
+            {METRIC_KEYS.map((k) => {
+              const m = latest.measurements[k];
+              return (
+                <li key={k} className="flex justify-between gap-3 border-b border-border py-1">
+                  <span>{METRIC_LABELS[k]}</span>
+                  <span className="text-muted-foreground">
+                    {m && m.value != null
+                      ? `${m.value}${m.unit === "ratio" ? "" : m.unit} · ${m.status === "within" ? "within range" : "adjust"}`
+                      : "Not enough visual information"}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       )}
     </div>
