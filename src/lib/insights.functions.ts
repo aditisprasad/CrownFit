@@ -3,7 +3,9 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 const daysAgo = (n: number) => new Date(Date.now() - n * 86400000).toISOString().slice(0, 10);
 const dayKeys = (n: number) =>
-  Array.from({ length: n }, (_, i) => new Date(Date.now() - (n - 1 - i) * 86400000).toISOString().slice(0, 10));
+  Array.from({ length: n }, (_, i) =>
+    new Date(Date.now() - (n - 1 - i) * 86400000).toISOString().slice(0, 10),
+  );
 
 type Component = { label: string; value: number | null; detail: string };
 
@@ -17,54 +19,93 @@ export const getInsights = createServerFn({ method: "GET" })
     const uid = context.userId;
     const from = daysAgo(29);
 
-    const [profile, water, steps, sleep, exercise, diet, jury, posture, mood, tasks, portfolio, events, plan] =
-      await Promise.all([
-        context.supabase.from("contestant_profiles").select("*").eq("user_id", uid).maybeSingle(),
-        context.supabase.from("water_logs").select("logged_on, amount_ml").eq("user_id", uid).gte("logged_on", from),
-        context.supabase.from("step_logs").select("logged_on, steps").eq("user_id", uid).gte("logged_on", from),
-        context.supabase.from("sleep_logs").select("logged_on, duration_hours, quality").eq("user_id", uid).gte("logged_on", from),
-        context.supabase.from("fitness_logs").select("logged_on, duration_minutes").eq("user_id", uid).gte("logged_on", from),
-        context.supabase.from("diet_logs").select("logged_on").eq("user_id", uid).gte("logged_on", from),
-        context.supabase
-          .from("interview_sessions")
-          .select("id, final_score, status, started_at, completed_at")
-          .eq("user_id", uid)
-          .order("started_at", { ascending: false })
-          .limit(20),
-        context.supabase
-          .from("posture_analyses")
-          .select("created_at")
-          .eq("user_id", uid)
-          .order("created_at", { ascending: false })
-          .limit(20),
-        context.supabase
-          .from("mood_records")
-          .select("estimated_state, positivity, stress, energy, confidence, created_at")
-          .eq("user_id", uid)
-          .order("created_at", { ascending: false })
-          .limit(20),
-        context.supabase.from("preparation_tasks").select("id, completed_at, created_at").eq("user_id", uid),
-        context.supabase.from("portfolio_items").select("id, created_at").eq("user_id", uid),
-        context.supabase
-          .from("calendar_events")
-          .select("id, title, kind, starts_at, location")
-          .eq("user_id", uid)
-          .gte("starts_at", new Date().toISOString())
-          .order("starts_at", { ascending: true })
-          .limit(5),
-        context.supabase
-          .from("preparation_plans")
-          .select("id, target_pageant, target_date, summary, weeks, focus_areas, updated_at")
-          .eq("user_id", uid)
-          .eq("is_active", true)
-          .maybeSingle(),
-      ]);
+    const [
+      profile,
+      water,
+      steps,
+      sleep,
+      exercise,
+      diet,
+      jury,
+      posture,
+      mood,
+      tasks,
+      portfolio,
+      events,
+      plan,
+    ] = await Promise.all([
+      context.supabase.from("contestant_profiles").select("*").eq("user_id", uid).maybeSingle(),
+      context.supabase
+        .from("water_logs")
+        .select("logged_on, amount_ml")
+        .eq("user_id", uid)
+        .gte("logged_on", from),
+      context.supabase
+        .from("step_logs")
+        .select("logged_on, steps")
+        .eq("user_id", uid)
+        .gte("logged_on", from),
+      context.supabase
+        .from("sleep_logs")
+        .select("logged_on, duration_hours, quality")
+        .eq("user_id", uid)
+        .gte("logged_on", from),
+      context.supabase
+        .from("fitness_logs")
+        .select("logged_on, duration_minutes")
+        .eq("user_id", uid)
+        .gte("logged_on", from),
+      context.supabase
+        .from("diet_logs")
+        .select("logged_on")
+        .eq("user_id", uid)
+        .gte("logged_on", from),
+      context.supabase
+        .from("interview_sessions")
+        .select("id, final_score, status, started_at, completed_at")
+        .eq("user_id", uid)
+        .order("started_at", { ascending: false })
+        .limit(20),
+      context.supabase
+        .from("posture_analyses")
+        .select("created_at")
+        .eq("user_id", uid)
+        .order("created_at", { ascending: false })
+        .limit(20),
+      context.supabase
+        .from("mood_records")
+        .select("estimated_state, positivity, stress, energy, confidence, created_at")
+        .eq("user_id", uid)
+        .order("created_at", { ascending: false })
+        .limit(20),
+      context.supabase
+        .from("preparation_tasks")
+        .select("id, completed_at, created_at")
+        .eq("user_id", uid),
+      context.supabase.from("portfolio_items").select("id, created_at").eq("user_id", uid),
+      context.supabase
+        .from("calendar_events")
+        .select("id, title, kind, starts_at, location")
+        .eq("user_id", uid)
+        .gte("starts_at", new Date().toISOString())
+        .order("starts_at", { ascending: true })
+        .limit(5),
+      context.supabase
+        .from("preparation_plans")
+        .select("id, target_pageant, target_date, summary, weeks, focus_areas, updated_at")
+        .eq("user_id", uid)
+        .eq("is_active", true)
+        .maybeSingle(),
+    ]);
 
     const p = profile.data;
     const last14 = dayKeys(14);
 
-    const sumBy = <T extends { logged_on: string }>(rows: T[], day: string, pick: (r: T) => number) =>
-      rows.filter((r) => r.logged_on === day).reduce((s, r) => s + (pick(r) || 0), 0);
+    const sumBy = <T extends { logged_on: string }>(
+      rows: T[],
+      day: string,
+      pick: (r: T) => number,
+    ) => rows.filter((r) => r.logged_on === day).reduce((s, r) => s + (pick(r) || 0), 0);
 
     const waterRows = water.data ?? [];
     const stepRows = steps.data ?? [];
@@ -93,11 +134,20 @@ export const getInsights = createServerFn({ method: "GET" })
 
     const juryScored = (jury.data ?? []).filter((s) => s.final_score != null);
     const juryAvg = juryScored.length
-      ? Number((juryScored.reduce((s, r) => s + Number(r.final_score), 0) / juryScored.length).toFixed(1))
+      ? Number(
+          (juryScored.reduce((s, r) => s + Number(r.final_score), 0) / juryScored.length).toFixed(
+            1,
+          ),
+        )
       : null;
     const juryTrend =
       juryScored.length >= 2
-        ? Number((Number(juryScored[0]?.final_score ?? 0) - Number(juryScored[juryScored.length - 1]?.final_score ?? 0)).toFixed(1))
+        ? Number(
+            (
+              Number(juryScored[0]?.final_score ?? 0) -
+              Number(juryScored[juryScored.length - 1]?.final_score ?? 0)
+            ).toFixed(1),
+          )
         : null;
 
     // Posture: measurement-based analyses only (no combined score; shown separately on the page).
@@ -150,30 +200,69 @@ export const getInsights = createServerFn({ method: "GET" })
         ]
       : [];
     const profileCompletion = p
-      ? Math.round((profileFields.filter((v) => v !== null && v !== undefined && v !== "").length / profileFields.length) * 100)
+      ? Math.round(
+          (profileFields.filter((v) => v !== null && v !== undefined && v !== "").length /
+            profileFields.length) *
+            100,
+        )
       : 0;
 
     const wellnessConsistency = hitRate((d) => d.water_ml, waterTarget);
-    const trainingConsistency = hitRate((d) => d.training_minutes, Math.max(15, p?.training_minutes_per_day ?? 30));
+    const trainingConsistency = hitRate(
+      (d) => d.training_minutes,
+      Math.max(15, p?.training_minutes_per_day ?? 30),
+    );
     const stepConsistency = hitRate((d) => d.steps, stepTarget);
     const sleepConsistency = hitRate((d) => d.sleep_hours, sleepTarget);
 
     const components: Component[] = [
-      { label: "Profile depth", value: profileCompletion, detail: "How much of your contestant profile is filled in" },
+      {
+        label: "Profile depth",
+        value: profileCompletion,
+        detail: "How much of your contestant profile is filled in",
+      },
       {
         label: "Interview performance",
         value: juryAvg != null ? Math.round(juryAvg * 10) : null,
-        detail: juryAvg != null ? `Average mock jury score ${juryAvg}/10 across ${juryScored.length} session(s)` : "No scored mock jury sessions yet",
+        detail:
+          juryAvg != null
+            ? `Average mock jury score ${juryAvg}/10 across ${juryScored.length} session(s)`
+            : "No scored mock jury sessions yet",
       },
-      { label: "Wellness consistency", value: wellnessConsistency, detail: wellnessConsistency != null ? "Days hitting your water target (last 14)" : "No water logs yet" },
-      { label: "Training consistency", value: trainingConsistency, detail: trainingConsistency != null ? "Days hitting your training target (last 14)" : "No training logs yet" },
-      { label: "Mindset", value: moodAvg, detail: moodAvg != null ? `${moodRows.length} mood reading(s)` : "No mood readings yet" },
+      {
+        label: "Wellness consistency",
+        value: wellnessConsistency,
+        detail:
+          wellnessConsistency != null
+            ? "Days hitting your water target (last 14)"
+            : "No water logs yet",
+      },
+      {
+        label: "Training consistency",
+        value: trainingConsistency,
+        detail:
+          trainingConsistency != null
+            ? "Days hitting your training target (last 14)"
+            : "No training logs yet",
+      },
+      {
+        label: "Mindset",
+        value: moodAvg,
+        detail: moodAvg != null ? `${moodRows.length} mood reading(s)` : "No mood readings yet",
+      },
     ];
 
     const known = components.filter((c) => c.value != null);
     const dataPoints =
-      waterRows.length + stepRows.length + sleepRows.length + exRows.length + dietRows.length +
-      postureRows.length + moodRows.length + juryScored.length + taskRows.length;
+      waterRows.length +
+      stepRows.length +
+      sleepRows.length +
+      exRows.length +
+      dietRows.length +
+      postureRows.length +
+      moodRows.length +
+      juryScored.length +
+      taskRows.length;
 
     const readiness =
       known.length >= 3 && dataPoints >= 8
@@ -181,7 +270,9 @@ export const getInsights = createServerFn({ method: "GET" })
         : null;
 
     const target = p?.target_date ?? null;
-    const daysToTarget = target ? Math.ceil((new Date(target).getTime() - Date.now()) / 86400000) : null;
+    const daysToTarget = target
+      ? Math.ceil((new Date(target).getTime() - Date.now()) / 86400000)
+      : null;
 
     const insights: string[] = [];
     if (streak >= 2) insights.push(`You have logged preparation ${streak} day(s) in a row.`);
@@ -191,8 +282,10 @@ export const getInsights = createServerFn({ method: "GET" })
           ? `Your mock jury score improved by ${juryTrend.toFixed(1)} points since your first session.`
           : `Your mock jury score is down ${Math.abs(juryTrend).toFixed(1)} points since your first session.`,
       );
-    if (stepConsistency != null) insights.push(`You hit your step target on ${stepConsistency}% of the last 14 days.`);
-    if (sleepConsistency != null) insights.push(`You hit your sleep target on ${sleepConsistency}% of the last 14 days.`);
+    if (stepConsistency != null)
+      insights.push(`You hit your step target on ${stepConsistency}% of the last 14 days.`);
+    if (sleepConsistency != null)
+      insights.push(`You hit your sleep target on ${sleepConsistency}% of the last 14 days.`);
 
     return {
       profile: p
@@ -217,7 +310,12 @@ export const getInsights = createServerFn({ method: "GET" })
         steps: stepConsistency,
         sleep: sleepConsistency,
       },
-      jury: { average: juryAvg, trend: juryTrend, sessions: (jury.data ?? []).length, recent: juryScored.slice(0, 5) },
+      jury: {
+        average: juryAvg,
+        trend: juryTrend,
+        sessions: (jury.data ?? []).length,
+        recent: juryScored.slice(0, 5),
+      },
       posture: { sessions: postureRows.length },
       mood: { average: moodAvg, recent: moodRows.slice(0, 5) },
       tasks: { total: taskRows.length, completed: tasksDone },

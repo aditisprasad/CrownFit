@@ -151,7 +151,9 @@ export async function buildCoachContext(supabase: DB, userId: string) {
     }
   }
   if (posture.data?.length) {
-    lines.push("- Posture & Stage Presence (real MediaPipe landmark measurements, no overall score exists):");
+    lines.push(
+      "- Posture & Stage Presence (real MediaPipe landmark measurements, no overall score exists):",
+    );
     for (const r of posture.data) {
       const m = (r.measurements ?? {}) as unknown as Measurements;
       const parts = METRIC_KEYS.map((k) => {
@@ -159,7 +161,9 @@ export async function buildCoachContext(supabase: DB, userId: string) {
         if (!x || x.value == null) return `${METRIC_LABELS[k]}: not enough visual information`;
         return `${METRIC_LABELS[k]}: ${x.value}${x.unit === "ratio" ? "" : x.unit} (${x.status === "within" ? "within pageant range" : "needs adjustment"})`;
       });
-      lines.push(`  · ${r.created_at.slice(0, 10)} (${r.view} view, ${r.source}): ${parts.join("; ")}`);
+      lines.push(
+        `  · ${r.created_at.slice(0, 10)} (${r.view} view, ${r.source}): ${parts.join("; ")}`,
+      );
     }
   } else {
     lines.push("- Posture & Stage Presence: not enough posture data yet (no saved analyses)");

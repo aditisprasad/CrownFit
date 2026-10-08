@@ -229,6 +229,7 @@ function InsightsPage() {
         </div>
       </div>
       <SkinPresentationSection />
+      <PostureSection />
     </div>
   );
 }

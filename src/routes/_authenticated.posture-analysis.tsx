@@ -31,7 +31,8 @@ export const Route = createFileRoute("/_authenticated/posture-analysis")({
       { title: "Posture & Stage Presence Analyzer — CrownFit" },
       {
         name: "description",
-        content: "Measure head, shoulder, hip and torso alignment from real body landmarks for pageant stage presence.",
+        content:
+          "Measure head, shoulder, hip and torso alignment from real body landmarks for pageant stage presence.",
       },
       { property: "og:title", content: "Posture & Stage Presence Analyzer — CrownFit" },
       {
@@ -70,8 +71,20 @@ function getLandmarker() {
 }
 
 const EDGES: [number, number][] = [
-  [11, 12], [11, 23], [12, 24], [23, 24], [11, 13], [13, 15], [12, 14], [14, 16],
-  [23, 25], [25, 27], [24, 26], [26, 28], [7, 0], [8, 0],
+  [11, 12],
+  [11, 23],
+  [12, 24],
+  [23, 24],
+  [11, 13],
+  [13, 15],
+  [12, 14],
+  [14, 16],
+  [23, 25],
+  [25, 27],
+  [24, 26],
+  [26, 28],
+  [7, 0],
+  [8, 0],
 ];
 
 function drawPose(c: HTMLCanvasElement, lm: Landmark[] | undefined) {
@@ -83,7 +96,8 @@ function drawPose(c: HTMLCanvasElement, lm: Landmark[] | undefined) {
   ctx.fillStyle = gold;
   ctx.lineWidth = Math.max(2, c.width / 300);
   for (const [a, b] of EDGES) {
-    const p = lm[a], q = lm[b];
+    const p = lm[a],
+      q = lm[b];
     if (!p || !q || (p.visibility ?? 1) < 0.5 || (q.visibility ?? 1) < 0.5) continue;
     ctx.beginPath();
     ctx.moveTo(p.x * c.width, p.y * c.height);
@@ -159,13 +173,26 @@ function PosturePage() {
       const r = lmk.detect(c);
       const pose = r.landmarks[0] as Landmark[] | undefined;
       if (!pose) {
-        setResult({ m: measureFrame(undefined, c.width, c.height, view), source: "photo", frames: 1, people: 0 });
+        setResult({
+          m: measureFrame(undefined, c.width, c.height, view),
+          source: "photo",
+          frames: 1,
+          people: 0,
+        });
         return;
       }
       drawPose(c, pose);
-      setResult({ m: measureFrame(pose, c.width, c.height, view), source: "photo", frames: 1, people: r.landmarks.length });
+      setResult({
+        m: measureFrame(pose, c.width, c.height, view),
+        source: "photo",
+        frames: 1,
+        people: r.landmarks.length,
+      });
     } catch (e) {
-      setError((e as Error).message || "Body landmark detection failed to load. Check your connection and try again.");
+      setError(
+        (e as Error).message ||
+          "Body landmark detection failed to load. Check your connection and try again.",
+      );
     } finally {
       setBusy(null);
       if (fileRef.current) fileRef.current.value = "";
@@ -177,7 +204,9 @@ function PosturePage() {
     if (!navigator.mediaDevices?.getUserMedia)
       return setError("Camera isn't available in this browser. You can upload a photo instead.");
     try {
-      const s = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user", width: 1280 } });
+      const s = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: "user", width: 1280 },
+      });
       streamRef.current = s;
       setCamOn(true);
       requestAnimationFrame(() => {
@@ -212,7 +241,8 @@ function PosturePage() {
           people = Math.max(people, r.landmarks.length);
           if (pose) {
             last = pose;
-            const ls = pose[11], rs = pose[12];
+            const ls = pose[11],
+              rs = pose[12];
             const sway =
               ls && rs && (ls.visibility ?? 1) >= 0.5 && (rs.visibility ?? 1) >= 0.5
                 ? {
@@ -236,7 +266,9 @@ function PosturePage() {
       setHasImage(true);
       stopCam();
       setResult({
-        m: frames.length ? aggregateFrames(frames) : measureFrame(undefined, c.width, c.height, view),
+        m: frames.length
+          ? aggregateFrames(frames)
+          : measureFrame(undefined, c.width, c.height, view),
         source: "camera_live",
         frames: frames.length,
         people,
@@ -252,7 +284,14 @@ function PosturePage() {
     if (!result) return;
     setSaving(true);
     try {
-      await save({ data: { source: result.source, view, frames: Math.max(1, result.frames), measurements: result.m } });
+      await save({
+        data: {
+          source: result.source,
+          view,
+          frames: Math.max(1, result.frames),
+          measurements: result.m,
+        },
+      });
       toast.success("Posture analysis saved");
       await qc.invalidateQueries({ queryKey: ["posture-analyses"] });
       await qc.invalidateQueries({ queryKey: ["insights"] });
@@ -281,9 +320,9 @@ function PosturePage() {
         <p className="eyebrow">Coaching</p>
         <h1 className="font-display text-4xl">Posture & Stage Presence</h1>
         <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-          Real body landmarks are detected on your device. We measure head, shoulder, hip and torso alignment —
-          no invented scores. Photos and video never leave your browser; only the measurements are saved, and only
-          when you choose to.
+          Real body landmarks are detected on your device. We measure head, shoulder, hip and torso
+          alignment — no invented scores. Photos and video never leave your browser; only the
+          measurements are saved, and only when you choose to.
         </p>
       </header>
 
@@ -293,10 +332,15 @@ function PosturePage() {
           {(["front", "side"] as const).map((v) => (
             <button
               key={v}
-              onClick={() => { setView(v); setResult(null); }}
+              onClick={() => {
+                setView(v);
+                setResult(null);
+              }}
               className={cn(
                 "rounded-full border px-3 py-1 text-sm",
-                view === v ? "border-gold bg-secondary text-gold" : "border-border text-muted-foreground",
+                view === v
+                  ? "border-gold bg-secondary text-gold"
+                  : "border-border text-muted-foreground",
               )}
             >
               {v === "front" ? "Front-facing" : "Side profile"}
@@ -307,29 +351,59 @@ function PosturePage() {
           <li>• Stand 2–3 m from the camera; head to hips (ideally full body) in frame.</li>
           <li>• Good, even lighting; fitted clothing so shoulders and hips are visible.</li>
           <li>• Only one person in the frame.</li>
-          <li>• {view === "front" ? "Face the camera squarely, arms relaxed." : "Turn 90° so your side faces the camera."}</li>
+          <li>
+            •{" "}
+            {view === "front"
+              ? "Face the camera squarely, arms relaxed."
+              : "Turn 90° so your side faces the camera."}
+          </li>
         </ul>
         <div className="flex flex-wrap gap-2">
           {!camOn ? (
-            <button onClick={startCam} disabled={!!busy} className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground disabled:opacity-50">
+            <button
+              onClick={startCam}
+              disabled={!!busy}
+              className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground disabled:opacity-50"
+            >
               <Camera className="h-4 w-4" /> Use camera
             </button>
           ) : (
             <>
-              <button onClick={runLive} disabled={!!busy} className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground disabled:opacity-50">
+              <button
+                onClick={runLive}
+                disabled={!!busy}
+                className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground disabled:opacity-50"
+              >
                 <Camera className="h-4 w-4" /> Analyse live (4s)
               </button>
-              <button onClick={stopCam} disabled={!!busy} className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm">
+              <button
+                onClick={stopCam}
+                disabled={!!busy}
+                className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm"
+              >
                 <X className="h-4 w-4" /> Stop camera
               </button>
             </>
           )}
-          <button onClick={() => fileRef.current?.click()} disabled={!!busy} className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm disabled:opacity-50">
+          <button
+            onClick={() => fileRef.current?.click()}
+            disabled={!!busy}
+            className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm disabled:opacity-50"
+          >
             <Upload className="h-4 w-4" /> Upload photo
           </button>
-          <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={(e) => onFile(e.target.files?.[0])} />
+          <input
+            ref={fileRef}
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={(e) => onFile(e.target.files?.[0])}
+          />
           {(hasImage || result) && !busy && (
-            <button onClick={clear} className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm">
+            <button
+              onClick={clear}
+              className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm"
+            >
               <Trash2 className="h-4 w-4" /> Clear
             </button>
           )}
@@ -337,7 +411,12 @@ function PosturePage() {
 
         <div className="mt-4 grid gap-4 md:grid-cols-2">
           <div className="relative overflow-hidden rounded-md bg-secondary/40">
-            <video ref={videoRef} playsInline muted className={cn("w-full -scale-x-100", !camOn && "hidden")} />
+            <video
+              ref={videoRef}
+              playsInline
+              muted
+              className={cn("w-full -scale-x-100", !camOn && "hidden")}
+            />
             <canvas ref={canvasRef} className={cn("w-full", (camOn || !hasImage) && "hidden")} />
             {!camOn && !hasImage && (
               <div className="flex aspect-[3/4] items-center justify-center p-6 text-center text-sm text-muted-foreground">
@@ -359,34 +438,41 @@ function PosturePage() {
             )}
             {result && result.people === 0 && (
               <p className="rounded-md border border-border p-3 text-sm">
-                <strong>Not enough visual information.</strong> No person was detected. Make sure your head,
-                shoulders and hips are clearly visible and well lit, then try again.
+                <strong>Not enough visual information.</strong> No person was detected. Make sure
+                your head, shoulders and hips are clearly visible and well lit, then try again.
               </p>
             )}
             {result && result.people > 1 && (
               <p className="rounded-md border border-border p-3 text-sm text-muted-foreground">
-                More than one person was detected — measurements use the most prominent person. For accurate
-                results, only you should be in frame.
+                More than one person was detected — measurements use the most prominent person. For
+                accurate results, only you should be in frame.
               </p>
             )}
             {result && result.people > 0 && measurable === 0 && (
               <p className="rounded-md border border-border p-3 text-sm">
-                <strong>Not enough visual information.</strong> Key body points (shoulders, hips, head) weren't
-                clear enough to measure. Step back so more of your body is in frame.
+                <strong>Not enough visual information.</strong> Key body points (shoulders, hips,
+                head) weren't clear enough to measure. Step back so more of your body is in frame.
               </p>
             )}
             {result && measurable > 0 && (
               <>
                 <p className="text-sm text-muted-foreground">
                   {withinCount(result.m)} of {measurable} measurable checks within pageant range ·{" "}
-                  {result.source === "camera_live" ? `${result.frames} frames analysed` : "single photo"}
+                  {result.source === "camera_live"
+                    ? `${result.frames} frames analysed`
+                    : "single photo"}
                 </p>
                 <MetricTable m={result.m} />
-                <button onClick={onSave} disabled={saving} className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground disabled:opacity-50">
+                <button
+                  onClick={onSave}
+                  disabled={saving}
+                  className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground disabled:opacity-50"
+                >
                   {saving && <Loader2 className="h-4 w-4 animate-spin" />} Save measurements
                 </button>
                 <p className="flex items-center gap-1 text-xs text-muted-foreground">
-                  <ShieldCheck className="h-3 w-3" /> Only numbers are saved — never the image. Visible only to you.
+                  <ShieldCheck className="h-3 w-3" /> Only numbers are saved — never the image.
+                  Visible only to you.
                 </p>
               </>
             )}
@@ -406,7 +492,8 @@ function PosturePage() {
             ))}
           </div>
           <p className="mt-3 text-xs text-muted-foreground">
-            Coaching guidance only — not medical or physiotherapy advice. Consult a professional for pain or injury.
+            Coaching guidance only — not medical or physiotherapy advice. Consult a professional for
+            pain or injury.
           </p>
         </div>
       )}
@@ -423,11 +510,16 @@ function PosturePage() {
               <li key={h.id} className="rounded-md border border-border p-4">
                 <div className="mb-2 flex items-center justify-between text-sm">
                   <span>
-                    {new Date(h.created_at).toLocaleString()} · {h.view === "front" ? "Front" : "Side"} ·{" "}
+                    {new Date(h.created_at).toLocaleString()} ·{" "}
+                    {h.view === "front" ? "Front" : "Side"} ·{" "}
                     {h.source === "camera_live" ? `Live (${h.frames_analyzed} frames)` : "Photo"} ·{" "}
                     {withinCount(h.measurements)}/{measurableCount(h.measurements)} within range
                   </span>
-                  <button onClick={() => onDelete(h.id)} aria-label="Delete analysis" className="text-muted-foreground hover:text-destructive">
+                  <button
+                    onClick={() => onDelete(h.id)}
+                    aria-label="Delete analysis"
+                    className="text-muted-foreground hover:text-destructive"
+                  >
                     <Trash2 className="h-4 w-4" />
                   </button>
                 </div>
@@ -456,13 +548,16 @@ function MetricTable({ m, compact }: { m: Measurements; compact?: boolean }) {
                     {x.value}
                     {x.unit === "ratio" ? "" : x.unit}{" "}
                     <span className="text-xs text-muted-foreground">
-                      ({x.status === "within" ? "within" : "adjust"}; target {k === "symmetry" ? "≥" : "≤"}
+                      ({x.status === "within" ? "within" : "adjust"}; target{" "}
+                      {k === "symmetry" ? "≥" : "≤"}
                       {THRESHOLDS[k]}
                       {x.unit})
                     </span>
                   </span>
                 ) : (
-                  <span className="text-xs text-muted-foreground">{x?.reason ?? "Not enough visual information"}</span>
+                  <span className="text-xs text-muted-foreground">
+                    {x?.reason ?? "Not enough visual information"}
+                  </span>
                 )}
               </td>
             </tr>
